@@ -325,87 +325,134 @@ ul#nav li.current a { color: #F06000; }
    border-radius: 3px 0 0 3px;
 }
 
-.photoshop {
-  	width: 60%;
-  	-moz-animation: photoshop 2s ease;
-  	-webkit-animation: photoshop 2s ease;
-}
-.illustrator {
-  	width: 55%;
-  	-moz-animation: illustrator 2s ease;
-  	-webkit-animation: illustrator 2s ease;
-}
-.wordpress {
-  	width: 50%;
-  	-moz-animation: wordpress 2s ease;
-  	-webkit-animation: wordpress 2s ease;
-}
-.css {
+.python {
   	width: 90%;
-  	-moz-animation: css 2s ease;
-  	-webkit-animation: css 2s ease;
+  	-moz-animation: pyhton 2s ease;
+  	-webkit-animation: python 2s ease;
+}
+.tornado {
+  	width: 90%;
+  	-moz-animation: tornado 2s ease;
+  	-webkit-animation: tornado 2s ease;
+}
+.flask {
+  	width: 70%;
+  	-moz-animation: flask 2s ease;
+  	-webkit-animation: flask 2s ease;
+}
+.django {
+  	width: 50%;
+  	-moz-animation: django 2s ease;
+  	-webkit-animation: django 2s ease;
 }
 .html5 {
   	width: 80%;
   	-moz-animation: html5 2s ease;
   	-webkit-animation: html5 2s ease;
 }
-.jquery {
-  	width: 50%;
-  	-moz-animation: jquery 2s ease;
-  	-webkit-animation: jquery 2s ease;
+.devjs {
+  	width: 70%;
+  	-moz-animation: devjs 2s ease;
+  	-webkit-animation: devjs 2s ease;
 }
-
-@-moz-keyframes photoshop {
-  0%   { width: 0px;  }
-  100% { width: 60%;  }
+.css {
+   width: 80%;
+   -moz-animation: css 2s ease;
+   -webkit-animation: css 2s ease;
 }
-@-moz-keyframes illustrator {
-  0%   { width: 0px;  }
-  100% { width: 55%;  }
+.linux {
+   width: 20%;
+   -moz-animation: linux 2s ease;
+   -webkit-animation: linux 2s ease;
 }
-@-moz-keyframes wordpress {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
+.sql {
+   width: 50%;
+   -moz-animation: sql 2s ease;
+   -webkit-animation: sql 2s ease;
 }
-@-moz-keyframes css {
+.git {
+   width: 20%;
+   -moz-animation: git 2s ease;
+   -webkit-animation: git 2s ease;
+}
+@-moz-keyframes python {
   0%   { width: 0px;  }
   100% { width: 90%;  }
+}
+@-moz-keyframes tornado {
+  0%   { width: 0px;  }
+  100% { width: 90%;  }
+}
+@-moz-keyframes flask {
+  0%   { width: 0px;  }
+  100% { width: 70%;  }
+}
+@-moz-keyframes django {
+  0%   { width: 0px;  }
+  100% { width: 50%;  }
 }
 @-moz-keyframes html5 {
   0%   { width: 0px;  }
   100% { width: 80%;  }
 }
-@-moz-keyframes jquery {
+@-moz-keyframes devjs {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 70%;  }
 }
-
-@-webkit-keyframes photoshop {
-  0%   { width: 0px;  }
-  100% { width: 60%;  }
+@-moz-keyframes css {
+   0%   { width: 0px;  }
+   100% { width: 80%;  }
 }
-@-webkit-keyframes illustrator {
-  0%   { width: 0px;  }
-  100% { width: 55%;  }
+@-moz-keyframes linux {
+   0%   { width: 0px;  }
+   100% { width: 20%;  }
 }
-@-webkit-keyframes wordpress {
-  0%   { width: 0px;  }
-  100% { width: 50%;  }
+@-moz-keyframes sql {
+   0%   { width: 0px;  }
+   100% { width: 50%;  }
 }
-@-webkit-keyframes css {
+@-moz-keyframes git {
+   0%   { width: 0px;  }
+   100% { width: 20%;  }
+}
+@-webkit-keyframes python {
   0%   { width: 0px;  }
   100% { width: 90%;  }
+}
+@-webkit-keyframes tornado {
+  0%   { width: 0px;  }
+  100% { width: 90%;  }
+}
+@-webkit-keyframes flask {
+  0%   { width: 0px;  }
+  100% { width: 70%;  }
+}
+@-webkit-keyframes django {
+  0%   { width: 0px;  }
+  100% { width: 50%;  }
 }
 @-webkit-keyframes html5 {
   0%   { width: 0px;  }
   100% { width: 80%;  }
 }
-@-webkit-keyframes jquery {
+@-webkit-keyframes devjs {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 70%;  }
 }
-
+@-webkit-keyframes css {
+   0%   { width: 0px;  }
+   100% { width: 80%;  }
+}
+@-webkit-keyframes linux {
+   0%   { width: 0px;  }
+   100% { width: 20%;  }
+}@-webkit-keyframes sql {
+   0%   { width: 0px;  }
+   100% { width: 50%;  }
+}@-webkit-keyframes git {
+   0%   { width: 0px;  }
+   100% { width: 20%;  }
+}
 /* ------------------------------------------------------------------ */
 /* e. Portfolio Section
 /* ------------------------------------------------------------------ */
