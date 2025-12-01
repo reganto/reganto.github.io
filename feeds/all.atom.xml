@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو</title><link href="/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/</id><updated>2025-12-01T21:30:00+03:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>صد سال تنهایی یا چهل‌ و پنج روز عذاب</title><link href="/sad-sal-tanhaii.html" rel="alternate"/><published>2025-12-01T21:30:00+03:30</published><updated>2025-12-01T21:30:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2025-12-01:/sad-sal-tanhaii.html</id><summary type="html">&lt;p&gt;صد سال تنهایی یا چهل و پنج روز عذاب&lt;/p&gt;</summary><content type="html">&lt;p&gt;آمده بودم مرخصی. تقریبا یک هفته فرصت استراحت (و خوابیدن) داشتم. سه چهار روز پشت سر هم خوابیدم. روز پنجم به فکرم رسید که ایام ملال‌آور خدمت را اندکی قابل تحمل‌تر کنم. به کتابخانه رفتم. از پسر جوانی برای خرید کتاب راهنمایی خواستم. از آن نوع راهنمایی‌ای که «&lt;em&gt;خودت الان چه می‌خوانی؟&lt;/em&gt;». آن پسر کتاب «&lt;strong&gt;صد سال تنهایی&lt;/strong&gt;» گابریل گارسیا مارکز را معرفی کرد. بدون اینکه کتاب را ورق بزنم، کارت کشیدم و به خانه برگشتم.&lt;/p&gt;
+&lt;p&gt;تکمیل خواهد شد.&lt;/p&gt;</content><category term="Book"/><category term="book"/></entry><entry><title>بازگشت به میناس‌تیریث بعد از سه سال</title><link href="/return-of-the-king.html" rel="alternate"/><published>2025-11-30T22:00:00+03:30</published><updated>2025-11-30T22:00:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2025-11-30:/return-of-the-king.html</id><summary type="html">&lt;p&gt;من بعد از سه چهار سال برگشتم&lt;/p&gt;</summary><content type="html">&lt;p&gt;بعد از سه چهار سال دوری از فضای وبلاگ‌نویسی و فعالیت در پلفترم‌هایی به مانند توییتر، تصمیم گرفتم باز هم به وبلاگ‌نویسی برگردم و نوشته‌هایم را اینجا منتشر کنم. دلیلش را مفصل توضیح خواهم داد.&lt;/p&gt;
+&lt;p&gt;از اوایل دهه نود شروع به نوشتن وبلاگ کردم. در &lt;a href="https://blogfa.com/"&gt;بلاگفا&lt;/a&gt; ایام خوشی داشتم. اما اوایل سال ۱۳۹۴ بود که باز هم بر من عیان شد که &lt;em&gt;جز پنج روز نیست حکم میر نوروزی&lt;/em&gt;. ماجرا چه بود؟ همان داستان معروف بلاگفا. (حتی بعد از ده سال هم از یادآوری آن روزها اندوهگین می‌شوم). وبلاگم، بخشی از وجودم را، برای همیشه از دست دادم و بعد از آن بودم که متوجه شدم حقیقا من صاحب آن وبلاگ نبودم و تنها بلاگفا فضایی را، به عاریه، در اختیار من قرار داده بود که به نشر اندیشه‌هایم بپردازم.&lt;/p&gt;
+&lt;p&gt;تکمیل خواهد شد.&lt;/p&gt;</content><category term="Diary"/><category term="diary"/></entry><entry><title>تورنادو و تسک‌های periodic</title><link href="/tornado-periodic-callback.html" rel="alternate"/><published>2022-08-31T10:20:00+04:30</published><updated>2010-12-05T19:30:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-31:/tornado-periodic-callback.html</id><summary type="html">&lt;p&gt;Tornado Periodic Callback&lt;/p&gt;</summary><content type="html">&lt;h2&gt;مقدمه&lt;/h2&gt;
+&lt;p&gt;یکی از ویژگی‌های بسیار جذاب تورنادو توانایی آن در اجرای تسک‌های پریودیک‌ است. ابزارهای دیگری نیز برای این دسته از تسک‌ها وجود دارند که شاید معروف‌ترین آن‌ها &lt;code&gt;Celery Beat&lt;/code&gt; و &lt;code&gt;Crond&lt;/code&gt; باشد اما تورنادو این کار را بدون هیچگونه پیش‌نیازی  و به سادگی و تنها با فراخوانی یک متد انجام می‌دهد.&lt;/p&gt;
+&lt;h2&gt;امضای متد&lt;/h2&gt;
+&lt;p&gt;متد مورد نظر برای اجرای تسک‌های پریودیک &lt;code&gt;PeriodicCallback&lt;/code&gt; نام دارد آن را می‌توان از مسیر &lt;code&gt;tornado.ioloop.PeriodicCallback&lt;/code&gt; ایمپورت کرد. این متد سه آرگومان می‌گیرد اولی تابعی است که قرار است اجرا شود «کال‌بک مورد نظر ما» دومی فاصله زمانی بین اجرای متوالی کال‌بک است«همان interval یا callback time» سومی هم پارامتری است به نام jitter&lt;/p&gt;
+&lt;h2&gt;یک مثال&lt;/h2&gt;
+&lt;p&gt;می‌خواهیم یک تابع داشته باشیم که در فواصل زمانی معین یک پیام را به خروجی می‌برد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;asyncio&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello Tornado&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;تابع &lt;code&gt;say_hello&lt;/code&gt; هر سه ثانیه یکبار به صورت پریودیک اجرا می‌شود. اکثر زمان‌ها در تورنادو به صورت ثانیه وارد می‌شود اما در این مورد یک استثنا وجود دارد. پارامتر &lt;code&gt;callback_time&lt;/code&gt; در &lt;code&gt;PeriodicCallback&lt;/code&gt; باید به صورت میلی‌ثانیه یا شی‌ای از &lt;code&gt;datetime.timedelta&lt;/code&gt; وارد شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;asyncio&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;timedelta&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello Tornado&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timedelta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;فراخوانی کال‌بک با آرگومان&lt;/h2&gt;
+&lt;p&gt;بعضی از توابع‌ برای اجرا نیازمند آرگومان‌هایی هستند و به دو روش می‌توان آرگومان‌هایی را به کال‌بک مورد نظر فرستاد&lt;/p&gt;
+&lt;p&gt;1- استفاده از &lt;code&gt;lambda&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;asyncio&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Reganto&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;2- استفاده از &lt;code&gt;partial&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;asyncio&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;callback&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;say_hello&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Reganto&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;یک مثال ملموس‌تر&lt;/h2&gt;
+&lt;p&gt;سناریویی را در نظر بگیرید که در یک سیستم تعدادی کاربر داشته باشیم. کاربران مورد نظر ما برای دریافت سرویسی ماهانه مبلغی را پرداخت می‌کنند در این‌صورت تسکی باید به صورت ماهیانه اجرا شود. این تسک می‌بایست کاربرانی را که برای سرویس مورد نظر پرداختی نداشته‌اند پیدا کرده و دسترسی آن‌ها را به سرویس مسدود کند و درنهایت ایمیلی با متن مناسب برای کاربرانی که اکانت خود را شارژ نکرده‌اند بفرستد.&lt;/p&gt;
+&lt;p&gt;این تسک را می‌توان به سه زیرتسک «سه تابع» تقسیم کرد:&lt;/p&gt;
+&lt;p&gt;1- پیدا کردن کاربرانی که پرداختی نداشته‌اند&lt;/p&gt;
+&lt;p&gt;2- مسدود کردن دسترسی کاربرانی که پرداختی نداشته‌اند&lt;/p&gt;
+&lt;p&gt;3- ارسال ایمیل به کاربران مسدودشده و درخواست برای شارژ اکانت&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;asyncio&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;timedelta&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;scan_for_expired_users&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;expired_users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Finrod&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Boromir&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Theoden&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;expired_users&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;deactivating_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Deactivating account: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_expiration_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sending expiration email to: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;arda_task&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;expired_users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scan_for_expired_users&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;expired_users&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;deactivating_process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;send_expiration_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PeriodicCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arda_task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timedelta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;days&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;asyncio&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_event_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run_forever&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;درباره‌ی jitter&lt;/h2&gt;
+&lt;p&gt;جیتر یک مفهوم ریاضی است  و برای کاهش  &lt;code&gt;alignment&lt;/code&gt; رویدادهای با پریود مشابه استفاده می‌شود.&lt;/p&gt;
+&lt;h4&gt;بدون جیتر&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="بدون جیتر" src="/images/1401/6/no-jitter-example.png"&gt;&lt;/p&gt;
+&lt;h4&gt;با جیتر&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="بدون جیتر" src="/images/1401/6/jitter-example.png"&gt;&lt;/p&gt;
+&lt;h4&gt;اجرا با مقادیر متفاوت جیتر&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="بدون جیتر" src="/images/1401/6/jitter.gif"&gt;&lt;/p&gt;
+&lt;p&gt;اگر مقدار جیتر را 0.1 قرار دهیم، باعث به‌ وجود آمدن تنوع 10 درصدی در فاصله زمانی فراخوانی کال‌بک خواهد شد.&lt;/p&gt;
+&lt;h2&gt;در آخر&lt;/h2&gt;
+&lt;p&gt;1- اگر اجرای کال‌بک بیشتر از &lt;code&gt;callback_time&lt;/code&gt; طول بکشد، از فراخوانی‌های بعدی چشم‌پوشی می‌شود.«اضافه شده در تونادو 6.2»&lt;/p&gt;
+&lt;p&gt;2- چنان‌چه برای &lt;code&gt;alignment&lt;/code&gt; معادلی مناسب یافتید، دریغ نکنید. tell.regnato[at]gmail.com&lt;/p&gt;
+&lt;p&gt;3- برای نکات جزیی‌تر می‌توانید مستندات تورنادو برای &lt;a href="https://www.tornadoweb.org/en/stable/ioloop.html"&gt;PeriodicCallback&lt;/a&gt; را چک کنید.&lt;/p&gt;
+&lt;p&gt;4- مثالی از اجرای همین تسک با Celery Beat را می‌توانید &lt;a href="https://breadcrumbscollector.tech/what-is-celery-beat-and-how-to-use-it/"&gt;اینجا&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;p&gt;5- عکس‌های مربوط به جیتر از &lt;a href="https://www.myonlinetraininghub.com/jitter-in-excel-scatter-charts"&gt;اینجا&lt;/a&gt; گرفته شده‌اند.&lt;/p&gt;</content><category term="Tornado"/><category term="python"/><category term="tornado"/></entry><entry><title>درامدی بر concurrency</title><link href="/introduction-to-concurrency.html" rel="alternate"/><published>2022-08-29T10:20:00+04:30</published><updated>2010-12-05T19:30:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-29:/introduction-to-concurrency.html</id><summary type="html"/><content type="html">&lt;h1&gt;همزمانی «Concurrency»&lt;/h1&gt;
+&lt;h1&gt;موازی‌سازی «Parallelism»&lt;/h1&gt;
+&lt;h2&gt;راه‌حل‌هایی برای موازی‌سازی&lt;/h2&gt;
+&lt;h3&gt;چندنخی «Multithreading»&lt;/h3&gt;
+&lt;h3&gt;چندپردازشی «Multiprocessing»&lt;/h3&gt;
+&lt;h1&gt;ناهمگام «Asynchronous»&lt;/h1&gt;
+&lt;h2&gt;راه‌حل‌هایی برای ناهمگام&lt;/h2&gt;
+&lt;h3&gt;ناهمگام از طریق Callback Arguments&lt;/h3&gt;
+&lt;h3&gt;ناهمگام از طریق برگشت دادن یک placeholder&lt;/h3&gt;
+&lt;h4&gt;یک placeholder از نوع شی Future&lt;/h4&gt;
+&lt;h4&gt;یک placeholder از نوع شی Promise&lt;/h4&gt;
+&lt;h4&gt;یک placeholder از نوع شی Deferred&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق تحویل به یک صف&lt;/h3&gt;
+&lt;h4&gt;صف در پایتون&lt;/h4&gt;
+&lt;h4&gt;صف در asyncio&lt;/h4&gt;
+&lt;h4&gt;صف در Tornado&lt;/h4&gt;
+&lt;h4&gt;سلری «Celery»&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق Coroutine&lt;/h3&gt;
+&lt;h4&gt;کروتین‌های generator پایه&lt;/h4&gt;
+&lt;h4&gt;کروتین‌های بومی «native»&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق posix signals&lt;/h3&gt;</content><category term="Concurrency"/><category term="concurrency"/><category term="parallelism"/><category term="asynchronous"/></entry><entry><title>مقیاس‌پذیری</title><link href="/scalability.html" rel="alternate"/><published>2022-08-14T10:20:00+04:30</published><updated>2022-08-14T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-14:/scalability.html</id><summary type="html"/><content type="html">&lt;p&gt;همیشه به Scalability و مفاهیم مرتبط با آن به ویژه Distributed Systems و Scale Out علاقه‌ داشته‌ام. فرصتی پیش آمد تا راجع به این مفاهیم بیشتر مطالعه کنم. این نوشتار ترجمه‌ای است  از &lt;a href="https://datacadamia.com/code/design/scalability"&gt;این مطلب&lt;/a&gt; همراه با اضافات. برای اطلاعات بیشتر &lt;a href="#"&gt;کتابچه معماری نرم‌افزار&lt;/a&gt; را مطالعه کنید.&lt;/p&gt;
+&lt;h2&gt;درباره&lt;/h2&gt;
+&lt;p&gt;افزایش یا کاهش ظرفیت یک سیستم با استفاده موثر از منابع به عنوان مقیاس‌پذیری شناخته می شود. یک سیستم مقیاس‌پذیر می‌تواند تعداد فزاینده‌ای از درخواست‌ها را بدون تاثیر نامطلوب بر زمان پاسخ‌دهی مدیریت کند.
+در مهندسی نرم‌افزار، مقیاس‌پذیری ویژگی مطلوب یک سیستم، یک شبکه یا یک فرایند است که نشان‌دهنده توانایی آن در انجام حجم فزاینده کار به شیوه‌ای زیبا و روان است. به عنوان مثال، می توانیم به توانایی یک سیستم برای افزایش توان کل تحت یک بار افزایش یافته در هنگام اضافه شدن منابع (معمولا سخت افزار) اشاره کنیم.
+مقیاس‌پذیری، به عنوان یک ویژگی سیستم‌ها، به طور کلی به سختی قابل تعریف است و در هر مورد خاص لازم است که الزامات خاصی برای مقیاس‌پذیری در ابعادی که مهم تلقی می‌شوند، تعریف شوند. مقیاس‌پذیری یک مسئله بسیار مهم در سیستم‌های الکترونیکی، پایگاه داده، روترها و شبکه است.
+مقیاس‌پذیری اصولاً مفهومی برآمده از علم تجارت است که در مهندسی نرم‌افزار نیز استفاده می‌شود. (مشابه الگوهای طراحی در معماری و الگوهای طراحی در مهندسی نرم‌افزار) در هر صورت ما با یک مفهوم ثابت سروکار داریم- توانایی یک تجارت یا فناوری برای پذیرش حجم افزایش یافته بدون تاثیر بر حاشیه سود (= افزایش درآمد بدون تغییر در هزینه های متغیر). به عنوان مثال، یک قطعه معین از تجهیزات ممکن است از 1 تا 1000 کاربر ظرفیت داشته باشد، و بیش از 1000 کاربر، تجهیزات اضافی مورد نیاز است در غیر اینصورت منجر به کاهش عملکرد خواهد شد (هزینه‌های متغیر افزایش و حاشیه سود کاهش می‌یابد).&lt;/p&gt;
+&lt;h2&gt;یک مثال عملی&lt;/h2&gt;
+&lt;p&gt;فرض کنید یک کارخانه تولید کفش در هفته ۵۰۰ جفت کفش تولید می‌کند اما به یکباره تقاضا برای کفش‌های تولیدی این کارخانه افزایش یافته و کارخانه باید در هفته ۱۵۰۰ جفت کفش تولید کند در این صورت اگر اصول مقیاس‌پذیری در کارخانه رعایت شده باشد،‌ صاحبان کارخانه می‌توانند بدون هزینه اضافی ( یا با کم‌ترین هزینه اضافی) تولید را افزایش دهند. ( افزایش سود بدون تغییر در هزینه‌های متغیر)&lt;/p&gt;
+&lt;h2&gt;دو نکته&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;مقیاس پذیری به طور موازی کار می کند.&lt;/li&gt;
+&lt;li&gt;پیچیدگی و رویکردهای‌ متکی‌به‌انسان مقیاس‌پذیر نمی‌شوند. سادگی و رویکردهای الگوریتم‌محور مقیاس‌پذیر می‌شوند.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;مقیاس پذیر به چه معناست؟&lt;/h1&gt;
+&lt;h2&gt;تعریف عملیاتی&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;در گذشته: "حتی اگر داده ها در حافظه اصلی جا نشوند کار می کند"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;اکنون: "می توان از 1000 کامپیوتر ارزان استفاده کرد"&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;تعریف الگوریتمی&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;در گذشته: اگر N آیتم داده دارید، نباید بیش از NM عملیات انجام دهید (الگوریتم زمانی چندجمله‌ای)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;اکنون: اگر N آیتم داده دارید، برای مقادیر k بزرگ نباید بیش از NM عملیات انجام دهید (با افزایش k تعداد عملیات‌ها همچنان ثابت می‌ماند)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;به زودی: اگر N آیتم داده دارید، نباید بیش از N * LOG(N) عملیات انجام دهید (الگوریتم زمانی لگاریتمی)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;سخت‌افزار/سیستم&lt;/h1&gt;
+&lt;p&gt;سیستمی که عملکرد آن پس از افزودن سخت افزار، متناسب با ظرفیت اضافه شده، بهبود می یابد، سیستمی مقیاس پذیر گفته می شود.&lt;/p&gt;
+&lt;h1&gt;الگوریتم/برنامه&lt;/h1&gt;
+&lt;p&gt;به یک الگوریتم، طراحی، پروتکل شبکه، برنامه یا سایر سیستم‌ها گفته می‌شود که در شرایطی که برای موقعیت‌های بزرگ به کار می‌رود، کارآمد و کاربردی باشد (مثلاً مجموعه داده‌های ورودی بزرگ یا تعداد زیادی گره‌های مشارکت‌کننده در مورد یک سیستم توزیع‌شده) مقیاس‌پذیر هستند. اگر طراحی با افزایش مقدار شکست بخورد، مقیاس نمی شود.&lt;/p&gt;
+&lt;h1&gt;مثال&lt;/h1&gt;
+&lt;p&gt;یک سیستم پردازش تراکنش آنلاین مقیاس‌پذیر یا سیستم مدیریت پایگاه داده، سیستمی است که می‌تواند برای پردازش تراکنش‌های بیشتر با افزودن منابع سخت‌افزاری جدید (پردازنده‌ها، دستگاه‌ها و ذخیره‌سازی) ارتقا یابد. این ارتقا به سادگی و بدون خاموش شدن سیستم اتفاق می‌افتد.&lt;/p&gt;
+&lt;h1&gt;مقیاس‌بندی&lt;/h1&gt;
+&lt;p&gt;مقیاس‌بندی فرآیند افزایش یا کاهش ظرفیت سیستم با تغییر تعداد فرآیندهای موجود برای درخواست خدمات است. مقیاس‌بندی یک سیستم ظرفیت اضافی را فراهم می کند، در حالی که کاهش مقیاس در یک سیستم ظرفیت را کاهش می دهد. مقیاس بندی نیز بخش مهمی از پیکربندی استقرار برای دسترسی بالا است.
+روش‌های افزودن منابع بیشتر برای یک برنامه خاص به دو دسته کلی تقسیم می‌شوند:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;مقیاس عمودی (scale up)&lt;/li&gt;
+&lt;li&gt;مقیاس افقی (scale out)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;مقیاس عمودی (Scale Up)&lt;/h1&gt;
+&lt;p&gt;"Scale up" زمانی است که شما یک ماشین را به یک ماشین قدرتمندتر ارتقا می دهید (مثلاً CPU سریعتر، GPU سریعتر، موتور با HP بیشتر، و غیره...) تا قدرت پردازش بیشتری داشته باشید.
+مقیاس عمودی (scale vertically - scale up) به معنای اضافه کردن موارد زیر به یک گره در یک سیستم است:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;منابع (افزودن CPU یا حافظه)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;یا فرآیند (افزودن همان فرآیند)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;یکی از مزایای عمده این روش، استفاده از فناوری مجازی‌سازی به شکل موثر آن است زیرا در سیستم‌هایی که به صورت Scale Up مقیاس‌بندی شده‌اند می‌توانیم منابع بیشتری برای مجازی‌سازی داشته باشیم.&lt;/p&gt;
+&lt;h2&gt;مثال&lt;/h2&gt;
+&lt;p&gt;فرض کنید یک CPU 800 مگاهرتز در رایانه خود داشته باشید. برای افزایش قدرت پردازش، تصمیم می گیرید یک کامپیوتر جدید با یک CPU 8 هسته ای 3.4 گیگاهرتزی بخرید تا جایگزین کامپیوتر قدیمی خودتان کنید.&lt;/p&gt;
+&lt;h1&gt;مقیاس افقی (Scale Out)&lt;/h1&gt;
+&lt;p&gt;"Scale Out" زمانی است که تعداد ماشین های پردازش (رایانه ها، پردازنده ها، سرورها و غیره) را برای افزایش قدرت پردازش افزایش می دهید.
+مقیاس افقی (Scale Out) به معنای افزودن گره های بیشتری به یک سیستم است، مانند افزودن یک کامپیوتر جدید به یک برنامه نرم افزاری توزیع شده. یک مثال ممکن است افزودن دو نمونه از یک وب سرور به وب سرور موجود باشد.
+با کاهش قیمت‌ کامپیوترها و افزایش کارایی آن‌ها، سیستم‌های ارزان قیمت می‌توانند برای اجرای برنامه‌های محاسباتی با کارایی بالا استفاده شوند. این برنامه‌ها در گذشته فقط توسط ابررایانه‌ها قابل مدیریت بودند. صدها کامپیوتر کوچک ممکن است در یک خوشه (Cluster) پیکربندی شوند تا قدرت محاسباتی کل را بدست آورند.
+مدل scale out تقاضای فزاینده‌ای برای ذخیره‌سازی داده‌های مشترک با عملکرد ورودی/خروجی بسیار بالا ایجاد کرده است، به‌ویژه در مواردی که پردازش مقادیر زیادی از داده‌ها مورد نیاز است، مانند تحلیل لرزه‌ای. این امر به توسعه فن آوری‌های ذخیره‌سازی جدید مانند دستگاه‌های ذخیره‌سازی اشیا دامن زده است . هنگامی که می خواهید یک محیط بسیار در دسترس را پیکربندی کنید، باید فرآیندها را برای دستیابی به افزونگی اصطلاحا scale out کنید.
+مثال: واگن شما در حال حاضر توسط یک اسب کشیده می شود. برای افزایش قدرت واگن 10 اسب دیگر می خرید تا واگن را بکشند.&lt;/p&gt;
+&lt;h1&gt;تریدآف‌ها&lt;/h1&gt;
+&lt;p&gt;تریدآف‌هایی بین این دو مدل وجود دارد.
+تعداد بیشتر کامپیوترها به معنای افزایش پیچیدگی مدیریت و همچنین مدل برنامه نویسی پیچیده‌تر و مسائلی مانند توان عملیاتی و تأخیر بین گره‌ها است. همچنین، برخی از برنامه‌ها را نمی‌توان در چارچوب یک مدل محاسباتی توزیع شده ارائه کرد. ‫Scale Up به سرعت گران تمام می‌شود. یک راه حل دیگر این است که سرور‌های ارزان خریداری کنید تا به جای توسعه عمودی، برنامه (پایگاه داده، ...) را در صدها یا حتی هزاران سرور توزیع کنید.
+در گذشته، تفاوت قیمت بین این دو مدل، مقیاس‌پذیری افقی را برای آن دسته از برنامه‌هایی که با پارادایم آن مطابقت داشتند به گزینه‌ای مناسب تبدیل می‌کرد اما پیشرفت‌های اخیر در فناوری مجازی‌سازی این مزیت را محو کرده است. استقرار (deploy) یک سیستم مجازی جدید بر روی یک هایپروایزر (در صورت امکان) تقریباً همیشه ارزان‌تر از خرید و نصب واقعی یک سرور است.&lt;/p&gt;
+&lt;h1&gt;مقیاس پذیری پایگاه داده&lt;/h1&gt;
+&lt;p&gt;تعدادی از رویکردهای مختلف پایگاه‌های اطلاعاتی را قادر می‌سازد تا به اندازه بسیار بزرگ رشد کنند و در عین حال از نرخ فزاینده تراکنش‌ها در ثانیه پشتیبانی می‌کنند. البته سرعت سریع پیشرفت‌های سخت‌افزاری در سرعت و ظرفیت دستگاه‌های ذخیره‌سازی انبوه و همچنین پیشرفت های مشابه در CPU و سرعت شبکه قابل کاهش نیست. فراتر از آن، معماری‌های مختلفی در پیاده‌سازی پایگاه‌های داده در مقیاس بسیار بزرگ به کار گرفته شده‌اند.&lt;/p&gt;
+&lt;h2&gt;پارتیشن‌بندی (partitioning) و خوشه (cluster)&lt;/h2&gt;
+&lt;p&gt;یکی از تکنیک هایی که توسط اکثر محصولات اصلی DBMS پشتیبانی می شود، پارتیشن‌بندی جداول بزرگ بر اساس محدوده مقادیر در یک فیلد کلیدی است. به این ترتیب، پایگاه داده را می توان به صورت خوشه‌ای از سرورهای مجزا Scale Out کرد.&lt;/p&gt;
+&lt;h2&gt;چند نخی (multi-threading)&lt;/h2&gt;
+&lt;p&gt;همچنین، با ظهور ریزپردازنده‌های 64 بیتی، پردازنده‌های چند هسته‌ای و چند پردازنده‌های بزرگ SMP ، فروشندگان DBMS در خط مقدم پشتیبانی از پیاده‌سازی‌های چند نخی بوده‌اند که به طور قابل‌توجهی ظرفیت پردازش تراکنش را افزایش می‌دهند.&lt;/p&gt;
+&lt;h2&gt;‏‫‫‫‫nas/san&lt;/h2&gt;
+&lt;p&gt;ذخیره‌ساز‌های متصل به شبکه (NAS) و شبکه‌های منطقه ذخیره‌سازی (SAN) همراه با شبکه‌های محلی (LAN) سریع و فناوری کانال فیبر (Fiber Channel)، پیکربندی‌های بزرگ‌تر و منسجم‌تری (loosely coupled) از پایگاه‌های داده و قدرت محاسباتی توزیع‌شده را ممکن می‌سازند.&lt;/p&gt;
+&lt;h2&gt;shared nothing/shared-everything&lt;/h2&gt;
+&lt;p&gt;استاندارد X/Open XA که به طور گسترده پشتیبانی می شود، از یک مانیتور تراکنش جهانی برای هماهنگ کردن تراکنش های توزیع شده در بین منابع پایگاه داده نیمه خودمختار سازگار با XA استفاده می کند. Oracle RAC از مدل متفاوتی برای دستیابی به مقیاس‌پذیری استفاده می‌کند که بر اساس معماری «shared-everything» است که بر اتصالات پرسرعت بین سرورها متکی است.
+در حالی که فروشندگان DBMS در مورد شایستگی‌های نسبی طرح‌های مورد علاقه خود بحث می کنند، برخی از شرکت‌ها و محققان راجع‌به محدودیت‌های ذاتی سیستم‌های مدیریت پایگاه داده رابطه‌ای سوالات اساسی می‌پرسند و اصولا مدل رابطه‌ای را مدلی مناسب برای مقیاس‌پذیری نمی‌دانند. به عنوان مثال GigaSpaces ادعا می کند که یک مدل کاملاً متفاوت از دسترسی به داده‌های توزیع‌شده و پردازش تراکنش، به نام معماری مبتنی بر فضا(space base architecture)، برای دستیابی به بالاترین عملکرد و مقیاس پذیری مورد نیاز است. از سوی دیگر، Base One بدون انحراف از فناوری پایگاه داده اصلی(مدل رابطه‌ای)، نوعی مقیاس پذیری افراطی را مطرح می کند. به نظر می رسد نمی‌توان هیچ پایانی برای بحث‌ها راجع‌به مقیاس پذیری پایگاه داده متصور شد.&lt;/p&gt;
+&lt;h2&gt;سخت افزار بیشتر برای مقیاس پذیری؟&lt;/h2&gt;
+&lt;p&gt;اغلب توصیه می شود که طراحی سیستم را بر مقیاس پذیری سخت افزار متمرکز کنید تا ظرفیت . ما معمولا با دو پارادایم برای دستیابی به عملکرد بهتر رو به رو هستیم. افزودن یک گره جدید به سیستم یا درگیری مداوم در تنظیم عملکرد هر گره برای بهبود ظرفیت پردازشی گره مورد نظر. در اکثر موارد مورد اول راحت‌تر و ارزان‌تر است. (راحت‌تر از آن جهت که اگر زیرساخت‌ها از قبل مهیا شده باشد، افزودن یک گره جدید مانند کپی پیست کردن یک فایل است). اما این رویکرد می تواند بازدهی کاهشی داشته باشد.
+به عنوان مثال فرض کنید بخشی از یک برنامه می تواند در صورت موازی سازی با افزایش سرعت 70 درصد اجرا شود و دیگر آن که برنامه‌ی مورد نظر به جای یک CPU روی چهار CPU اجرا شود.
+اگر:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;α کسری از یک محاسبه است که متوالی است،&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1 - α‎ کسری است که می توان آن را موازی کرد،&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;و P تعداد پردازنده&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;سپس حداکثر سرعتی که می توان به دست آورد طبق قانون امدال(Amdahl's Law) داده می شود:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;1/(a+(1-a)/P)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;با جایگزینی مقادیر با α = 0.3، درمی‌یابیم که:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;برای 4 پردازنده: 2.105.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;برای 8 پردازنده: 2.581.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;دوبرابر کردن قدرت پردازش فقط یک پنجم سرعت را بهبود بخشیده است. اگر کل مشکل قابل موازی بود، البته ما انتظار دو برابر شدن سرعت را داشتیم. بنابراین، افزایش توان سخت افزاری شاید منجر به افزایش جزیی سرعت پردازشی شود اما نمی‌توان آن را لزوما رویکردی بهینه در نظر گرفت.&lt;/p&gt;</content><category term="Software Architecture"/><category term="scale out"/><category term="scale up"/><category term="scalability"/></entry><entry><title>با وجود venv بازم لازمه داکر یادبگیرم؟</title><link href="/docker-vs-venv.html" rel="alternate"/><published>2022-08-12T10:20:00+04:30</published><updated>2022-08-12T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-12:/docker-vs-venv.html</id><summary type="html"/><content type="html">&lt;p&gt;در گروه تلگرامی کاربران جنگو فارسی کاربری به نام A Boy Has No Name سوالی در رابطه با الزام یادگیری داکر با وجود ابزاری مانند venv پرسیده بود که پاسخ آن را برای استفاده دیگران این‌جا هم ذکر می‌کنم.&lt;/p&gt;
+&lt;h2&gt;سوال چه بود؟&lt;/h2&gt;
+&lt;p&gt;سوال را می‌توانید در &lt;a href="https://t.me/djangoir/255037"&gt;اینجا&lt;/a&gt;بیابید.&lt;/p&gt;
+&lt;p&gt;اگر تلگرام ندارید:‌ با وجود venv بازم لازمه داکر یادبگیرم؟&lt;/p&gt;
+&lt;h2&gt;پاسخ من به این سوال&lt;/h2&gt;
+&lt;p&gt;هر دو ابزارهای ایزوله‌سازی هستند. اول از همه باید ببینیم چرا باید از ایزوله‌سازی استفاده می‌کنیم. ما به دلایل زیر از ایزوله ‌سازی استفاده می‌کنیم:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;اگر پروژه X به نسخه 1.1 یک پکیج نیاز داشته باشه و پروژه Y به نسخه مثلا 2.3 از همین پکیچ « دقت کنید که ما تنها امکان نصب یک نسخه از یک پکیج را به صورت system wide خواهیم داشت»&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;در بعضی از سیستم‌ عامل‌ها «لینوکس رو مطمئنم بقیه رو نه» بخش‌هایی از سیستم‌عامل وابسته به بعضی از پکیج‌های پایتون هستند. حالا فرض کنید بخش X از سیستم‌عامل به نسخه 1.2 از یک پکیج و پروژه‌ای ما به نسخه 1.5 همون پکیج وابسته باشه! اینجا تداخل پیش میاد و با نصب نسخه 1.5 از پیکج مورد نظر ما،‌ عملکرد یک بخش 
+از سیستم‌عامل با مشکل رو به رو میشه&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ما در پایتون با مفهومی به نام &lt;a href="https://www.google.com/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=2ahUKEwiyi5mO-sb5AhWKg_0HHQvhAZgQmhN6BAhcEAI&amp;amp;url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTransitive_dependency&amp;amp;usg=AOvVaw0J0qDwL7kCnDliXs6Gzexh"&gt;transitive dependency&lt;/a&gt; سروکار داریم.«A-&amp;gt;B, B-&amp;gt;C» با ایجاد یک محیط ایزوله به راحتی می‌تونیم یک lock file از وابستگی‌‌ها و ورژن‌ او‌ن‌ها داشته باشیم. این لاک‌فایل بازتولید محیط توسعه در یک سیستم دیگر رو خیلی راحت می‌کنه &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;حالا که با چرایی ساخت محیط ایزوله آشنا شدیم باید ببینیم دسته‌بندی محیط‌‌های ایزوله به چه صورت هست؟&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Application level isolation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;System level isolation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;پکیج‌های مثل venv،‌ virtualenv و ... در دسته اول قرار می‌گیرند. این ابزارها مفسر پایتون و پکیج‌های مورد نیاز را در یک محیط ایزوله اما غیرپرتابل قرار می‌دهند. غیرپرتابل از این جهت که با تغییر دایرکتوری محیط ایزوله عملا محیط ایزوله بلااستفاده خواهد شد. «‌در venv/bin/ یک ls -ltrh بگیرید و ببینید مفسر به کجا لینک شده». استفاده از این محیط‌های مجازی در سیستم‌های دیگر نیز عملا بلاموضوع است. اما برای پروژه‌های کوچک تا متوسط با وابستگی‌های کم،‌این ابزار‌ها گزینه‌ای مناسب هستند.&lt;/p&gt;
+&lt;p&gt;در سطح دوم، ما به دلایلی «مثلا همکار شما nginx را با فلان فلگ کامپایل کرده و شما نیاز دارید با همان تنظیمات nginx را داشته باشید - تیم از یک دیتابیس خاص استفاده می‌کنه و  بقیه موارد مربوط به external dependencies» مایلیم تمام سیستم عامل « یا دست کم بخش‌هایی از سیستم‌ عامل و ابزار‌های مورد استفاده» را به صورت ایزوله داشته باشیم. برای اینکار دو نوع ابزار وجود دارد:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Classic virtualization&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lightweight virtualization «Containerization»&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;در دسته اول ابزار‌هایی مثل Virtualbox، VMWare، ‍‍Vagrant و ... قرار می‌گیرند و در دسته دوم ابزارهایی مانند Docker، Rocket و ...&lt;/p&gt;
+&lt;p&gt;یک جایی نیاز هست که تمام اعضای تیم بر روی یک محیط یکسان « با internal dependencies و external dependencies  مشابه» کار کنند که در این صورت از Classic virtualization  و ابزارهای مرتبط استفاده می‌شود. در این‌جا ما با یک محیط کاملا ایزوله و خودکفا ;) سروکار داریم.&lt;/p&gt;
+&lt;p&gt;اما در دسته دوم ما با ایزوله سازی محیط user-space به صورت مفهوم کانتیتر بر روی یک انجین سروکار داریم. در این صورت سیستم‌عامل به صورت یک external dependency ایزوله نمی‌شه. &lt;/p&gt;
+&lt;p&gt;در هر صورت تمام این بحث‌ها به خاطر پرتابل بودن محیط توسعه و دردسر‌های مربوط به اون هست. هر کدوم‌ از این طرز‌تفکر‌ها و ابزارهای مربوط‌ به اون‌ها تریدآف‌هایی دارند اما به خاطر مفهوم Scale Out شیفت تکنولوژی به سمت Docker هست. venv رو مجبورید استفاده کنید! یک حدی از داکر رو هم خوبه که بلد باشید و بیشتر از اون رو مگر اینکه به مباحث DevOps و حوزه‌های مرتبط علاقه‌مند باشید.&lt;/p&gt;
+&lt;p&gt;اگر مایل هستید راجع‌به این موضوع بیشتر بدونید فصل دوم کتاب Expert Python Programming رو پیشنهاد می‌کنم.&lt;/p&gt;</content><category term="Python"/><category term="docker"/><category term="vevnv"/><category term="isolation"/></entry><entry><title>اصول SOLID</title><link href="/solid-principles.html" rel="alternate"/><published>2022-06-21T10:20:00+04:30</published><updated>2022-06-21T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-06-21:/solid-principles.html</id><summary type="html"/><content type="html">&lt;p&gt;SOLID «سالید» کلمه‌ای مخفف برای پنج اصل است که معمولا در &lt;strong&gt;طراحی شی‌گرا&lt;/strong&gt; اعمال می‌شوند. این اصول کمک می‌کنند تا برنامه‌ها &lt;strong&gt;قابل درک‌تر&lt;/strong&gt;، &lt;strong&gt;منعطف‌تر&lt;/strong&gt;و &lt;strong&gt;قابلیت نگه‌داری آسان‌تر&lt;/strong&gt;ی داشته باشند. اصول سالید برای مدیریت وابستگی‌ها استفاده می‌شوند. این اصول مستقل از هم نیستند و نقض هر کدام «احتمالا» منجر به نقض بقیه خواهد شد.&lt;/p&gt;
+&lt;h3&gt;ارتباط میان SOLID و Design Patterns&lt;/h3&gt;
+&lt;p&gt;الگوهای طراحی «Design Patterns» راه‌حل‌هایی امتحان شده و قابل اطمینان برای مسائل رایج هستند. الگوهای طراحی به صورت ضمنی SOLID را نیز تحت پوشش قرار می‌دهند.&lt;/p&gt;
+&lt;h3&gt;اصل اول: Single Responsibility Principle «اصل تک مسئولیتی»&lt;/h3&gt;
+&lt;p&gt;اصل SRP بیان می‌دارد که هر موجودیت در برنامه شی‌گرا اعم از کلاس،‌متد یا تابع بایستی تنها یک وظیفه برای انجام داشته باشد و در این صورت است که موجودیت مفروض ما اگر نیاز به تغییر داشته باشد،‌ باید تنها به یک دلیل تغییر کند. تک مسئولیتی بودن هر بخش از کد بخشی از فلسفه یونیکس هم هست&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;اگر موجودیتی چندین مسئولیت برای انجام داشته باشد اصطلاحا به آن &lt;strong&gt;god object&lt;/strong&gt; می‌گویند&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;مثال&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;کلاس زیر را در نظر بگیرید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Student&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# get student name&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# set student name&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert_to_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Database logic written here&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_report&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Report formatting&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید در کلاس &lt;code&gt;Student&lt;/code&gt; چندین متد وجود دارد و هر متد وظیفه خاص و غیرمرتبط با متد‌های دیگر دارد. این شیوه پیاده‌سازی ناقض اصل &lt;code&gt;SRP&lt;/code&gt; است. برای پیروی از SRP دو متد آخر را در دو کلاس جداگانه قرار می‌دهیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Student&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# get student name&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# set student name&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StudentDB&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Retrieve data from DB&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Insert obj to DB&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;Class&lt;/span&gt; &lt;span class="n"&gt;StudentLog&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_report&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Report formatting&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;در این حالت هر کلاس تنها یک وظیفه برای انجام برعهده دارد و اگر بنابر تغییر یکی از این کلاس‌ها داشته باشیم تنها به یک دلیل کلاس مورد نظر را تغییر خواهیم داد. اصل &lt;code&gt;SRP&lt;/code&gt; برای توابع و متد‌ها نیز می‌تواند موضوعیت داشته باشد. به عنوان مثال به فانکشن زیر توجه کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Create connection&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prepare params for insertion&lt;/span&gt;
+    &lt;span class="c1"&gt;# Execute insertion&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return result&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید ما در این تابع یک کانکشن به دیتابیس ساخته‌ایم. پارامترهای لازم را فراهم آورده‌ایم. داده را وارد دیتابیس کرده‌ایم و نتیجه را برگشت‌ داده‌ایم. این تابع به وضوح اصل &lt;code&gt;SRP&lt;/code&gt; را نقض می‌کند. از آن‌گذشته برای توابع دیگر نیز باید کد مربوط به اتصال به دیتابیس را تکرار کنیم. بنابراین پیاده‌سازی بهتر می‌تواند به صورت زیر باشد:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;db_connection&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return a connection to DB&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_params&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prepare params&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db_connection&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_params&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="c1"&gt;# Insert data to DB&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return result&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;اصل دوم&lt;/h3&gt;
+&lt;h3&gt;اصل سوم&lt;/h3&gt;
+&lt;h3&gt;اصل چهارم&lt;/h3&gt;
+&lt;h3&gt;اصل پنجم&lt;/h3&gt;
+&lt;p&gt;منابع:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clean Code in Python by Mariano Anaya&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Clean Architecture"/><category term="SOLID"/></entry><entry><title>آماده‌سازی VSCode برای Django</title><link href="/vscode-for-djagno.html" rel="alternate"/><published>2022-06-16T10:20:00+04:30</published><updated>2022-06-16T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-06-16:/vscode-for-djagno.html</id><summary type="html"/><content type="html">&lt;p&gt;مراحل آماده‌سازی vscode برای کار با فریمورک Djagno&lt;/p&gt;
+&lt;p&gt;پوشه‌ای برای پروژه خود بسازید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;myproject
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;vscode را اجرا کنید و از منوی File بر روی زیرمنوی Add folder to workspace بزنید. پوشه پروژه&lt;code&gt;myproject&lt;/code&gt; را به vscode اضافه کنید.&lt;/p&gt;
+&lt;p&gt;برای ذخیره workspace جاری از منوی File بر روی Save workspace as... بزنید.&lt;/p&gt;
+&lt;p&gt;در صورتی که از ورژن کنترل استفاده می‌کنید،‌ Git را در دایرکتوری جاری init کنید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک فایل &lt;code&gt;.gitignore&lt;/code&gt; مخصوص پایتون اضافه کنید. یک نمونه گیت‌ایگنور برای پایتون را می‌توانید در &lt;a href="https://github.com/reganto/usernado/blob/master/.gitignore"&gt;این مسیر&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;p&gt;برای پروژه‌ی جاری یک &lt;code&gt;Virtualenv&lt;/code&gt; بسازید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای فعال‌سازی virtualenv در شل می‌توان از دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;استفاده کرد.&lt;/p&gt;
+&lt;p&gt;حالا نوبت آن است که virtualenv ساخته شده را به vscode معرفی کنیم. در vscode کلید‌های ترکیبی &lt;code&gt;Ctrl+Shift+p&lt;/code&gt; را بفشارید و &lt;code&gt;select interpreter&lt;/code&gt; را تایپ کنید. از مسیر &lt;code&gt;myproject/venv/bin/python&lt;/code&gt; می‌توانید پایتون را به vscode معرفی کنید.&lt;/p&gt;
+&lt;p&gt;در مسیر &lt;code&gt;myproject&lt;/code&gt; اگر پوشه &lt;code&gt;.vscode&lt;/code&gt; وجود ندارد، آن را بسازید. فایلی به نام &lt;code&gt;settings.json&lt;/code&gt; در این پوشه ایجاد کنید. در این فایل می‌توانیم تنظیمات vscode برای workspace  جاری را قرار دهیم. بعضی از مقادیر از این قرارند:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;telemetry.telemetryLevel&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;off&amp;quot;&lt;/span&gt;,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.analysis.autoImportCompletions&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;autoDocstring.docstringFormat&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sphinx&amp;quot;&lt;/span&gt;,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.linting.flake8Enabled&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.linting.enabled&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editor.formatOnSave&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.formatting.provider&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اولین مورد مربوط به خاموش کردن &lt;code&gt;telemetry&lt;/code&gt; برای vscode است تا اطلاعاتی از فعالیت‌های ما برای توسعه‌دهندگان فرستاده نشود. دومین مورد مربوط به قابلیت &lt;code&gt;autoImport&lt;/code&gt; برای vscode است که تا زمان نگارش این متن کارایی خوبی نداشته و بهتر است خاموش شود. سومین مورد مربوط به تعیین نوع &lt;code&gt;docstring&lt;/code&gt; برای توابع و کلاس‌هاست. این مورد مربوط به یک افزونه vscode است. مورد بعدی برای فعال نمودن ‍‍‍&lt;code&gt;flake8&lt;/code&gt; به عنوان ‍&lt;code&gt;Linter&lt;/code&gt; استفاده می‌شود. مورد بعدی برای فعال نمودن قابلیت &lt;code&gt;linting&lt;/code&gt; برای vscode است. مورد بعدی برای فرمت‌بندی کد در هنگام ذخیره آن استفاده می‌شود یعنی هربار که کد را ذخیره می‌کنیم بلافاصله کد به صورت خودکار با یک &lt;code&gt;Code Formatter&lt;/code&gt; مانند &lt;code&gt;Black&lt;/code&gt; فرمت‌بندی می‌شود. مورد آخر &lt;code&gt;Code Formatter&lt;/code&gt; را مشخص می‌کند که معمولا در پروژه‌هایی جنگویی توصیه به استفاده از &lt;code&gt;Black&lt;/code&gt; به عنوان &lt;code&gt;Code Formatter&lt;/code&gt; است.&lt;/p&gt;
+&lt;p&gt;برای مدیریت وابستگی‌ها از &lt;code&gt;poetry&lt;/code&gt; استفاده کنید. با دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;poetry  را برای پروژه جاری تنظیم کنید. به سوالاتی که poetry درباره‌ی پروژه می‌پرسد جواب دهید.&lt;/p&gt;
+&lt;p&gt;اطلاعات بیشتر راجع‌به &lt;a href="https://python-poetry.org/"&gt;poetry&lt;/a&gt; را می‌توانید در وبسایت ابزار بیابید.&lt;/p&gt;
+&lt;p&gt;در صورتی که &lt;code&gt;virtualenv&lt;/code&gt; فعال نیست آن را فعال کنید.&lt;/p&gt;
+&lt;p&gt;حالا با دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;از فعال بودن &lt;code&gt;virtualenv&lt;/code&gt; اطمینال حاصل کنید.&lt;/p&gt;
+&lt;p&gt;لینتر &lt;code&gt;Flake8&lt;/code&gt; و فرمتر &lt;code&gt;Black&lt;/code&gt; را نصب کنید:&lt;/p&gt;
+&lt;p&gt;‍‍‍&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;black&lt;span class="w"&gt; &lt;/span&gt;flake8&lt;span class="w"&gt; &lt;/span&gt;--dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید این پکیج‌ها را تنها برای حالت &lt;code&gt;development&lt;/code&gt; نصب کردیم.&lt;/p&gt;
+&lt;p&gt;در مرحله بعد باید &lt;code&gt;Django&lt;/code&gt; و ‍&lt;code&gt;DRF&lt;/code&gt; را نصب کنیم. «در صورتی که تمایل به ایجاد API دارید DRF را نصب کنید»&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;django&lt;span class="w"&gt; &lt;/span&gt;djangorestframework
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به دلیل عمل کردن &lt;code&gt;poetry&lt;/code&gt; و &lt;code&gt;pip&lt;/code&gt; روی یک &lt;code&gt;virtualenv&lt;/code&gt; می‌توانیم فایل &lt;code&gt;requirements.txt&lt;/code&gt;  را به سادگی ایجاد کنیم&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;freeze&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک پروژه جنگو ایجاد کنید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;django-admin&lt;span class="w"&gt; &lt;/span&gt;startproject&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;بر روی فایل &lt;code&gt;manage.py&lt;/code&gt; کلیک کنید و آنگاه بر روی زبانه‌ی &lt;code&gt;Run and Debug&lt;/code&gt; بزنید و در نهایت &lt;code&gt;launch‍&lt;/code&gt;  را کلیک کنید. از لیست فریم‌ورک‌ها Django را انتخاب کنید. با طی این مراحل فایل با نام &lt;code&gt;launch.json&lt;/code&gt; در مسیر &lt;code&gt;myproject/.vscode/&lt;/code&gt; ساخته می‌شود. حالا با &lt;code&gt;F5&lt;/code&gt; می‌توانید جنگو را اجرا کنید. در واقع F5 همان کار &lt;code&gt;./manage.py runserver&lt;/code&gt; را انجام می‌دهد.&lt;/p&gt;
+&lt;p&gt;ساختار فایل‌ها:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;myproject/
+&lt;span class="w"&gt;    &lt;/span&gt;.vscode/
+&lt;span class="w"&gt;        &lt;/span&gt;settings.json
+&lt;span class="w"&gt;        &lt;/span&gt;launch.json
+&lt;span class="w"&gt;    &lt;/span&gt;backend/
+&lt;span class="w"&gt;        &lt;/span&gt;config/
+&lt;span class="w"&gt;            &lt;/span&gt;__init__.py
+&lt;span class="w"&gt;            &lt;/span&gt;asgi.py
+&lt;span class="w"&gt;            &lt;/span&gt;settings.py
+&lt;span class="w"&gt;            &lt;/span&gt;urls.py
+&lt;span class="w"&gt;            &lt;/span&gt;wsgi.py
+&lt;span class="w"&gt;        &lt;/span&gt;venv/
+&lt;span class="w"&gt;        &lt;/span&gt;.gitignore
+&lt;span class="w"&gt;        &lt;/span&gt;manage.py
+&lt;span class="w"&gt;        &lt;/span&gt;poetry.lock
+&lt;span class="w"&gt;        &lt;/span&gt;pyproject.toml
+&lt;span class="w"&gt;        &lt;/span&gt;requirements.txt
+
+&lt;span class="w"&gt;    &lt;/span&gt;frontend/
+&lt;span class="w"&gt;    &lt;/span&gt;.gitignore
+&lt;span class="w"&gt;    &lt;/span&gt;CONTRIBUTING.md
+&lt;span class="w"&gt;    &lt;/span&gt;LICENSE.txt
+&lt;span class="w"&gt;    &lt;/span&gt;myproject.code-workspace
+&lt;span class="w"&gt;    &lt;/span&gt;README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;VSCode&lt;span class="w"&gt; &lt;/span&gt;Django&lt;span class="w"&gt; &lt;/span&gt;Checklist:
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;folder&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;workspace
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;save&lt;span class="w"&gt; &lt;/span&gt;workspace&lt;span class="w"&gt;  &lt;/span&gt;
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;gitignore&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;backend
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;venv
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;activate&lt;span class="w"&gt; &lt;/span&gt;venv
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;vscode
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.vscode/settings.json
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;init
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;black&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;flake8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;development
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;dj&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;drf
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;generate&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;django&lt;span class="w"&gt; &lt;/span&gt;startproject
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.vscode/launch.json&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;django
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.gitignore&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;project&lt;span class="w"&gt; &lt;/span&gt;level&lt;span class="w"&gt; &lt;/span&gt;folder
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;PROJECT.code-workspace&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;.vscode/*&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;.gitignore
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;LICENSE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;CONTRIBUTING.md&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;README.md&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;so&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;so&lt;span class="w"&gt; &lt;/span&gt;forth
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک نمونه پروژه ساخته شده را می‌توانید در مسیر &lt;a href="https://github.com/reganto/mandos"&gt;https://github.com/reganto/mandos&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;p&gt;افزونه‌هایی مورد نیاز از این قرارند:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;autoDocstring&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pylance&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;سایر افزونه‌های جالب:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Docker&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lorem Ipsum&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Material Icon Theme&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PostgreSQL&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Python"/><category term="vscode"/><category term="django"/></entry><entry><title>تست رگرسیون با Siege</title><link href="/regression-testing-with-seige.html" rel="alternate"/><published>2022-05-18T16:48:00+04:30</published><updated>2022-05-18T16:48:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-05-18:/regression-testing-with-seige.html</id><summary type="html"/><content type="html">&lt;p&gt;وقتی یک برنامه تحت وب شروع به کار می‌کند شاید در نگاه اول همه چیز خوب به نظر برسد اما با رشد کاربران و افزایش ترافیک، سیستم چگونه کار خواهد کرد؟اگر برنامه تحت وب را یک جعبه در نظر بگیریم،‌درخواست به برنامه ارسال می‌شود،‌درخواست پردازش می‌شود ودر نهایت پاسخی نمایش داده می شود.با ابزار siege می‌توانیم regression test , load test, stress test را به خوبی انجام دهیم.
+فرض کنید می‌خواهید برنامه ی تحت وب خود را برای یک میلیون کاربر آماده کنید.برای تست این برنامه دو راه وجود دارد، راه اول این است که از یک میلیون کاربر بخواهید که برنامه ی شما را تست کنند و راه دوم شبیه سازی این تعداد کاربر است.&lt;/p&gt;
+&lt;h3&gt;انواع تست کارایی&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Load test:&lt;/strong&gt;
+وقتی که برنامه تحت وب را برای تعداد مشخص و از قبل تعیین شده‌ای از درخواست ها تست می‌کنیم،‌به این نوع تست load test می گویند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stress test:&lt;/strong&gt;
+اگر تعداد درخواست از سطح مشخص شده فراتر رود در این صورت تست را stress test می گویند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Regression test:&lt;/strong&gt;
+وقتی تغییری در نرم‌افزار داده می شود،چگونه بفهمیم کارایی نرم‌افزار کاهش نیافته است؟ برای حصول اطمینان از یکسان بودن کارایی سرور قبل و بعد از تغییر، ‌regression test انجام می شود. اگر بخواهیم زیرساخت ها ی پروژه را تغییر دهیم دوباره به regression test نیاز خواهیم داشت. فرض کنید پروژه بر روی وب سرور Apache باشد و بخواهیم وب سرور را به Nginx تغییر دهیم. قبل از تغییر وب سرور ‌برنامه به صورت میانگین قادر به مدیریت N در خواست در دقیقه است. از کجا معلوم که با تغییر وب سرور کارایی برنامه کاهش نیابد و همچنان N درخواست در دقیقه قابل مدیریت باشد؟&lt;/p&gt;
+&lt;h3&gt;مراحل انجام یک تست موفق:&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;برنامه ریزی:&lt;/strong&gt;
+در این مرحله باید به سؤالاتی از این قبیل پاسخ داده شود: چه چیزی باید تست شود؟ چه انتظاری از تست وجود دارد؟ ترافیک روی سرور چقدر باید باشد؟ تست بر روی کدام آدرس باید انجام شود؟ و . . .&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;آماده سازی:&lt;/strong&gt;
+در این مرحله باید از ایزوله بودن محیط تست اطمینان حاصل شود. برای انجام تست های بعدی هم از همین محیط ایزوله استفاده می‌شود.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;آنالیز:&lt;/strong&gt;
+نتایج حاصل از تست باید مورد ارزیابی دقیق قرار گیرند.&lt;/p&gt;
+&lt;h3&gt;شروع کار با Siege:&lt;/h3&gt;
+&lt;p&gt;ابزاری فوق‌العاده برای بنچمارک گیری و تست اپلیکیشن های تحت وب است. این ابزار کاربران همزمان را برای تست اپ های تحت وب شبیه سازی می کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;نصب:&lt;/strong&gt;
+در توزیع ابونتو ابزار siege بدین صورت نصب می شود:«البته با نصب از طریق مخازن اصلی ابونتو، جدیدترین ورژن نصب نخواهد شد»&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;siege
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ایجاد سرور آزمایشی:&lt;/strong&gt;
+برای ایجاد یک سرور آزمایشی تنها کافی است کد زیر را تایپ کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;PORT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به جای PORT باید پورت مورد نظر خود برای اجرای سرور را وارد کنید.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;اصول اولیه کار با siege:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;برای شروع کار دستورات زیر را در شل اجرا کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;URL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به جای URL باید آدرس مورد نظر جایگزین شود. در این صورت تست با پارامتر های پیش‌فرض انجام می شود. برای اتمام تست از کلید های ترکیبی CTRL+C استفاده کنید.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;اولین تست:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;فرض کنید سرور را بر روی پورت 8888 اجرا کرده‌ایم. حال با استفاده از siege سرور را تست می‌کنیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8888/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر است:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;**&lt;span class="w"&gt; &lt;/span&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+**&lt;span class="w"&gt; &lt;/span&gt;Preparing&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;concurrent&lt;span class="w"&gt; &lt;/span&gt;users&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;battle.
+The&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;now&lt;span class="w"&gt; &lt;/span&gt;under&lt;span class="w"&gt; &lt;/span&gt;siege...
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;آرگومان &lt;code&gt;r-&lt;/code&gt; تعداد تکرار تست را تعیین می‌کند. آرگومان &lt;code&gt;c-&lt;/code&gt; تعداد کاربران شبیه‌سازی شده را مشخص می‌کند. پس تعداد درخواست‌های فرستاده شده به سمت سرور برابر ضرب مقدار این دو آرگومان خواهد شد.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;تحلیل خروجی تست:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Transaction:&lt;/strong&gt;
+برای هر کلاینت از طرف سرور یک سوکت باز می شود،‌ درخواست مدیریت می شود،‌ پاسخ برگشت داده می‌شود و درنهایت سوکت بسته می شود. این ها کارهایی است که در یک تراکنش انجام می شود. این مورد تعداد درخواست‌های فرستاده شده به سمت سرور را مشخص می‌کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Availability:&lt;/strong&gt;
+درصد درخواست‌هایی است که با موفقیت توسط سرور مدیریت شده اند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Elapsed time:&lt;/strong&gt;
+زمان انجام تست است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Data transferred:&lt;/strong&gt;
+مجموع داده‌هایی است که از طرف سرور به هر کاربر شبیه سازی شده ارسال شده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response time:&lt;/strong&gt;
+میانگین زمانی برای پاسخ به درخواست یک کاربر شبیه سازی شده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Transaction rate:&lt;/strong&gt;
+میانگین تعداد تراکنش هایی است که سرور می‌تواند در یک ثانیه مدیریت کند(Transaction / Elapsed time)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Throughput:&lt;/strong&gt;
+میانگین تعداد بایت هایی است که در هر ثانیه از سرور به تمام کاربران شبیه سازی شده انتقال می یابد.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Concurrency:&lt;/strong&gt;
+حاصل تقسیم تعداد کل تراکنش ها به زمان کل سپری شده است(Transaction/ Elapsed time ).هر چه این عدد بزرگ‌تر باشد،‌کارایی سرور کم‌تر است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Successful transactions:&lt;/strong&gt;
+تعداد دفعاتی که کد پاسخ(response code)برگشت داده شده از طرف سرور کوچک تر از 400 است.(تراکنش با موفقیت انجام شده باشد)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Failed transactions:&lt;/strong&gt;
+تعداد دفعاتی که کد پاسخ برگشت داده شده از طرف سرور بزرگ‌تر یا مساوی 400 باشد به علاوه تراکنش هایی که اصطلاحاً timeout می شوند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Longest transaction:&lt;/strong&gt;
+بیشترین زمانی که یک تراکنش طول کشیده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Shortest transaction:&lt;/strong&gt;
+کم‌ترین زمانی که یک تراکنش طول کشیده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;سوئیچ‌های siege&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;در این قسمت سوئیچ های ابزار siege را مورد بررسی قرار خواهیم داد. با سوئیچ h- هلپ ابزار نمایش داده می شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-h
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Usage:&lt;span class="w"&gt; &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;options&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;       &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;options&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;URL
+&lt;span class="w"&gt;       &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;URL
+Options:
+&lt;span class="w"&gt;  &lt;/span&gt;-V,&lt;span class="w"&gt; &lt;/span&gt;--version&lt;span class="w"&gt;             &lt;/span&gt;VERSION,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;version&lt;span class="w"&gt; &lt;/span&gt;number.
+&lt;span class="w"&gt;  &lt;/span&gt;-h,&lt;span class="w"&gt; &lt;/span&gt;--help&lt;span class="w"&gt;                &lt;/span&gt;HELP,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;this&lt;span class="w"&gt; &lt;/span&gt;section.
+&lt;span class="w"&gt;  &lt;/span&gt;-C,&lt;span class="w"&gt; &lt;/span&gt;--config&lt;span class="w"&gt;              &lt;/span&gt;CONFIGURATION,&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;current&lt;span class="w"&gt; &lt;/span&gt;config.
+&lt;span class="w"&gt;  &lt;/span&gt;-v,&lt;span class="w"&gt; &lt;/span&gt;--verbose&lt;span class="w"&gt;             &lt;/span&gt;VERBOSE,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;notification&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;screen.
+&lt;span class="w"&gt;  &lt;/span&gt;-q,&lt;span class="w"&gt; &lt;/span&gt;--quiet&lt;span class="w"&gt;               &lt;/span&gt;QUIET&lt;span class="w"&gt; &lt;/span&gt;turns&lt;span class="w"&gt; &lt;/span&gt;verbose&lt;span class="w"&gt; &lt;/span&gt;off&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;suppresses&lt;span class="w"&gt; &lt;/span&gt;output.
+&lt;span class="w"&gt;  &lt;/span&gt;-g,&lt;span class="w"&gt; &lt;/span&gt;--get&lt;span class="w"&gt;                 &lt;/span&gt;GET,&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;down&lt;span class="w"&gt; &lt;/span&gt;HTTP&lt;span class="w"&gt; &lt;/span&gt;headers&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;display&lt;span class="w"&gt; &lt;/span&gt;the
+&lt;span class="w"&gt;                            &lt;/span&gt;transaction.&lt;span class="w"&gt; &lt;/span&gt;Great&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;application&lt;span class="w"&gt; &lt;/span&gt;debugging.
+&lt;span class="w"&gt;  &lt;/span&gt;-p,&lt;span class="w"&gt; &lt;/span&gt;--print&lt;span class="w"&gt;               &lt;/span&gt;PRINT,&lt;span class="w"&gt; &lt;/span&gt;like&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt; &lt;/span&gt;only&lt;span class="w"&gt; &lt;/span&gt;it&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;entire&lt;span class="w"&gt; &lt;/span&gt;page.
+&lt;span class="w"&gt;  &lt;/span&gt;-c,&lt;span class="w"&gt; &lt;/span&gt;--concurrent&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;      &lt;/span&gt;CONCURRENT&lt;span class="w"&gt; &lt;/span&gt;users,&lt;span class="w"&gt; &lt;/span&gt;default&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-r,&lt;span class="w"&gt; &lt;/span&gt;--reps&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;            &lt;/span&gt;REPS,&lt;span class="w"&gt; &lt;/span&gt;number&lt;span class="w"&gt; &lt;/span&gt;of&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;times&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;test.
+&lt;span class="w"&gt;  &lt;/span&gt;-t,&lt;span class="w"&gt; &lt;/span&gt;--time&lt;span class="o"&gt;=&lt;/span&gt;NUMm&lt;span class="w"&gt;           &lt;/span&gt;TIMED&lt;span class="w"&gt; &lt;/span&gt;testing&lt;span class="w"&gt; &lt;/span&gt;where&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;modifier&lt;span class="w"&gt; &lt;/span&gt;S,&lt;span class="w"&gt; &lt;/span&gt;M,&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;H
+&lt;span class="w"&gt;                            &lt;/span&gt;ex:&lt;span class="w"&gt; &lt;/span&gt;--time&lt;span class="o"&gt;=&lt;/span&gt;1H,&lt;span class="w"&gt; &lt;/span&gt;one&lt;span class="w"&gt; &lt;/span&gt;hour&lt;span class="w"&gt; &lt;/span&gt;test.
+&lt;span class="w"&gt;  &lt;/span&gt;-d,&lt;span class="w"&gt; &lt;/span&gt;--delay&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;           &lt;/span&gt;Time&lt;span class="w"&gt; &lt;/span&gt;DELAY,&lt;span class="w"&gt; &lt;/span&gt;random&lt;span class="w"&gt; &lt;/span&gt;delay&lt;span class="w"&gt; &lt;/span&gt;before&lt;span class="w"&gt; &lt;/span&gt;each&lt;span class="w"&gt; &lt;/span&gt;requst
+&lt;span class="w"&gt;  &lt;/span&gt;-b,&lt;span class="w"&gt; &lt;/span&gt;--benchmark&lt;span class="w"&gt;           &lt;/span&gt;BENCHMARK:&lt;span class="w"&gt; &lt;/span&gt;no&lt;span class="w"&gt; &lt;/span&gt;delays&lt;span class="w"&gt; &lt;/span&gt;between&lt;span class="w"&gt; &lt;/span&gt;requests.
+&lt;span class="w"&gt;  &lt;/span&gt;-i,&lt;span class="w"&gt; &lt;/span&gt;--internet&lt;span class="w"&gt;            &lt;/span&gt;INTERNET&lt;span class="w"&gt; &lt;/span&gt;user&lt;span class="w"&gt; &lt;/span&gt;simulation,&lt;span class="w"&gt; &lt;/span&gt;hits&lt;span class="w"&gt; &lt;/span&gt;URLs&lt;span class="w"&gt; &lt;/span&gt;randomly.
+&lt;span class="w"&gt;  &lt;/span&gt;-f,&lt;span class="w"&gt; &lt;/span&gt;--file&lt;span class="o"&gt;=&lt;/span&gt;FILE&lt;span class="w"&gt;           &lt;/span&gt;FILE,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;specific&lt;span class="w"&gt; &lt;/span&gt;URLS&lt;span class="w"&gt; &lt;/span&gt;FILE.
+&lt;span class="w"&gt;  &lt;/span&gt;-R,&lt;span class="w"&gt; &lt;/span&gt;--rc&lt;span class="o"&gt;=&lt;/span&gt;FILE&lt;span class="w"&gt;             &lt;/span&gt;RC,&lt;span class="w"&gt; &lt;/span&gt;specify&lt;span class="w"&gt; &lt;/span&gt;an&lt;span class="w"&gt; &lt;/span&gt;siegerc&lt;span class="w"&gt; &lt;/span&gt;file
+&lt;span class="w"&gt;  &lt;/span&gt;-l,&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;[=&lt;/span&gt;FILE&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;LOG&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;FILE.&lt;span class="w"&gt; &lt;/span&gt;If&lt;span class="w"&gt; &lt;/span&gt;FILE&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;specified,&lt;span class="w"&gt; &lt;/span&gt;the
+&lt;span class="w"&gt;                            &lt;/span&gt;default&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;used:&lt;span class="w"&gt; &lt;/span&gt;/var/log/siege.log
+&lt;span class="w"&gt;  &lt;/span&gt;-m,&lt;span class="w"&gt; &lt;/span&gt;--mark&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;MARK,&lt;span class="w"&gt; &lt;/span&gt;mark&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;log&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;with&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;string.
+&lt;span class="w"&gt;                            &lt;/span&gt;between&lt;span class="w"&gt; &lt;/span&gt;.001&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;NUM.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;NOT&lt;span class="w"&gt; &lt;/span&gt;COUNTED&lt;span class="w"&gt; &lt;/span&gt;IN&lt;span class="w"&gt; &lt;/span&gt;STATS&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-H,&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;Add&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;header&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;request&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;can&lt;span class="w"&gt; &lt;/span&gt;be&lt;span class="w"&gt; &lt;/span&gt;many&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-A,&lt;span class="w"&gt; &lt;/span&gt;--user-agent&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;Sets&lt;span class="w"&gt; &lt;/span&gt;User-Agent&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;request
+&lt;span class="w"&gt;  &lt;/span&gt;-T,&lt;span class="w"&gt; &lt;/span&gt;--content-type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Sets&lt;span class="w"&gt; &lt;/span&gt;Content-Type&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;request
+&lt;span class="w"&gt;      &lt;/span&gt;--no-parser&lt;span class="w"&gt;           &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;PARSER,&lt;span class="w"&gt; &lt;/span&gt;turn&lt;span class="w"&gt; &lt;/span&gt;off&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;HTML&lt;span class="w"&gt; &lt;/span&gt;page&lt;span class="w"&gt; &lt;/span&gt;parser
+&lt;span class="w"&gt;      &lt;/span&gt;--no-follow&lt;span class="w"&gt;           &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;FOLLOW,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;follow&lt;span class="w"&gt; &lt;/span&gt;HTTP&lt;span class="w"&gt; &lt;/span&gt;redirects
+
+Copyright&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;C&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2017&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;Jeffrey&lt;span class="w"&gt; &lt;/span&gt;Fulmer,&lt;span class="w"&gt; &lt;/span&gt;et&lt;span class="w"&gt; &lt;/span&gt;al.
+This&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;free&lt;span class="w"&gt; &lt;/span&gt;software&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;see&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;copying&lt;span class="w"&gt; &lt;/span&gt;conditions.
+There&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;warranty&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;even&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MERCHANTABILITY&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;FITNESS
+FOR&lt;span class="w"&gt; &lt;/span&gt;A&lt;span class="w"&gt; &lt;/span&gt;PARTICULAR&lt;span class="w"&gt; &lt;/span&gt;PURPOSE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اولین سوئیچ V- است. اگر ابزار با این سوئیچ اجرا شود،‌ ورژن ابزار و کپی رایت مربوط به آن نمایش داده می شود. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-V
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+
+Copyright&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;C&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2017&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;Jeffrey&lt;span class="w"&gt; &lt;/span&gt;Fulmer,&lt;span class="w"&gt; &lt;/span&gt;et&lt;span class="w"&gt; &lt;/span&gt;al.
+This&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;free&lt;span class="w"&gt; &lt;/span&gt;software&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;see&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;copying&lt;span class="w"&gt; &lt;/span&gt;conditions.
+There&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;warranty&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;even&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MERCHANTABILITY&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;FITNESS
+FOR&lt;span class="w"&gt; &lt;/span&gt;A&lt;span class="w"&gt; &lt;/span&gt;PARTICULAR&lt;span class="w"&gt; &lt;/span&gt;PURPOSE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی C- است. این سوئیچ تنظیماتی را که ابزار با آن اجرا می شود را نمایش می دهد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-C
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CURRENT&lt;span class="w"&gt;  &lt;/span&gt;SIEGE&lt;span class="w"&gt;  &lt;/span&gt;CONFIGURATION
+Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Edit&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;resource&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;change&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;settings.
+----------------------------------------------
+version:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+verbose:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+color:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+quiet:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+debug:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+protocol:&lt;span class="w"&gt;                       &lt;/span&gt;HTTP/1.1
+HTML&lt;span class="w"&gt; &lt;/span&gt;parser:&lt;span class="w"&gt;                    &lt;/span&gt;enabled
+get&lt;span class="w"&gt; &lt;/span&gt;method:&lt;span class="w"&gt;                     &lt;/span&gt;HEAD
+connection:&lt;span class="w"&gt;                     &lt;/span&gt;close
+concurrent&lt;span class="w"&gt; &lt;/span&gt;users:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;25&lt;/span&gt;
+&lt;span class="nb"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;run:&lt;span class="w"&gt;                    &lt;/span&gt;n/a
+repetitions:&lt;span class="w"&gt;                    &lt;/span&gt;n/a
+socket&lt;span class="w"&gt; &lt;/span&gt;timeout:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;30&lt;/span&gt;
+cache&lt;span class="w"&gt; &lt;/span&gt;enabled:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+accept-encoding:&lt;span class="w"&gt;                &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+delay:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.000&lt;span class="w"&gt; &lt;/span&gt;sec
+internet&lt;span class="w"&gt; &lt;/span&gt;simulation:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+benchmark&lt;span class="w"&gt; &lt;/span&gt;mode:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+failures&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;until&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;abort:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;1024&lt;/span&gt;
+named&lt;span class="w"&gt; &lt;/span&gt;URL:&lt;span class="w"&gt;                      &lt;/span&gt;none
+URLs&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                      &lt;/span&gt;/etc/siege/urls.txt
+thread&lt;span class="w"&gt; &lt;/span&gt;limit:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;255&lt;/span&gt;
+logging:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+log&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                       &lt;/span&gt;/var/log/log/siege.log
+resource&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                  &lt;/span&gt;/home/reganto/.siege/siege.conf
+timestamped&lt;span class="w"&gt; &lt;/span&gt;output:&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+comma&lt;span class="w"&gt; &lt;/span&gt;separated&lt;span class="w"&gt; &lt;/span&gt;output:&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;redirects:&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;zero&lt;span class="w"&gt; &lt;/span&gt;byte&lt;span class="w"&gt; &lt;/span&gt;data:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;chunked&lt;span class="w"&gt; &lt;/span&gt;encoding:&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+upload&lt;span class="w"&gt; &lt;/span&gt;unique&lt;span class="w"&gt; &lt;/span&gt;files:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+no-follow:
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ad.doubleclick.net
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;pagead2.googlesyndication.com
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ads.pubsqrd.com
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ib.adnxs.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی v- است. اگر ابزار با این سوئیچ اجرا شود،‌ابزار اصطلاحا verbose خواهد بود. دراین حالت تمام اکشن هایی که توسط ابزار انجام می شود،‌در صفحه نمایش نشان داده می شود. تست سوئیچ v- را با یک کاربر شبیه سازی شده و به مدت ۵ ثانیه بر روی گوگل انجام می دهیم .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;با آرگومان t- می‌توان زمان انجام تست را تعیین کرد. (S برای ثانیه، M برای دقیقه , H برای ساعت)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;حتما متوجه شده‌اید که از این ابزار برای حملات &lt;a href="https://en.wikipedia.org/wiki/Denial-of-service_attack"&gt;DOS&lt;/a&gt; نیز می‌توان استفاده کرد پس زمان تست را افزایش ندهید.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;خروجی:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;**&lt;span class="w"&gt; &lt;/span&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4&lt;span class="w"&gt;                                                     &lt;/span&gt;
+**&lt;span class="w"&gt; &lt;/span&gt;Preparing&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;concurrent&lt;span class="w"&gt; &lt;/span&gt;users&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;battle.
+The&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;now&lt;span class="w"&gt; &lt;/span&gt;under&lt;span class="w"&gt; &lt;/span&gt;siege...
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.26&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.11&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;16557&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;5482&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.88&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+
+Lifting&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;siege...
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.64&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.02&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.30&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.84
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.26
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید خروجی به صورت verbose نمایش داده شده است.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی q- است. این سوئیچ مخالف سوئیچ قبلی است. اگر تست با این سوئیچ انجام شود،‌هیچگونه خروجی ای در صفحه نمایش ظاهر نمی شود(پیام اتمام فرایند تست در خروجی نمایش داده می شود)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-q&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Lifting&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;siege...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی g- است. اگر تست با این سوئیچ اجرا شود،‌ Request Headers و Response Headers  به همراه خروجی تست نمایش داده می شوند.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;HEAD&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;google.com
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Moved&lt;span class="w"&gt; &lt;/span&gt;Permanently
+Location:&lt;span class="w"&gt; &lt;/span&gt;https://www.google.com/
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;Fri,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jun&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;public,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;
+Server:&lt;span class="w"&gt; &lt;/span&gt;gws
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+X-Frame-Options:&lt;span class="w"&gt; &lt;/span&gt;SAMEORIGIN
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+
+GET&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;www.google.com
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;-1
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;private,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
+P3P:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;CP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is not a P3P policy! See g.co/p3phelp for more info.&amp;quot;&lt;/span&gt;
+Content-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip
+Server:&lt;span class="w"&gt; &lt;/span&gt;gws
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16549&lt;/span&gt;
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+X-Frame-Options:&lt;span class="w"&gt; &lt;/span&gt;SAMEORIGIN
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;1P_JAR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;-05-18-13&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Fri,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;-Jun-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Secure
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;AEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;AakniGMdinGLKkNMlyftRpRAM4cMUqgUrRD_RwKDoO-zjrnh86-IVfvrZQ&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Mon,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;-Nov-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Secure&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;HttpOnly&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;SameSite&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;lax
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;NID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;511&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;iOqxShyPFsdByVNu1VRRvSkoaMtVo7rmFosEnMXXiNjV0csTcZMZasN5Ci61UHRngT75Id5lhl_XAwahXXfn9vaSnFExBF9WQDdd6V7u5jFL8uMPdjwdc4ztHk8PdERarunLE4kMNzc5ZprheXKLpTHw0xk_l8HGhmi86Exur8s&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Thu,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;-Nov-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;HttpOnly
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+
+GET&lt;span class="w"&gt; &lt;/span&gt;/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;www.google.com
+Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;1P_JAR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;-05-18-13&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nv"&gt;AEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;AakniGMdinGLKkNMlyftRpRAM4cMUqgUrRD_RwKDoO-zjrnh86-IVfvrZQ&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nv"&gt;NID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;511&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;iOqxShyPFsdByVNu1VRRvSkoaMtVo7rmFosEnMXXiNjV0csTcZMZasN5Ci61UHRngT75Id5lhl_XAwahXXfn9vaSnFExBF9WQDdd6V7u5jFL8uMPdjwdc4ztHk8PdERarunLE4kMNzc5ZprheXKLpTHw0xk_l8HGhmi86Exur8s
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Accept-Ranges:&lt;span class="w"&gt; &lt;/span&gt;bytes
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;image/png
+Cross-Origin-Resource-Policy:&lt;span class="w"&gt; &lt;/span&gt;cross-origin
+Cross-Origin-Opener-Policy-Report-Only:&lt;span class="w"&gt; &lt;/span&gt;same-origin&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;report-to&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;static-on-bigtable&amp;quot;&lt;/span&gt;
+Report-To:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;group&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;static-on-bigtable&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;max_age&amp;quot;&lt;/span&gt;:2592000,&lt;span class="s2"&gt;&amp;quot;endpoints&amp;quot;&lt;/span&gt;:&lt;span class="o"&gt;[{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;https://csp.withgoogle.com/csp/report-to/static-on-bigtable&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}]}&lt;/span&gt;
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5482&lt;/span&gt;
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:16&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:16&lt;span class="w"&gt; &lt;/span&gt;GMT
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;private,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;31536000&lt;/span&gt;
+Last-Modified:&lt;span class="w"&gt; &lt;/span&gt;Tue,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;22&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;:30:00&lt;span class="w"&gt; &lt;/span&gt;GMT
+X-Content-Type-Options:&lt;span class="w"&gt; &lt;/span&gt;nosniff
+Server:&lt;span class="w"&gt; &lt;/span&gt;sffe
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.83&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.02&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.28&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.78&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.01&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.00
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.37
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.70
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید هدر‌های درخواست‌ها و پاسخ‌ها نیز در خروجی تست وجود دارند.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی p- است. این سوئیچ همان کار سوئیچ قبلی را انجام می دهد و علاوه بر آن محتوای html ی صفحه را نیز بر میگرداند.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ c- تعداد کاربران شبیه سازی شده را تعیین می کند. siege به صورت پیشفرض ۱۰ کاربر شبیه‌سازی شده را برای تست فراهم می‌کند.&lt;/p&gt;
+&lt;p&gt;مثال: تست با سه کاربر شبیه‌سازی شده:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ r- نشان‌دهنده تعداد تکرار درخواست‌های ارسالی است.&lt;/p&gt;
+&lt;p&gt;مثال: تست با یک کاربر شبیه‌سازی شده و با تعداد تکرار ۲:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی t- ،‌ زمان انجام تست را مشخص می کند.&lt;/p&gt;
+&lt;p&gt;مثال: تست برای دو کاربر همزمان شبیه‌سازی شده و به مدت ۱۰ ثانیه:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;10S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای مشخص کردن زمان انجام تست از سه فلگ S برای ثانیه،‌ M برای دقیقه و H برای ساعت استفاده می‌شود.  &lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی d-  است که برای ایجاد یک تاخیر رندوم بین درخواست ها استفاده می‌شود البته می توانیم میزان تاخیر بین درخواست ها را نیز تعیین کنیم.&lt;/p&gt;
+&lt;p&gt;مثال:این تست برای ۲ کاربر همزمان شبیه سازی شده اجرا می‌شود هر کاربر ۳ بار درخواست را تکرار می کند و بین درخواست ها تاخیر یک ثانیه ای وجود دارد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;1S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی کاری مخالف سوئیچ تاخیر انجام می‌دهد. اگر ابزار با سوئیج b- اجرا شود،‌ هیچ تاخیری بین درخواست ها اتفاق نمی‌افتد و درخواست ها پشت سر هم به سرور ارسال می‌شوند. این سوئیچ برای بنچمارک گیری استفاده می‌شود.&lt;/p&gt;
+&lt;p&gt;مثال: این تست برای دوکاربر همزمان شبیه سازی شده و با تعداد تکرار پنج انجام می‌شود. درضمن تاخیری بین درخواست ها وجود ندارد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی i- که برای شبیه سازی یک کاربر معمولی استفاده می‌شود. هر کاربری که وارد یک سایت می‌شود با توجه به نیاز و علاقه مندی‌ خود ممکن است بر روی لینک های مختلفی کلیک کند. سوئیچ i- این رفتار کاربران را شبیه سازی می کند. پس وقتی که تست با این سوئیچ انجام شود، آدرس های مختلفی به صورت رندوم تست می شوند.&lt;/p&gt;
+&lt;p&gt;مثال: این تست برای دو کاربر همزمان و با تعداد تکرار یک و با شبیه سازی رفتار کاربران انجام می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;‍siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی f- است. این سوئیچ برای تعیین مسیر فایلی که حاوی آدرس های مورد تست است، استفاده می‌شود. اگر فایلی با نام test.txt و محتوی دو آدرس به صورت زیر داشته باشیم،&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nl"&gt;https:&lt;/span&gt;&lt;span class="c1"&gt;//reganto.github.com/&lt;/span&gt;
+&lt;span class="nl"&gt;https:&lt;/span&gt;&lt;span class="c1"&gt;//google.com/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;در آن صورت تست به صورت زیر انجام می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;10S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;تست برای دوکاربر شبیه سازی شده و در طی ۱۰ ثانیه بر روی دو آدرس موجود در فایل انجام می‌شود.
+سوئیچ بعدی R- است. این سوئیچ برای معرفی یک siegerc فایل به ابزار استفاده می‌شود. اینگونه فایل ها دقیقا مشابه فایل bashrc هستند و با اجرای ابزار،‌ تنظیماتی را بر روی آن ابزار اعمال می کند. فایل siegerc پیش فرض در مسیر etc/siege/siegerc/ قرار دارد. می تونید این فایل را با یک ادیتور باز کنید و تنظیمات را تغییر دهید.(راهنمای هر دستور به صورت کامنت شده در فایل siegerc وجود دارد.)
+سوئیچ بعدی l- است. این سوئیچ برای معرفی یک لاگ فایل به ابزار استفاده می‌شود تا ابزار لاگ‌های خود را در آن ثبت کند. اگر فایلی تعیین نشود،‌ لاگ ها به طور پیش فرش در var/log/siege.log/قرار می گیرند. برای معرفی یک لاگ فایل از آپشن لانگ یعنی log-- نیز می‌توان استفاده کرد. به مثال زیر توجه کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;=&lt;/span&gt;siege.log&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;تنظیمات کلی ابزار در مسیر  siege/siege.conf./~ قرار دارد.
+سوئیچ بعدی m- و نوع لانگ آن mark-- است. این سوئیچ برای نشانه‌گذاری در لاگ فایل استفاده می‌شود و لاگ های مربوط به هر کاربر را با یک رشته از هم جدا می کند. شاید یک مثال به روشن شدن موضوع کمک کند. یک سرور آزمایشی ایجاد میکنم:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8001&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--bind&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;البته می توانید تست را بر روی هر سرور دیگری نیز انجام دهید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;=&lt;/span&gt;siege.log&lt;span class="w"&gt; &lt;/span&gt;--mark&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aaaaa&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;بعد از انجام تست، لاگ فایل را باز کنید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Date &amp;amp; Time,  Trans,  Elap Time,  Data Trans,  Resp Time,  Trans Rate,  Throughput,  Concurrent,    OKAY,   Failed
+2022-05-21 00:11:32,      7,       2.78,           0,       0.40,        2.52,        0.00,        1.00,       7,       0
+**** aaaaa ****
+2022-05-21 00:35:48,   1352,       4.40,           3,       0.01,      307.27,        0.68,        1.97,    1352,       0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می بینید لاگ های مربوط به تست های مربوط به کاربران شبیه‌سازی مختلف با aaaaa از هم جدا شده اند. پس سوئیچ mark-- نقش یک delimiter«حائل» رو برای لاگ های مربوط به کاربران شبیه‌سازی‌شده مختلف در لاگ فایل  ایفا می‌کند.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی H- و لانگ آن یعنی header-- است. این سوئیچ برای اضافه کردن یک هدر به درخواست استفاده می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cache-control: no-cache&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;لیستی از هدر‌های HTTP را می‌توانید &lt;a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields"&gt;اینجا&lt;/a&gt; بیابید.
+ با سوئیچ A- یا شکل لانگ آن user-agent-- می توان agent در خواست دهنده را مشخص کرد.  برای مشاهده‌ی لیستی از agentهای معروف می‌توانید به این &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent"&gt;لینک&lt;/a&gt; مراجعه بفرمایید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-A&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;curl/7.68.0&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اگر agent تعیین نشود، Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/4.0.4 به صورت پیش فرض به عنوان agent ارسال می شود.
+یکی دیگر از هدرهایی که نوع مدیای درون بدنه درخواست را تعیین می کند، هدرcontent-type است. ابزار Siege برای این هدر یک سوئیچ مجزا با نام T- یا content-type-- در نظر گرفته است. تست باید با سوئیچ g- انجام شود تا هدر درخواست و هدر پاسخ قابل مشاهده باشد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content-type:application/json&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی تست :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;HEAD&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;localhost:8001
+Accept:&lt;span class="w"&gt; &lt;/span&gt;/
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+content-type:&lt;span class="w"&gt; &lt;/span&gt;application/json
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Server:&lt;span class="w"&gt; &lt;/span&gt;SimpleHTTP/0.6&lt;span class="w"&gt; &lt;/span&gt;Python/3.6.8
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jul&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16&lt;/span&gt;:34:29&lt;span class="w"&gt; &lt;/span&gt;GMT
+Content-type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;utf-8
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;418&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Siege برای حملات DOS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ابزار siege برای حملات  DOS نیز استفاده می‌شود. و اگر این حملات به صورت توزیع شده باشد،‌ حمله اصطلاحا &lt;a href="https://en.wikipedia.org/wiki/Denial-of-service_attack#Distributed_attack"&gt;DDOS&lt;/a&gt; خواهد بود. برای جلوگیری از متهم شدن به حمله DOS تمام تست های این بخش بر روی سرور محلی انجام می‌شود. مانند مثال های قبل سرور محلی را با دستور زیر ایجاد می کنیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8001&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--bind&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;پس از اجرای سرور،‌ تست را انجام می دهیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;255&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ b- تاخیر بین درخواست ها را از بین می‌برد و از این طریق حمله موثرتر انجام خواهد شد!
+البته به صورت پیش فرض تعداد کاربران شبیه سازی شده‌ی محدودی را می توانید استفاده کنید. این محدودیت را می تونید با باز کردن فایل کانفیگ siege یا فایل siegerc ببینید.(محدودیت در متغیر limit اعمال شده است) این نکته را هم باید مد نظر داشته باشید که سیستم برای هر درخواست کاربر شبیه سازی شده یک سوکت باز می کند.برای موثر بودن حمله مقدار سوئیچ‌های t- یا r- را تا حد معقولی افزایش دهید. برای جلوگیری از حملات DOS &lt;a href="https://www.indusface.com/blog/top-6-ddos-attack-prevention-tactics-2021/"&gt;چندین راه مختلف وجود دارد&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;استفاده از Siege برای ارسال دیتای POST&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;از این قابلیت برای تست API ها استفاده می‌شود ولی با وجود ابزارهای قدرتمندی مانند Postman یا cURL شاید از استفاده از Siege چندان عاقلانه به نظر نرسد.در هر حال این قابلیت در siege وجود دارد. برای ارسال دیتای پست با Siege به صورت زیر عمل می کنیم:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://sample.com/ POST foo=bar&amp;amp;baz=bash&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;این دستور با یک کاربر شبیه سازی شده و تعداد تکرار یک، به آدرس فرضی sample.com دیتاهای foo=bar و baz=bash را ارسال می کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;مروری بر مهم‌ترین کانفیگ‌های Siege&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;همان‌طور که قبلا اشاره شد کانفیگ ابزار در مسیر &lt;code&gt;etc/siege/siegerc/&lt;/code&gt; قرار دارد. البته یک کپی از تنظیمات نیز در مسیر ‍&lt;code&gt;siege/siege.cong./~&lt;/code&gt; وجود دارد. توضیحات مربوط به هر کانفیگ در قسمت بالای آن کانفیگ به صورت کامنت‌شده قرار دارد در این قسمت چند کانفیگ مهم را مرور خواهیم کرد.&lt;/p&gt;
+&lt;p&gt;درباره‌ی log در ابزار قبلا توضیح دادیم. &lt;code&gt;logfile&lt;/code&gt; مسیر لاگ‌های ابزار را مشخص می‌کند. &lt;code&gt;verbose&lt;/code&gt; همان سوئیچ v- است. &lt;code&gt;color&lt;/code&gt; برای نمایش خروجی به صورت رنگی استفاده می‌شود و مقادیر آن به صورت on/off می‌باشد. &lt;code&gt;quiet&lt;/code&gt; همان سوئیچ q- است. قبلا ذکر شد که اگر ابزار با سوئیچ g- اجرا شود، هدر درخواست و پاسخ نمایش داده می‌شود. تنظیم &lt;code&gt;gmethod&lt;/code&gt; متدی را که ابزار در حالتی که با سوئیچ g- اجرا می‌شود را تعیین می کند. مقادیر این تنظیم GET/HEAD هستند. با متد HEAD فقط هدر درخواست و پاسخ نمایش داده می‌شود اما با متد GET تمام صفحه‌ای که درخواست به آن ارسال می‌شود، برگشت داده می‌شود و این دقیقا همان کاری‌ است که سوئیچ p- انجام می‌دهد. وقتی که درخواستی به یک سرور ارسال می‌شوداگر آپشن v- استفاده شده باشد، لاگ های ابزار در خروجی قرار می گیرند همچنین آدرس‌هایی که تست می‌شوند به صورت خلاصه شده در لاگ خروجی قرار می گیرند. با &lt;code&gt;fullurl&lt;/code&gt; می توانیم خروجی لاگ‌ها را به صورت کامل نمایش دهیم. مقادیر این تنظیم به صورت true/false است. &lt;code&gt;protocol&lt;/code&gt; پروتکل درخواست را مشخص می کند مقادیر آن می تواند HTTP/1.0 یا HTTP/1.1 باشد. در مورد HTTP/2.0 در مستندات اشاره‌ای نشده است. &lt;code&gt;concurrent&lt;/code&gt; مشابه سوئیچ c- است. برای بعضی از تنظیمات،‌ سوئیچ‌های متناظری نیز در نظر گرفته شده است. تنظیم‌های &lt;code&gt;time&lt;/code&gt; و &lt;code&gt;reps&lt;/code&gt; و &lt;code&gt;file&lt;/code&gt; و &lt;code&gt;dely&lt;/code&gt; و &lt;code&gt;internet&lt;/code&gt; و &lt;code&gt;benchmark&lt;/code&gt; و سوئیچ‌های t- و ‍r- و f- و d- و i- و b- متناظر هستند.&lt;/p&gt;</content><category term="Test"/><category term="test"/><category term="regression testing"/><category term="siege"/></entry><entry><title>انقراض دبیاسکی</title><link href="/dibiasky-extinction.html" rel="alternate"/><published>2022-03-16T16:33:00+03:30</published><updated>2022-03-16T16:33:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2022-03-16:/dibiasky-extinction.html</id><summary type="html"/><content type="html">&lt;p&gt;چندی پیش یکی از مقامات سازمان محیط‌زیست ابراز داشت که حدود ۷۰ درصد از گونه‌های زیستی در ایران منقرض شده‌اند. قبل از آن گاردین نیز گزارشی مشابه از انقراض گونه‌ها منتشر کرده بود. این درصدها سروصداهای مقطعی بین دوست‌داران محیط زیست ایجاد کرد اما آش همان آش است و کاسه همان کاسه!&lt;/p&gt;
+&lt;p&gt;چندی پیش یکی از مقامات سازمان محیط‌زیست ابراز داشت که &lt;a href="https://www.hamshahrionline.ir/news/348580/%D8%A7%D9%86%D9%82%D8%B1%D8%A7%D8%B6-%DB%B7%DB%B0-%D8%AF%D8%B1%D8%B5%D8%AF-%DA%AF%D9%88%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D8%AC%D8%A7%D9%86%D9%88%D8%B1%DB%8C"&gt;حدود ۷۰ درصد از گونه‌های زیستی در ایران منقرض شده‌اند&lt;/a&gt;. قبل از آن &lt;a href="https://www.theguardian.com/environment/2018/oct/30/humanity-wiped-out-animals-since-1970-major-report-finds"&gt;گاردین&lt;/a&gt; نیز گزارشی مشابه از انقراض گونه‌ها منتشر کرده بود. این درصدها سروصداهای مقطعی بین دوست‌داران محیط زیست ایجاد کرد اما آش همان آش است و کاسه همان کاسه!&lt;/p&gt;
+&lt;p&gt;کسانی که از این انقراض گسترده نارحت هستند و لب به اعتراض گشوده‌اند سخن از عواطف انسانی و ... می‌گویند و خواستار حفظ گونه‌های باقی‌مانده هستند اما از منظر علمی و منطقی،‌ انسان گونه‌ای است که برای بقای خود و برای بهتر«راحت‌تر» زیستن می‌جنگد و از نابود کردن گونه‌های دیگر ابایی ندارد و این ذات حیوانات است و جزئی از غریزه آن‌ها. اما چیزی که انسان‌ها را از سایر گونه‌ها متمایز می‌کند درصد بالای انقراض سایر گونه‌ها به دست این گونه‌ی به خصوص و میزان رفتار تهاجمی این گونه است. احتمالا زمین به خاطر ندارد گونه‌ای توانسته باشد بیش از ۵۰ درصد گونه‌های دیگر را نابود سازد و به چنین تفوقی دست یابد. انقراض بیش از نیمی از گونه‌های زنده به دست انسان‌ها در کمتر از نیم‌قرن واقعیتی است که بیشتر با نگاه آخرالزمانی به آن می‌نگرم.&lt;/p&gt;
+&lt;h2&gt;به بالا نگاه نکن!&lt;/h2&gt;
+&lt;p&gt;این فیلم شاهکاری است از آدام مک‌کی و در عین‌حال که قالبی آخرالزمانی دارد اما می‌توان رگه‌هایی از کمدی را نیز در آن مشاهده کرد. این فیلم سراسر استعاره و کنایه است. کنایه به زندگی پرزرق‌وبرق و عاری از تعقل انسان‌ها و تلاش‌های از روی یاس عده‌ای قلیل برای بیدار کردن انسان‌های نسبت به خطرات پیش‌رو. «خطر اسپویل!» فیلم از آن‌جا شروع می‌شود که خانم دبیاسکی«جنیفر لارنس» موفق به کشف دنباله‌داری می‌شود و ماجرا را با دکتر مندی «لئوناردو دیکاپریو» در میان می‌گذارد. دکتر مندی بعد از محاسبه‌های ریاضی متوجه می‌شود دنباله‌دار مذکور مستقیما به سمت زمین در حرکت است و ۶ ماه بعد به زمین برخورد خواهد کرد. در نگاه آدام مک‌کی،‌ دنباله‌دار و فرصت شش ماهه هر دو استعاره‌اند. اولی استعاره از مصائب و مشکلات حاد و دومی فرصتی که انسان‌ برای برطرف نمودن آن‌ مشکلات در اختیار دارد«داشته». اگر فکر می‌کنید در کمدی سیاه آدام مک‌کی انسان‌ها دست‌به‌دست هم داده و برای مشکلی که حیاتشان را در معرض خطر قرار می‌دهد راه‌حلی می‌اندیشند باید بگویم سخت در اشتباهید! بعد از شش ماه دنباله‌دار به زمین برخورد می‌کند و همه‌چیز و همه‌کس را نابود می‌کند.&lt;/p&gt;
+&lt;p&gt;به «بالا را نگاه نکن!» از زوایای گوناگونی می‌توان نگریست. از نگاه مک‌کی وقتی انسان‌ها با خطری که حیاتشان را تهدید می‌کند آنگونه برخورد می‌کنند، ارائه‌ راهکاری منطقی برای سایر مشکلات  از جمله انقراض سایر گونه‌ها نه غیرممکن اما دور از انتظار است. مورد دیگر در رابطه با کسانی که به آب و آتش می‌زنند تا شاید راهی یافته و توجه سیاست‌مداران را به آن جلب کنن. نمونه این افراد خانم دبیاسکی است. اما آدام مک‌کی از سر نومیدی به آن‌ها توصیه می‌کند به جای بیدار کردن سیاست‌مداران تهی مغز و عامه‌ی عاشق تفنن،‌ به سراغ زندگی خود بروند و هر جوری که دوست دارند زندگی کنند«ما ایرانی‌ها می‌گوییم آب در هاون کوبیدن». اگر آن ۶ ماه را ۶۰ سال و دبیاسکی را عالمان و دانشمندان دلسوخته که زندگی‌هایشان را وقف نهیب به انسان‌ها برای دیدن خطر رو به رو کردند در نظر بگیریم، مک‌کی می‌گوید: «عالمان عزیز! همان گونه که دبیاسکی توانست انسان‌ها را بیدار کند، شما نیز می‌توانید!» البته در فیلم می‌کی چیزی که خانم دبیاسکی را پس از ۶ ماه تلاش ناموفق آزار می‌دهد اینست که چرا با وجود آنکه می‌دانسته فرصتی کوتاه برای زندگی دارد بهتر از آن استفاده نکرده و با تلاش برای کاری بیهوده آن را تباه ساخته است. در نگاه آدام مک‌کی گسترش رسانه‌ها الزاما به معنای گسترش دانش و فرصتی برای بسط اندیشه‌های خردورزانه نیست بلکه رسانه « استعاره‌ از رسانه‌‌های حال حاضر در آمریکا» ابزاری برای سست نمودن نگاه منطقی و بسط تحمق به نفع عده‌ای قلیل است. فیلم آدام مک‌کی در بستر همین رسانه «نتفلیکس» امکان ایجاد و توزیع یافته و مک‌کی هوشمندانه با انتخاب نام فیلم‌اش « بالا را نگاه نکن!» به مخاطب نهیب می‌زند که همین فیلم هم در راستای همان سیاست بسط تحمق است پس آن را بیش‌از اندازه جدی نگیر! نامگذاری دنباله‌دار به نام دبیاسکی طنزی است که فقط می‌توان بر آن گریست. افزودن دبیاسکی به کلمه‌ی انقراض به صورت «انقراض دبیاسکی» مجازات خانم دبیاسکی بود به خاطر تلاش برای آگاه نمودن انسان و اذیت کردن هر چند جزئی کسانی که نباید اذیتشان می‌کرد. &lt;/p&gt;
+&lt;h2&gt;انکار:&lt;/h2&gt;
+&lt;p&gt;دبیاسکی ماجرا را با سیاست‌مداران در میان گذاشت. اولین واکنش آن‌‌ها «انکار» بود. همان کاری که سیاست‌مداران در دنیای واقعی در برخورد با حقایق انجام می‌دهند. &lt;/p&gt;
+&lt;h2&gt;تلاش برای سرپوش نهادن:&lt;/h2&gt;
+&lt;p&gt;دبیاسکی و دکتر با رئیس‌جمهور دیدار می‌کنند و خانم رئیس‌جمهور از آن‌ها می‌خواست به خاطر درپیش بودن انتخابات، سکوت کنند.&lt;/p&gt;
+&lt;h2&gt;باز شدن پای رسانه به ماجرا:&lt;/h2&gt;
+&lt;p&gt;پس از سرپوش نهادن رئیس‌جمهور، دبیاسکی و دکتر دست به دامن رسانه می‌شوند تا شاید فرصتی یافته و پیام خود را به صورت مستقیم به مردم برسانند. این‌جا همان جایی است که آدام مک‌کی هنرمندانه ابتذال رسانه و پیامد آن ابتذال جامعه را به زیبایی به تصویر کشیده است. در یک برنامه پربیننده تلویزیونی ماجرای دو سلبریتی و ماجرای برخورد دنباله‌دار مطرح می‌شود. اولی به صورت ویروسی تکثیر می‌شود و دومی تنها دست‌مایه ساخت میم‌هایی در شبکه‌های اجتماعی می‌شود. البته هیپنوتیزم دکتر مندی «نماینده جامعه علمی» با جادوی رسانه نکته‌ی دیگری است که از چشمان تیزبین مک‌کی دورنمانده است.&lt;/p&gt;
+&lt;h2&gt;سواستفاده برای پیشبرد مقاصد جناحی و حزبی:&lt;/h2&gt;
+&lt;p&gt;پس از مطرح کردن ماجرا در رسانه دیگر مجالی برای سرپوش گذاردن باقی نمی‌ماند. اما این‌بار سیاست‌مدارن به دنبال سواستفاده از دنباله‌دار برای مقاصد سیاسی هستند. دبیاسکی و دکتر مندی راضی می‌شوند در نمایشی که خانم رئیس‌جمهور برای قهرمان سازی از فرد مورد نظرش و جذب نظر مردم به راه انداخته، بازی کنند.&lt;/p&gt;
+&lt;h2&gt;فن‌سالاران و سرمایه‌داران وارد می‌شوند:&lt;/h2&gt;
+&lt;p&gt;درست زمانی که همه چیز در حال انجام است و نمایش به راه افتاده و این نمایش خواست همه را برآورده می‌کند، سرمایه‌دار بزرگ و صاحب‌نفوذ «ایشرول» وارد می‌شود و از نابودسازی دنباله‌دار جلوگیری می‌کند.  منافع سرمایه‌داران حکم می‌کند دنباله‌دار دبیاسکی نابود نشود. این‌جاست که آدام مک‌کی نقد‌هایی جدی به میزان نفوذ و ثروت سرمایه‌داران و فن‌سالاران وارد می‌کند و آن‌ها را خطری بزرگ می‌شمارد. مک‌کی سرمایه‌داران را حاکمان واقعی می‌داند و سیاست‌مداران را بازیچه‌ای در دست‌ آن‌ها قلمداد می‌کند.&lt;/p&gt;
+&lt;h2&gt;ایجاد دوقطبی:&lt;/h2&gt;
+&lt;p&gt;صاحبان قدرت برای پیشبرد مقاصد خود دو قطبی ایجاد می‌کنند. مردم نیز به دو گروه تقسیم می‌شوند. گروهی موافق نابودی دنباله‌دار هستند و شعارشان این است:‌ « به بالا نگاه کن!» و گروهی دیگر نظر متفاوتی دارند و شعارشان «به بالا نگاه نکن!» است.&lt;/p&gt;
+&lt;p&gt;این هزارتو چنان دبیاسکی و دکتر مندی را خسته می‌کند که آن‌ها نومیدانه دست از تلاش می‌کشند و روزهای باقی مانده از عمر خود را آن‌طور که دوست دارند زندگی می‌کنند. این‌جاست که بیننده از خود می‌پرسد به راستی اگر دبیاسکی و دکتر مندی به جای ۶ ماه ۶۰ سال تلاش می‌کردند قادر به راضی کردن صاحبان قدرت و مردم برای مقابله جدی با خطر می‌شدند؟ &lt;/p&gt;
+&lt;p&gt;در این رابطه تماشای فیلم‌های دیگری مانند فینچ«Finch» و مسیر«The Road» توصیه می‌شود.&lt;/p&gt;</content><category term="old_posts"/></entry><entry><title>اسکریپت full battery alarm برای لینوکس</title><link href="/battery-full-alarm-for-linux.html" rel="alternate"/><published>2021-08-19T10:20:00+04:30</published><updated>2021-08-19T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2021-08-19:/battery-full-alarm-for-linux.html</id><summary type="html"/><content type="html">&lt;p&gt;یکی از کاربران AskUbuntu سوالی پرسیده بود در رابطه با اسکریپتی برای نشان دادن آلارمی برای باتری لپ‌تاپ وقتی که تا حد معینی شارژ شده باشد. این موضوع برای من هم سوال بود و دوست داشتم اسکریپی برای آن بنویسم.&lt;/p&gt;
+&lt;h2&gt;سوال چه بود؟&lt;/h2&gt;
+&lt;p&gt;سوال را می‌توانید &lt;a href="https://askubuntu.com/q/1157608/1397026"&gt;اینجا&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;h2&gt;پاسخ من به این سوال&lt;/h2&gt;
+&lt;p&gt;برای Gnome:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;:0.0
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/capacity&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/status&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Charging&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-ge&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;85&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;notify-send&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;critical&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Battery fully charged&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای KDE:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;:0.0
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/capacity&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/status&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Charging&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-ge&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;85&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;kdialog&lt;span class="w"&gt; &lt;/span&gt;--msgbox&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Battery fully charged&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اسکریپیت را با دستور &lt;code&gt;chmod +x SCRIPTNAME.sh&lt;/code&gt; به حالت اجرایی درآورید و در &lt;code&gt;startup&lt;/code&gt; قرار دهید.&lt;/p&gt;
+&lt;p&gt;دیدن این &lt;a href="https://gist.github.com/reganto/addd1853ffc0dcf0d3944cd068c37ed7"&gt;Github Gist&lt;/a&gt; هم می‌تواند جالب باشد.&lt;/p&gt;
+&lt;p&gt;اسکریپت‌ها و ابزارهای مورد استفاده‌ام را می‌توانید در این &lt;a href="https://github.com/reganto/my-utils"&gt;رپوزیتوری&lt;/a&gt; بیابید.&lt;/p&gt;</content><category term="Linux"/><category term="battery"/><category term="linux"/></entry></feed>

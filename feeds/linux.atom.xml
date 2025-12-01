@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو - Linux</title><link href="/" rel="alternate"/><link href="/feeds/linux.atom.xml" rel="self"/><id>/</id><updated>2021-08-19T10:20:00+04:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>اسکریپت full battery alarm برای لینوکس</title><link href="/battery-full-alarm-for-linux.html" rel="alternate"/><published>2021-08-19T10:20:00+04:30</published><updated>2021-08-19T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2021-08-19:/battery-full-alarm-for-linux.html</id><summary type="html"/><content type="html">&lt;p&gt;یکی از کاربران AskUbuntu سوالی پرسیده بود در رابطه با اسکریپتی برای نشان دادن آلارمی برای باتری لپ‌تاپ وقتی که تا حد معینی شارژ شده باشد. این موضوع برای من هم سوال بود و دوست داشتم اسکریپی برای آن بنویسم.&lt;/p&gt;
+&lt;h2&gt;سوال چه بود؟&lt;/h2&gt;
+&lt;p&gt;سوال را می‌توانید &lt;a href="https://askubuntu.com/q/1157608/1397026"&gt;اینجا&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;h2&gt;پاسخ من به این سوال&lt;/h2&gt;
+&lt;p&gt;برای Gnome:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;:0.0
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/capacity&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/status&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Charging&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-ge&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;85&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;notify-send&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;critical&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Battery fully charged&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای KDE:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;:0.0
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/capacity&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;battery_status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;/sys/class/power_supply/BAT0/status&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Charging&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$battery_level&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-ge&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;85&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;kdialog&lt;span class="w"&gt; &lt;/span&gt;--msgbox&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Battery fully charged&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;sleep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;120&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اسکریپیت را با دستور &lt;code&gt;chmod +x SCRIPTNAME.sh&lt;/code&gt; به حالت اجرایی درآورید و در &lt;code&gt;startup&lt;/code&gt; قرار دهید.&lt;/p&gt;
+&lt;p&gt;دیدن این &lt;a href="https://gist.github.com/reganto/addd1853ffc0dcf0d3944cd068c37ed7"&gt;Github Gist&lt;/a&gt; هم می‌تواند جالب باشد.&lt;/p&gt;
+&lt;p&gt;اسکریپت‌ها و ابزارهای مورد استفاده‌ام را می‌توانید در این &lt;a href="https://github.com/reganto/my-utils"&gt;رپوزیتوری&lt;/a&gt; بیابید.&lt;/p&gt;</content><category term="Linux"/><category term="battery"/><category term="linux"/></entry></feed>

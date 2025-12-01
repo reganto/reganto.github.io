@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو - Clean Architecture</title><link href="/" rel="alternate"/><link href="/feeds/clean-architecture.atom.xml" rel="self"/><id>/</id><updated>2022-06-21T10:20:00+04:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>اصول SOLID</title><link href="/solid-principles.html" rel="alternate"/><published>2022-06-21T10:20:00+04:30</published><updated>2022-06-21T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-06-21:/solid-principles.html</id><summary type="html"/><content type="html">&lt;p&gt;SOLID «سالید» کلمه‌ای مخفف برای پنج اصل است که معمولا در &lt;strong&gt;طراحی شی‌گرا&lt;/strong&gt; اعمال می‌شوند. این اصول کمک می‌کنند تا برنامه‌ها &lt;strong&gt;قابل درک‌تر&lt;/strong&gt;، &lt;strong&gt;منعطف‌تر&lt;/strong&gt;و &lt;strong&gt;قابلیت نگه‌داری آسان‌تر&lt;/strong&gt;ی داشته باشند. اصول سالید برای مدیریت وابستگی‌ها استفاده می‌شوند. این اصول مستقل از هم نیستند و نقض هر کدام «احتمالا» منجر به نقض بقیه خواهد شد.&lt;/p&gt;
+&lt;h3&gt;ارتباط میان SOLID و Design Patterns&lt;/h3&gt;
+&lt;p&gt;الگوهای طراحی «Design Patterns» راه‌حل‌هایی امتحان شده و قابل اطمینان برای مسائل رایج هستند. الگوهای طراحی به صورت ضمنی SOLID را نیز تحت پوشش قرار می‌دهند.&lt;/p&gt;
+&lt;h3&gt;اصل اول: Single Responsibility Principle «اصل تک مسئولیتی»&lt;/h3&gt;
+&lt;p&gt;اصل SRP بیان می‌دارد که هر موجودیت در برنامه شی‌گرا اعم از کلاس،‌متد یا تابع بایستی تنها یک وظیفه برای انجام داشته باشد و در این صورت است که موجودیت مفروض ما اگر نیاز به تغییر داشته باشد،‌ باید تنها به یک دلیل تغییر کند. تک مسئولیتی بودن هر بخش از کد بخشی از فلسفه یونیکس هم هست&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;اگر موجودیتی چندین مسئولیت برای انجام داشته باشد اصطلاحا به آن &lt;strong&gt;god object&lt;/strong&gt; می‌گویند&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;مثال&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;کلاس زیر را در نظر بگیرید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Student&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# get student name&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# set student name&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert_to_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Database logic written here&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_report&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Report formatting&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید در کلاس &lt;code&gt;Student&lt;/code&gt; چندین متد وجود دارد و هر متد وظیفه خاص و غیرمرتبط با متد‌های دیگر دارد. این شیوه پیاده‌سازی ناقض اصل &lt;code&gt;SRP&lt;/code&gt; است. برای پیروی از SRP دو متد آخر را در دو کلاس جداگانه قرار می‌دهیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Student&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# get student name&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# set student name&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StudentDB&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Retrieve data from DB&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Insert obj to DB&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;Class&lt;/span&gt; &lt;span class="n"&gt;StudentLog&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_report&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Report formatting&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;در این حالت هر کلاس تنها یک وظیفه برای انجام برعهده دارد و اگر بنابر تغییر یکی از این کلاس‌ها داشته باشیم تنها به یک دلیل کلاس مورد نظر را تغییر خواهیم داد. اصل &lt;code&gt;SRP&lt;/code&gt; برای توابع و متد‌ها نیز می‌تواند موضوعیت داشته باشد. به عنوان مثال به فانکشن زیر توجه کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Create connection&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prepare params for insertion&lt;/span&gt;
+    &lt;span class="c1"&gt;# Execute insertion&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return result&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید ما در این تابع یک کانکشن به دیتابیس ساخته‌ایم. پارامترهای لازم را فراهم آورده‌ایم. داده را وارد دیتابیس کرده‌ایم و نتیجه را برگشت‌ داده‌ایم. این تابع به وضوح اصل &lt;code&gt;SRP&lt;/code&gt; را نقض می‌کند. از آن‌گذشته برای توابع دیگر نیز باید کد مربوط به اتصال به دیتابیس را تکرار کنیم. بنابراین پیاده‌سازی بهتر می‌تواند به صورت زیر باشد:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;db_connection&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return a connection to DB&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_params&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prepare params&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db_connection&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_params&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="c1"&gt;# Insert data to DB&lt;/span&gt;
+    &lt;span class="c1"&gt;# Return result&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;اصل دوم&lt;/h3&gt;
+&lt;h3&gt;اصل سوم&lt;/h3&gt;
+&lt;h3&gt;اصل چهارم&lt;/h3&gt;
+&lt;h3&gt;اصل پنجم&lt;/h3&gt;
+&lt;p&gt;منابع:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clean Code in Python by Mariano Anaya&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Clean Architecture"/><category term="SOLID"/></entry></feed>

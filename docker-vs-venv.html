@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  	<title>با وجود venv بازم لازمه داکر یادبگیرم؟</title>
+
+	<link rel="stylesheet" href="/theme/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/bootstrap-rtl.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/Vazir.css" type="text/css" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script>
+  		$(document).ready(function () {
+    		$(".post table").addClass("table table-striped table-condensed table-bordered");
+  	  	});
+    </script>
+	<meta charset="utf-8" />
+
+	<link rel="alternate" href="/feeds/all.atom.xml" type="application/atom+xml" title="خبرخوان رگانتو -سلسله یادداشت‌های رگانتو " />
+        <meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="google-site-verification" content="qsVGVu_-AAkJs98yNa_4PU3KkEz1Bam-dNOyEUeCyZI" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <meta name="tags" content="docker" />
+    <meta name="tags" content="vevnv" />
+    <meta name="tags" content="isolation" />
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<div class="banner">
+				  <a href="/"><h1>سلسله یادداشت‌های رگانتو</h1></a>
+			</div>
+<div class="content">
+	<div class="post">
+		<h3>
+			با وجود venv بازم لازمه داکر یادبگیرم؟
+		</h3>
+		<div class="info">
+			جمعه 21 مرداد 1401
+				توسط <a class="url fn" href="/author/reganto.html">Reganto</a>
+		</div>
+		<div class="content">
+			<p>در گروه تلگرامی کاربران جنگو فارسی کاربری به نام A Boy Has No Name سوالی در رابطه با الزام یادگیری داکر با وجود ابزاری مانند venv پرسیده بود که پاسخ آن را برای استفاده دیگران این‌جا هم ذکر می‌کنم.</p>
+<h2>سوال چه بود؟</h2>
+<p>سوال را می‌توانید در <a href="https://t.me/djangoir/255037">اینجا</a>بیابید.</p>
+<p>اگر تلگرام ندارید:‌ با وجود venv بازم لازمه داکر یادبگیرم؟</p>
+<h2>پاسخ من به این سوال</h2>
+<p>هر دو ابزارهای ایزوله‌سازی هستند. اول از همه باید ببینیم چرا باید از ایزوله‌سازی استفاده می‌کنیم. ما به دلایل زیر از ایزوله ‌سازی استفاده می‌کنیم:</p>
+<ul>
+<li>
+<p>اگر پروژه X به نسخه 1.1 یک پکیج نیاز داشته باشه و پروژه Y به نسخه مثلا 2.3 از همین پکیچ « دقت کنید که ما تنها امکان نصب یک نسخه از یک پکیج را به صورت system wide خواهیم داشت»</p>
+</li>
+<li>
+<p>در بعضی از سیستم‌ عامل‌ها «لینوکس رو مطمئنم بقیه رو نه» بخش‌هایی از سیستم‌عامل وابسته به بعضی از پکیج‌های پایتون هستند. حالا فرض کنید بخش X از سیستم‌عامل به نسخه 1.2 از یک پکیج و پروژه‌ای ما به نسخه 1.5 همون پکیج وابسته باشه! اینجا تداخل پیش میاد و با نصب نسخه 1.5 از پیکج مورد نظر ما،‌ عملکرد یک بخش 
+از سیستم‌عامل با مشکل رو به رو میشه</p>
+</li>
+<li>
+<p>ما در پایتون با مفهومی به نام <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiyi5mO-sb5AhWKg_0HHQvhAZgQmhN6BAhcEAI&amp;url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTransitive_dependency&amp;usg=AOvVaw0J0qDwL7kCnDliXs6Gzexh">transitive dependency</a> سروکار داریم.«A-&gt;B, B-&gt;C» با ایجاد یک محیط ایزوله به راحتی می‌تونیم یک lock file از وابستگی‌‌ها و ورژن‌ او‌ن‌ها داشته باشیم. این لاک‌فایل بازتولید محیط توسعه در یک سیستم دیگر رو خیلی راحت می‌کنه </p>
+</li>
+<li>
+<p>...</p>
+</li>
+</ul>
+<p>حالا که با چرایی ساخت محیط ایزوله آشنا شدیم باید ببینیم دسته‌بندی محیط‌‌های ایزوله به چه صورت هست؟</p>
+<ul>
+<li>
+<p>Application level isolation</p>
+</li>
+<li>
+<p>System level isolation</p>
+</li>
+</ul>
+<p>پکیج‌های مثل venv،‌ virtualenv و ... در دسته اول قرار می‌گیرند. این ابزارها مفسر پایتون و پکیج‌های مورد نیاز را در یک محیط ایزوله اما غیرپرتابل قرار می‌دهند. غیرپرتابل از این جهت که با تغییر دایرکتوری محیط ایزوله عملا محیط ایزوله بلااستفاده خواهد شد. «‌در venv/bin/ یک ls -ltrh بگیرید و ببینید مفسر به کجا لینک شده». استفاده از این محیط‌های مجازی در سیستم‌های دیگر نیز عملا بلاموضوع است. اما برای پروژه‌های کوچک تا متوسط با وابستگی‌های کم،‌این ابزار‌ها گزینه‌ای مناسب هستند.</p>
+<p>در سطح دوم، ما به دلایلی «مثلا همکار شما nginx را با فلان فلگ کامپایل کرده و شما نیاز دارید با همان تنظیمات nginx را داشته باشید - تیم از یک دیتابیس خاص استفاده می‌کنه و  بقیه موارد مربوط به external dependencies» مایلیم تمام سیستم عامل « یا دست کم بخش‌هایی از سیستم‌ عامل و ابزار‌های مورد استفاده» را به صورت ایزوله داشته باشیم. برای اینکار دو نوع ابزار وجود دارد:</p>
+<ul>
+<li>
+<p>Classic virtualization</p>
+</li>
+<li>
+<p>Lightweight virtualization «Containerization»</p>
+</li>
+</ul>
+<p>در دسته اول ابزار‌هایی مثل Virtualbox، VMWare، ‍‍Vagrant و ... قرار می‌گیرند و در دسته دوم ابزارهایی مانند Docker، Rocket و ...</p>
+<p>یک جایی نیاز هست که تمام اعضای تیم بر روی یک محیط یکسان « با internal dependencies و external dependencies  مشابه» کار کنند که در این صورت از Classic virtualization  و ابزارهای مرتبط استفاده می‌شود. در این‌جا ما با یک محیط کاملا ایزوله و خودکفا ;) سروکار داریم.</p>
+<p>اما در دسته دوم ما با ایزوله سازی محیط user-space به صورت مفهوم کانتیتر بر روی یک انجین سروکار داریم. در این صورت سیستم‌عامل به صورت یک external dependency ایزوله نمی‌شه. </p>
+<p>در هر صورت تمام این بحث‌ها به خاطر پرتابل بودن محیط توسعه و دردسر‌های مربوط به اون هست. هر کدوم‌ از این طرز‌تفکر‌ها و ابزارهای مربوط‌ به اون‌ها تریدآف‌هایی دارند اما به خاطر مفهوم Scale Out شیفت تکنولوژی به سمت Docker هست. venv رو مجبورید استفاده کنید! یک حدی از داکر رو هم خوبه که بلد باشید و بیشتر از اون رو مگر اینکه به مباحث DevOps و حوزه‌های مرتبط علاقه‌مند باشید.</p>
+<p>اگر مایل هستید راجع‌به این موضوع بیشتر بدونید فصل دوم کتاب Expert Python Programming رو پیشنهاد می‌کنم.</p>
+		</div>
+	</div>
+</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div class="footer">
+		<div class="container" style="direction: ltr;">
+			<hr/>
+				<ul class="nav nav-pills pull-right">
+					<li><a target="_blank" href="https://github.com/reganto">گیت‌هاب</a> </li>
+					<li><a target="_blank" href="https://linkedin.com/in/mselseleh">لینکدین</a> </li>
+					<li><a target="_blank" href="mailto:tell.reganto@gamil.com">تماس با من</a> </li>
+				        <li><a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 - 2025</a> </li>
+				</ul>
+		</div>
+	</div>
+</body>
+</html>

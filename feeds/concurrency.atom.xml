@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو - Concurrency</title><link href="/" rel="alternate"/><link href="/feeds/concurrency.atom.xml" rel="self"/><id>/</id><updated>2022-08-29T10:20:00+04:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>درامدی بر concurrency</title><link href="/introduction-to-concurrency.html" rel="alternate"/><published>2022-08-29T10:20:00+04:30</published><updated>2010-12-05T19:30:00+03:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-29:/introduction-to-concurrency.html</id><summary type="html"/><content type="html">&lt;h1&gt;همزمانی «Concurrency»&lt;/h1&gt;
+&lt;h1&gt;موازی‌سازی «Parallelism»&lt;/h1&gt;
+&lt;h2&gt;راه‌حل‌هایی برای موازی‌سازی&lt;/h2&gt;
+&lt;h3&gt;چندنخی «Multithreading»&lt;/h3&gt;
+&lt;h3&gt;چندپردازشی «Multiprocessing»&lt;/h3&gt;
+&lt;h1&gt;ناهمگام «Asynchronous»&lt;/h1&gt;
+&lt;h2&gt;راه‌حل‌هایی برای ناهمگام&lt;/h2&gt;
+&lt;h3&gt;ناهمگام از طریق Callback Arguments&lt;/h3&gt;
+&lt;h3&gt;ناهمگام از طریق برگشت دادن یک placeholder&lt;/h3&gt;
+&lt;h4&gt;یک placeholder از نوع شی Future&lt;/h4&gt;
+&lt;h4&gt;یک placeholder از نوع شی Promise&lt;/h4&gt;
+&lt;h4&gt;یک placeholder از نوع شی Deferred&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق تحویل به یک صف&lt;/h3&gt;
+&lt;h4&gt;صف در پایتون&lt;/h4&gt;
+&lt;h4&gt;صف در asyncio&lt;/h4&gt;
+&lt;h4&gt;صف در Tornado&lt;/h4&gt;
+&lt;h4&gt;سلری «Celery»&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق Coroutine&lt;/h3&gt;
+&lt;h4&gt;کروتین‌های generator پایه&lt;/h4&gt;
+&lt;h4&gt;کروتین‌های بومی «native»&lt;/h4&gt;
+&lt;h3&gt;ناهمگام از طریق posix signals&lt;/h3&gt;</content><category term="Concurrency"/><category term="concurrency"/><category term="parallelism"/><category term="asynchronous"/></entry></feed>

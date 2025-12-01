@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو - Test</title><link href="/" rel="alternate"/><link href="/feeds/test.atom.xml" rel="self"/><id>/</id><updated>2022-05-18T16:48:00+04:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>تست رگرسیون با Siege</title><link href="/regression-testing-with-seige.html" rel="alternate"/><published>2022-05-18T16:48:00+04:30</published><updated>2022-05-18T16:48:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-05-18:/regression-testing-with-seige.html</id><summary type="html"/><content type="html">&lt;p&gt;وقتی یک برنامه تحت وب شروع به کار می‌کند شاید در نگاه اول همه چیز خوب به نظر برسد اما با رشد کاربران و افزایش ترافیک، سیستم چگونه کار خواهد کرد؟اگر برنامه تحت وب را یک جعبه در نظر بگیریم،‌درخواست به برنامه ارسال می‌شود،‌درخواست پردازش می‌شود ودر نهایت پاسخی نمایش داده می شود.با ابزار siege می‌توانیم regression test , load test, stress test را به خوبی انجام دهیم.
+فرض کنید می‌خواهید برنامه ی تحت وب خود را برای یک میلیون کاربر آماده کنید.برای تست این برنامه دو راه وجود دارد، راه اول این است که از یک میلیون کاربر بخواهید که برنامه ی شما را تست کنند و راه دوم شبیه سازی این تعداد کاربر است.&lt;/p&gt;
+&lt;h3&gt;انواع تست کارایی&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Load test:&lt;/strong&gt;
+وقتی که برنامه تحت وب را برای تعداد مشخص و از قبل تعیین شده‌ای از درخواست ها تست می‌کنیم،‌به این نوع تست load test می گویند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stress test:&lt;/strong&gt;
+اگر تعداد درخواست از سطح مشخص شده فراتر رود در این صورت تست را stress test می گویند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Regression test:&lt;/strong&gt;
+وقتی تغییری در نرم‌افزار داده می شود،چگونه بفهمیم کارایی نرم‌افزار کاهش نیافته است؟ برای حصول اطمینان از یکسان بودن کارایی سرور قبل و بعد از تغییر، ‌regression test انجام می شود. اگر بخواهیم زیرساخت ها ی پروژه را تغییر دهیم دوباره به regression test نیاز خواهیم داشت. فرض کنید پروژه بر روی وب سرور Apache باشد و بخواهیم وب سرور را به Nginx تغییر دهیم. قبل از تغییر وب سرور ‌برنامه به صورت میانگین قادر به مدیریت N در خواست در دقیقه است. از کجا معلوم که با تغییر وب سرور کارایی برنامه کاهش نیابد و همچنان N درخواست در دقیقه قابل مدیریت باشد؟&lt;/p&gt;
+&lt;h3&gt;مراحل انجام یک تست موفق:&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;برنامه ریزی:&lt;/strong&gt;
+در این مرحله باید به سؤالاتی از این قبیل پاسخ داده شود: چه چیزی باید تست شود؟ چه انتظاری از تست وجود دارد؟ ترافیک روی سرور چقدر باید باشد؟ تست بر روی کدام آدرس باید انجام شود؟ و . . .&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;آماده سازی:&lt;/strong&gt;
+در این مرحله باید از ایزوله بودن محیط تست اطمینان حاصل شود. برای انجام تست های بعدی هم از همین محیط ایزوله استفاده می‌شود.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;آنالیز:&lt;/strong&gt;
+نتایج حاصل از تست باید مورد ارزیابی دقیق قرار گیرند.&lt;/p&gt;
+&lt;h3&gt;شروع کار با Siege:&lt;/h3&gt;
+&lt;p&gt;ابزاری فوق‌العاده برای بنچمارک گیری و تست اپلیکیشن های تحت وب است. این ابزار کاربران همزمان را برای تست اپ های تحت وب شبیه سازی می کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;نصب:&lt;/strong&gt;
+در توزیع ابونتو ابزار siege بدین صورت نصب می شود:«البته با نصب از طریق مخازن اصلی ابونتو، جدیدترین ورژن نصب نخواهد شد»&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;siege
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ایجاد سرور آزمایشی:&lt;/strong&gt;
+برای ایجاد یک سرور آزمایشی تنها کافی است کد زیر را تایپ کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;PORT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به جای PORT باید پورت مورد نظر خود برای اجرای سرور را وارد کنید.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;اصول اولیه کار با siege:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;برای شروع کار دستورات زیر را در شل اجرا کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;URL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به جای URL باید آدرس مورد نظر جایگزین شود. در این صورت تست با پارامتر های پیش‌فرض انجام می شود. برای اتمام تست از کلید های ترکیبی CTRL+C استفاده کنید.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;اولین تست:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;فرض کنید سرور را بر روی پورت 8888 اجرا کرده‌ایم. حال با استفاده از siege سرور را تست می‌کنیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8888/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر است:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;**&lt;span class="w"&gt; &lt;/span&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+**&lt;span class="w"&gt; &lt;/span&gt;Preparing&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;concurrent&lt;span class="w"&gt; &lt;/span&gt;users&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;battle.
+The&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;now&lt;span class="w"&gt; &lt;/span&gt;under&lt;span class="w"&gt; &lt;/span&gt;siege...
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;آرگومان &lt;code&gt;r-&lt;/code&gt; تعداد تکرار تست را تعیین می‌کند. آرگومان &lt;code&gt;c-&lt;/code&gt; تعداد کاربران شبیه‌سازی شده را مشخص می‌کند. پس تعداد درخواست‌های فرستاده شده به سمت سرور برابر ضرب مقدار این دو آرگومان خواهد شد.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;تحلیل خروجی تست:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Transaction:&lt;/strong&gt;
+برای هر کلاینت از طرف سرور یک سوکت باز می شود،‌ درخواست مدیریت می شود،‌ پاسخ برگشت داده می‌شود و درنهایت سوکت بسته می شود. این ها کارهایی است که در یک تراکنش انجام می شود. این مورد تعداد درخواست‌های فرستاده شده به سمت سرور را مشخص می‌کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Availability:&lt;/strong&gt;
+درصد درخواست‌هایی است که با موفقیت توسط سرور مدیریت شده اند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Elapsed time:&lt;/strong&gt;
+زمان انجام تست است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Data transferred:&lt;/strong&gt;
+مجموع داده‌هایی است که از طرف سرور به هر کاربر شبیه سازی شده ارسال شده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response time:&lt;/strong&gt;
+میانگین زمانی برای پاسخ به درخواست یک کاربر شبیه سازی شده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Transaction rate:&lt;/strong&gt;
+میانگین تعداد تراکنش هایی است که سرور می‌تواند در یک ثانیه مدیریت کند(Transaction / Elapsed time)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Throughput:&lt;/strong&gt;
+میانگین تعداد بایت هایی است که در هر ثانیه از سرور به تمام کاربران شبیه سازی شده انتقال می یابد.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Concurrency:&lt;/strong&gt;
+حاصل تقسیم تعداد کل تراکنش ها به زمان کل سپری شده است(Transaction/ Elapsed time ).هر چه این عدد بزرگ‌تر باشد،‌کارایی سرور کم‌تر است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Successful transactions:&lt;/strong&gt;
+تعداد دفعاتی که کد پاسخ(response code)برگشت داده شده از طرف سرور کوچک تر از 400 است.(تراکنش با موفقیت انجام شده باشد)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Failed transactions:&lt;/strong&gt;
+تعداد دفعاتی که کد پاسخ برگشت داده شده از طرف سرور بزرگ‌تر یا مساوی 400 باشد به علاوه تراکنش هایی که اصطلاحاً timeout می شوند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Longest transaction:&lt;/strong&gt;
+بیشترین زمانی که یک تراکنش طول کشیده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Shortest transaction:&lt;/strong&gt;
+کم‌ترین زمانی که یک تراکنش طول کشیده است.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;سوئیچ‌های siege&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;در این قسمت سوئیچ های ابزار siege را مورد بررسی قرار خواهیم داد. با سوئیچ h- هلپ ابزار نمایش داده می شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-h
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Usage:&lt;span class="w"&gt; &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;options&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;       &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;options&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;URL
+&lt;span class="w"&gt;       &lt;/span&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;URL
+Options:
+&lt;span class="w"&gt;  &lt;/span&gt;-V,&lt;span class="w"&gt; &lt;/span&gt;--version&lt;span class="w"&gt;             &lt;/span&gt;VERSION,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;version&lt;span class="w"&gt; &lt;/span&gt;number.
+&lt;span class="w"&gt;  &lt;/span&gt;-h,&lt;span class="w"&gt; &lt;/span&gt;--help&lt;span class="w"&gt;                &lt;/span&gt;HELP,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;this&lt;span class="w"&gt; &lt;/span&gt;section.
+&lt;span class="w"&gt;  &lt;/span&gt;-C,&lt;span class="w"&gt; &lt;/span&gt;--config&lt;span class="w"&gt;              &lt;/span&gt;CONFIGURATION,&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;current&lt;span class="w"&gt; &lt;/span&gt;config.
+&lt;span class="w"&gt;  &lt;/span&gt;-v,&lt;span class="w"&gt; &lt;/span&gt;--verbose&lt;span class="w"&gt;             &lt;/span&gt;VERBOSE,&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;notification&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;screen.
+&lt;span class="w"&gt;  &lt;/span&gt;-q,&lt;span class="w"&gt; &lt;/span&gt;--quiet&lt;span class="w"&gt;               &lt;/span&gt;QUIET&lt;span class="w"&gt; &lt;/span&gt;turns&lt;span class="w"&gt; &lt;/span&gt;verbose&lt;span class="w"&gt; &lt;/span&gt;off&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;suppresses&lt;span class="w"&gt; &lt;/span&gt;output.
+&lt;span class="w"&gt;  &lt;/span&gt;-g,&lt;span class="w"&gt; &lt;/span&gt;--get&lt;span class="w"&gt;                 &lt;/span&gt;GET,&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;down&lt;span class="w"&gt; &lt;/span&gt;HTTP&lt;span class="w"&gt; &lt;/span&gt;headers&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;display&lt;span class="w"&gt; &lt;/span&gt;the
+&lt;span class="w"&gt;                            &lt;/span&gt;transaction.&lt;span class="w"&gt; &lt;/span&gt;Great&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;application&lt;span class="w"&gt; &lt;/span&gt;debugging.
+&lt;span class="w"&gt;  &lt;/span&gt;-p,&lt;span class="w"&gt; &lt;/span&gt;--print&lt;span class="w"&gt;               &lt;/span&gt;PRINT,&lt;span class="w"&gt; &lt;/span&gt;like&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt; &lt;/span&gt;only&lt;span class="w"&gt; &lt;/span&gt;it&lt;span class="w"&gt; &lt;/span&gt;prints&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;entire&lt;span class="w"&gt; &lt;/span&gt;page.
+&lt;span class="w"&gt;  &lt;/span&gt;-c,&lt;span class="w"&gt; &lt;/span&gt;--concurrent&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;      &lt;/span&gt;CONCURRENT&lt;span class="w"&gt; &lt;/span&gt;users,&lt;span class="w"&gt; &lt;/span&gt;default&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-r,&lt;span class="w"&gt; &lt;/span&gt;--reps&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;            &lt;/span&gt;REPS,&lt;span class="w"&gt; &lt;/span&gt;number&lt;span class="w"&gt; &lt;/span&gt;of&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;times&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;test.
+&lt;span class="w"&gt;  &lt;/span&gt;-t,&lt;span class="w"&gt; &lt;/span&gt;--time&lt;span class="o"&gt;=&lt;/span&gt;NUMm&lt;span class="w"&gt;           &lt;/span&gt;TIMED&lt;span class="w"&gt; &lt;/span&gt;testing&lt;span class="w"&gt; &lt;/span&gt;where&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;modifier&lt;span class="w"&gt; &lt;/span&gt;S,&lt;span class="w"&gt; &lt;/span&gt;M,&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;H
+&lt;span class="w"&gt;                            &lt;/span&gt;ex:&lt;span class="w"&gt; &lt;/span&gt;--time&lt;span class="o"&gt;=&lt;/span&gt;1H,&lt;span class="w"&gt; &lt;/span&gt;one&lt;span class="w"&gt; &lt;/span&gt;hour&lt;span class="w"&gt; &lt;/span&gt;test.
+&lt;span class="w"&gt;  &lt;/span&gt;-d,&lt;span class="w"&gt; &lt;/span&gt;--delay&lt;span class="o"&gt;=&lt;/span&gt;NUM&lt;span class="w"&gt;           &lt;/span&gt;Time&lt;span class="w"&gt; &lt;/span&gt;DELAY,&lt;span class="w"&gt; &lt;/span&gt;random&lt;span class="w"&gt; &lt;/span&gt;delay&lt;span class="w"&gt; &lt;/span&gt;before&lt;span class="w"&gt; &lt;/span&gt;each&lt;span class="w"&gt; &lt;/span&gt;requst
+&lt;span class="w"&gt;  &lt;/span&gt;-b,&lt;span class="w"&gt; &lt;/span&gt;--benchmark&lt;span class="w"&gt;           &lt;/span&gt;BENCHMARK:&lt;span class="w"&gt; &lt;/span&gt;no&lt;span class="w"&gt; &lt;/span&gt;delays&lt;span class="w"&gt; &lt;/span&gt;between&lt;span class="w"&gt; &lt;/span&gt;requests.
+&lt;span class="w"&gt;  &lt;/span&gt;-i,&lt;span class="w"&gt; &lt;/span&gt;--internet&lt;span class="w"&gt;            &lt;/span&gt;INTERNET&lt;span class="w"&gt; &lt;/span&gt;user&lt;span class="w"&gt; &lt;/span&gt;simulation,&lt;span class="w"&gt; &lt;/span&gt;hits&lt;span class="w"&gt; &lt;/span&gt;URLs&lt;span class="w"&gt; &lt;/span&gt;randomly.
+&lt;span class="w"&gt;  &lt;/span&gt;-f,&lt;span class="w"&gt; &lt;/span&gt;--file&lt;span class="o"&gt;=&lt;/span&gt;FILE&lt;span class="w"&gt;           &lt;/span&gt;FILE,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;specific&lt;span class="w"&gt; &lt;/span&gt;URLS&lt;span class="w"&gt; &lt;/span&gt;FILE.
+&lt;span class="w"&gt;  &lt;/span&gt;-R,&lt;span class="w"&gt; &lt;/span&gt;--rc&lt;span class="o"&gt;=&lt;/span&gt;FILE&lt;span class="w"&gt;             &lt;/span&gt;RC,&lt;span class="w"&gt; &lt;/span&gt;specify&lt;span class="w"&gt; &lt;/span&gt;an&lt;span class="w"&gt; &lt;/span&gt;siegerc&lt;span class="w"&gt; &lt;/span&gt;file
+&lt;span class="w"&gt;  &lt;/span&gt;-l,&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;[=&lt;/span&gt;FILE&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;LOG&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;FILE.&lt;span class="w"&gt; &lt;/span&gt;If&lt;span class="w"&gt; &lt;/span&gt;FILE&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;specified,&lt;span class="w"&gt; &lt;/span&gt;the
+&lt;span class="w"&gt;                            &lt;/span&gt;default&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;used:&lt;span class="w"&gt; &lt;/span&gt;/var/log/siege.log
+&lt;span class="w"&gt;  &lt;/span&gt;-m,&lt;span class="w"&gt; &lt;/span&gt;--mark&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;MARK,&lt;span class="w"&gt; &lt;/span&gt;mark&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;log&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;with&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;string.
+&lt;span class="w"&gt;                            &lt;/span&gt;between&lt;span class="w"&gt; &lt;/span&gt;.001&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;NUM.&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;NOT&lt;span class="w"&gt; &lt;/span&gt;COUNTED&lt;span class="w"&gt; &lt;/span&gt;IN&lt;span class="w"&gt; &lt;/span&gt;STATS&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-H,&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;Add&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;header&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;request&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;can&lt;span class="w"&gt; &lt;/span&gt;be&lt;span class="w"&gt; &lt;/span&gt;many&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;-A,&lt;span class="w"&gt; &lt;/span&gt;--user-agent&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;Sets&lt;span class="w"&gt; &lt;/span&gt;User-Agent&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;request
+&lt;span class="w"&gt;  &lt;/span&gt;-T,&lt;span class="w"&gt; &lt;/span&gt;--content-type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Sets&lt;span class="w"&gt; &lt;/span&gt;Content-Type&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;request
+&lt;span class="w"&gt;      &lt;/span&gt;--no-parser&lt;span class="w"&gt;           &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;PARSER,&lt;span class="w"&gt; &lt;/span&gt;turn&lt;span class="w"&gt; &lt;/span&gt;off&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;HTML&lt;span class="w"&gt; &lt;/span&gt;page&lt;span class="w"&gt; &lt;/span&gt;parser
+&lt;span class="w"&gt;      &lt;/span&gt;--no-follow&lt;span class="w"&gt;           &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;FOLLOW,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;follow&lt;span class="w"&gt; &lt;/span&gt;HTTP&lt;span class="w"&gt; &lt;/span&gt;redirects
+
+Copyright&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;C&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2017&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;Jeffrey&lt;span class="w"&gt; &lt;/span&gt;Fulmer,&lt;span class="w"&gt; &lt;/span&gt;et&lt;span class="w"&gt; &lt;/span&gt;al.
+This&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;free&lt;span class="w"&gt; &lt;/span&gt;software&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;see&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;copying&lt;span class="w"&gt; &lt;/span&gt;conditions.
+There&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;warranty&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;even&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MERCHANTABILITY&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;FITNESS
+FOR&lt;span class="w"&gt; &lt;/span&gt;A&lt;span class="w"&gt; &lt;/span&gt;PARTICULAR&lt;span class="w"&gt; &lt;/span&gt;PURPOSE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اولین سوئیچ V- است. اگر ابزار با این سوئیچ اجرا شود،‌ ورژن ابزار و کپی رایت مربوط به آن نمایش داده می شود. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-V
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+
+Copyright&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;C&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2017&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;by&lt;span class="w"&gt; &lt;/span&gt;Jeffrey&lt;span class="w"&gt; &lt;/span&gt;Fulmer,&lt;span class="w"&gt; &lt;/span&gt;et&lt;span class="w"&gt; &lt;/span&gt;al.
+This&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;free&lt;span class="w"&gt; &lt;/span&gt;software&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;see&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;copying&lt;span class="w"&gt; &lt;/span&gt;conditions.
+There&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;NO&lt;span class="w"&gt; &lt;/span&gt;warranty&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt;even&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;MERCHANTABILITY&lt;span class="w"&gt; &lt;/span&gt;or&lt;span class="w"&gt; &lt;/span&gt;FITNESS
+FOR&lt;span class="w"&gt; &lt;/span&gt;A&lt;span class="w"&gt; &lt;/span&gt;PARTICULAR&lt;span class="w"&gt; &lt;/span&gt;PURPOSE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی C- است. این سوئیچ تنظیماتی را که ابزار با آن اجرا می شود را نمایش می دهد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-C
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CURRENT&lt;span class="w"&gt;  &lt;/span&gt;SIEGE&lt;span class="w"&gt;  &lt;/span&gt;CONFIGURATION
+Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Edit&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;resource&lt;span class="w"&gt; &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;change&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;settings.
+----------------------------------------------
+version:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4
+verbose:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+color:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+quiet:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+debug:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+protocol:&lt;span class="w"&gt;                       &lt;/span&gt;HTTP/1.1
+HTML&lt;span class="w"&gt; &lt;/span&gt;parser:&lt;span class="w"&gt;                    &lt;/span&gt;enabled
+get&lt;span class="w"&gt; &lt;/span&gt;method:&lt;span class="w"&gt;                     &lt;/span&gt;HEAD
+connection:&lt;span class="w"&gt;                     &lt;/span&gt;close
+concurrent&lt;span class="w"&gt; &lt;/span&gt;users:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;25&lt;/span&gt;
+&lt;span class="nb"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;run:&lt;span class="w"&gt;                    &lt;/span&gt;n/a
+repetitions:&lt;span class="w"&gt;                    &lt;/span&gt;n/a
+socket&lt;span class="w"&gt; &lt;/span&gt;timeout:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;30&lt;/span&gt;
+cache&lt;span class="w"&gt; &lt;/span&gt;enabled:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+accept-encoding:&lt;span class="w"&gt;                &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+delay:&lt;span class="w"&gt;                          &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.000&lt;span class="w"&gt; &lt;/span&gt;sec
+internet&lt;span class="w"&gt; &lt;/span&gt;simulation:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+benchmark&lt;span class="w"&gt; &lt;/span&gt;mode:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+failures&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;until&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;abort:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;1024&lt;/span&gt;
+named&lt;span class="w"&gt; &lt;/span&gt;URL:&lt;span class="w"&gt;                      &lt;/span&gt;none
+URLs&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                      &lt;/span&gt;/etc/siege/urls.txt
+thread&lt;span class="w"&gt; &lt;/span&gt;limit:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;255&lt;/span&gt;
+logging:&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+log&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                       &lt;/span&gt;/var/log/log/siege.log
+resource&lt;span class="w"&gt; &lt;/span&gt;file:&lt;span class="w"&gt;                  &lt;/span&gt;/home/reganto/.siege/siege.conf
+timestamped&lt;span class="w"&gt; &lt;/span&gt;output:&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+comma&lt;span class="w"&gt; &lt;/span&gt;separated&lt;span class="w"&gt; &lt;/span&gt;output:&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;redirects:&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;zero&lt;span class="w"&gt; &lt;/span&gt;byte&lt;span class="w"&gt; &lt;/span&gt;data:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+allow&lt;span class="w"&gt; &lt;/span&gt;chunked&lt;span class="w"&gt; &lt;/span&gt;encoding:&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+upload&lt;span class="w"&gt; &lt;/span&gt;unique&lt;span class="w"&gt; &lt;/span&gt;files:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+no-follow:
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ad.doubleclick.net
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;pagead2.googlesyndication.com
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ads.pubsqrd.com
+&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;ib.adnxs.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی v- است. اگر ابزار با این سوئیچ اجرا شود،‌ابزار اصطلاحا verbose خواهد بود. دراین حالت تمام اکشن هایی که توسط ابزار انجام می شود،‌در صفحه نمایش نشان داده می شود. تست سوئیچ v- را با یک کاربر شبیه سازی شده و به مدت ۵ ثانیه بر روی گوگل انجام می دهیم .&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;با آرگومان t- می‌توان زمان انجام تست را تعیین کرد. (S برای ثانیه، M برای دقیقه , H برای ساعت)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;حتما متوجه شده‌اید که از این ابزار برای حملات &lt;a href="https://en.wikipedia.org/wiki/Denial-of-service_attack"&gt;DOS&lt;/a&gt; نیز می‌توان استفاده کرد پس زمان تست را افزایش ندهید.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;خروجی:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;**&lt;span class="w"&gt; &lt;/span&gt;SIEGE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.0.4&lt;span class="w"&gt;                                                     &lt;/span&gt;
+**&lt;span class="w"&gt; &lt;/span&gt;Preparing&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;concurrent&lt;span class="w"&gt; &lt;/span&gt;users&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;battle.
+The&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;is&lt;span class="w"&gt; &lt;/span&gt;now&lt;span class="w"&gt; &lt;/span&gt;under&lt;span class="w"&gt; &lt;/span&gt;siege...
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.26&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.11&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;16557&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="m"&gt;5482&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.88&lt;span class="w"&gt; &lt;/span&gt;secs:&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;GET&lt;span class="w"&gt;  &lt;/span&gt;/
+
+Lifting&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;siege...
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;.64&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.02&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.30&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.84
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.26
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید خروجی به صورت verbose نمایش داده شده است.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی q- است. این سوئیچ مخالف سوئیچ قبلی است. اگر تست با این سوئیچ انجام شود،‌هیچگونه خروجی ای در صفحه نمایش ظاهر نمی شود(پیام اتمام فرایند تست در خروجی نمایش داده می شود)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-q&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Lifting&lt;span class="w"&gt; &lt;/span&gt;the&lt;span class="w"&gt; &lt;/span&gt;server&lt;span class="w"&gt; &lt;/span&gt;siege...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی g- است. اگر تست با این سوئیچ اجرا شود،‌ Request Headers و Response Headers  به همراه خروجی تست نمایش داده می شوند.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی به صورت زیر خواهد بود:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;HEAD&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;google.com
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;301&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Moved&lt;span class="w"&gt; &lt;/span&gt;Permanently
+Location:&lt;span class="w"&gt; &lt;/span&gt;https://www.google.com/
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;Fri,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jun&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;public,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;
+Server:&lt;span class="w"&gt; &lt;/span&gt;gws
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;220&lt;/span&gt;
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+X-Frame-Options:&lt;span class="w"&gt; &lt;/span&gt;SAMEORIGIN
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+
+GET&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;www.google.com
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;-1
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;private,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
+P3P:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;CP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is not a P3P policy! See g.co/p3phelp for more info.&amp;quot;&lt;/span&gt;
+Content-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip
+Server:&lt;span class="w"&gt; &lt;/span&gt;gws
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16549&lt;/span&gt;
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+X-Frame-Options:&lt;span class="w"&gt; &lt;/span&gt;SAMEORIGIN
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;1P_JAR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;-05-18-13&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Fri,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;-Jun-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Secure
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;AEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;AakniGMdinGLKkNMlyftRpRAM4cMUqgUrRD_RwKDoO-zjrnh86-IVfvrZQ&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Mon,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;-Nov-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Secure&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;HttpOnly&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;SameSite&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;lax
+Set-Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;NID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;511&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;iOqxShyPFsdByVNu1VRRvSkoaMtVo7rmFosEnMXXiNjV0csTcZMZasN5Ci61UHRngT75Id5lhl_XAwahXXfn9vaSnFExBF9WQDdd6V7u5jFL8uMPdjwdc4ztHk8PdERarunLE4kMNzc5ZprheXKLpTHw0xk_l8HGhmi86Exur8s&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;expires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Thu,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;17&lt;/span&gt;-Nov-2022&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:15&lt;span class="w"&gt; &lt;/span&gt;GMT&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.google.com&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;HttpOnly
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+
+GET&lt;span class="w"&gt; &lt;/span&gt;/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;www.google.com
+Cookie:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;1P_JAR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;-05-18-13&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nv"&gt;AEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;AakniGMdinGLKkNMlyftRpRAM4cMUqgUrRD_RwKDoO-zjrnh86-IVfvrZQ&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="nv"&gt;NID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;511&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;iOqxShyPFsdByVNu1VRRvSkoaMtVo7rmFosEnMXXiNjV0csTcZMZasN5Ci61UHRngT75Id5lhl_XAwahXXfn9vaSnFExBF9WQDdd6V7u5jFL8uMPdjwdc4ztHk8PdERarunLE4kMNzc5ZprheXKLpTHw0xk_l8HGhmi86Exur8s
+Accept:&lt;span class="w"&gt; &lt;/span&gt;*/*
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Accept-Ranges:&lt;span class="w"&gt; &lt;/span&gt;bytes
+Content-Type:&lt;span class="w"&gt; &lt;/span&gt;image/png
+Cross-Origin-Resource-Policy:&lt;span class="w"&gt; &lt;/span&gt;cross-origin
+Cross-Origin-Opener-Policy-Report-Only:&lt;span class="w"&gt; &lt;/span&gt;same-origin&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;report-to&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;static-on-bigtable&amp;quot;&lt;/span&gt;
+Report-To:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;group&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;static-on-bigtable&amp;quot;&lt;/span&gt;,&lt;span class="s2"&gt;&amp;quot;max_age&amp;quot;&lt;/span&gt;:2592000,&lt;span class="s2"&gt;&amp;quot;endpoints&amp;quot;&lt;/span&gt;:&lt;span class="o"&gt;[{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;https://csp.withgoogle.com/csp/report-to/static-on-bigtable&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}]}&lt;/span&gt;
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5482&lt;/span&gt;
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:16&lt;span class="w"&gt; &lt;/span&gt;GMT
+Expires:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;May&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2022&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;13&lt;/span&gt;:58:16&lt;span class="w"&gt; &lt;/span&gt;GMT
+Cache-Control:&lt;span class="w"&gt; &lt;/span&gt;private,&lt;span class="w"&gt; &lt;/span&gt;max-age&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;31536000&lt;/span&gt;
+Last-Modified:&lt;span class="w"&gt; &lt;/span&gt;Tue,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;22&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;18&lt;/span&gt;:30:00&lt;span class="w"&gt; &lt;/span&gt;GMT
+X-Content-Type-Options:&lt;span class="w"&gt; &lt;/span&gt;nosniff
+Server:&lt;span class="w"&gt; &lt;/span&gt;sffe
+X-XSS-Protection:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Alt-Svc:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-29&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q050&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q046&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,h3-Q043&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;,quic&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;:443&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ma&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2592000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;46,43&amp;quot;&lt;/span&gt;
+
+Transactions:&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;hits
+Availability:&lt;span class="w"&gt;                 &lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;.00&lt;span class="w"&gt; &lt;/span&gt;%
+Elapsed&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.83&lt;span class="w"&gt; &lt;/span&gt;secs
+Data&lt;span class="w"&gt; &lt;/span&gt;transferred:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.02&lt;span class="w"&gt; &lt;/span&gt;MB
+Response&lt;span class="w"&gt; &lt;/span&gt;time:&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.28&lt;span class="w"&gt; &lt;/span&gt;secs
+Transaction&lt;span class="w"&gt; &lt;/span&gt;rate:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.78&lt;span class="w"&gt; &lt;/span&gt;trans/sec
+Throughput:&lt;span class="w"&gt;                     &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.01&lt;span class="w"&gt; &lt;/span&gt;MB/sec
+Concurrency:&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.00
+Successful&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;
+Failed&lt;span class="w"&gt; &lt;/span&gt;transactions:&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+Longest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.37
+Shortest&lt;span class="w"&gt; &lt;/span&gt;transaction:&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.70
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید هدر‌های درخواست‌ها و پاسخ‌ها نیز در خروجی تست وجود دارند.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی p- است. این سوئیچ همان کار سوئیچ قبلی را انجام می دهد و علاوه بر آن محتوای html ی صفحه را نیز بر میگرداند.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ c- تعداد کاربران شبیه سازی شده را تعیین می کند. siege به صورت پیشفرض ۱۰ کاربر شبیه‌سازی شده را برای تست فراهم می‌کند.&lt;/p&gt;
+&lt;p&gt;مثال: تست با سه کاربر شبیه‌سازی شده:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ r- نشان‌دهنده تعداد تکرار درخواست‌های ارسالی است.&lt;/p&gt;
+&lt;p&gt;مثال: تست با یک کاربر شبیه‌سازی شده و با تعداد تکرار ۲:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی t- ،‌ زمان انجام تست را مشخص می کند.&lt;/p&gt;
+&lt;p&gt;مثال: تست برای دو کاربر همزمان شبیه‌سازی شده و به مدت ۱۰ ثانیه:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;10S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای مشخص کردن زمان انجام تست از سه فلگ S برای ثانیه،‌ M برای دقیقه و H برای ساعت استفاده می‌شود.  &lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی d-  است که برای ایجاد یک تاخیر رندوم بین درخواست ها استفاده می‌شود البته می توانیم میزان تاخیر بین درخواست ها را نیز تعیین کنیم.&lt;/p&gt;
+&lt;p&gt;مثال:این تست برای ۲ کاربر همزمان شبیه سازی شده اجرا می‌شود هر کاربر ۳ بار درخواست را تکرار می کند و بین درخواست ها تاخیر یک ثانیه ای وجود دارد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;1S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی کاری مخالف سوئیچ تاخیر انجام می‌دهد. اگر ابزار با سوئیج b- اجرا شود،‌ هیچ تاخیری بین درخواست ها اتفاق نمی‌افتد و درخواست ها پشت سر هم به سرور ارسال می‌شوند. این سوئیچ برای بنچمارک گیری استفاده می‌شود.&lt;/p&gt;
+&lt;p&gt;مثال: این تست برای دوکاربر همزمان شبیه سازی شده و با تعداد تکرار پنج انجام می‌شود. درضمن تاخیری بین درخواست ها وجود ندارد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی i- که برای شبیه سازی یک کاربر معمولی استفاده می‌شود. هر کاربری که وارد یک سایت می‌شود با توجه به نیاز و علاقه مندی‌ خود ممکن است بر روی لینک های مختلفی کلیک کند. سوئیچ i- این رفتار کاربران را شبیه سازی می کند. پس وقتی که تست با این سوئیچ انجام شود، آدرس های مختلفی به صورت رندوم تست می شوند.&lt;/p&gt;
+&lt;p&gt;مثال: این تست برای دو کاربر همزمان و با تعداد تکرار یک و با شبیه سازی رفتار کاربران انجام می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;‍siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ بعدی f- است. این سوئیچ برای تعیین مسیر فایلی که حاوی آدرس های مورد تست است، استفاده می‌شود. اگر فایلی با نام test.txt و محتوی دو آدرس به صورت زیر داشته باشیم،&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nl"&gt;https:&lt;/span&gt;&lt;span class="c1"&gt;//reganto.github.com/&lt;/span&gt;
+&lt;span class="nl"&gt;https:&lt;/span&gt;&lt;span class="c1"&gt;//google.com/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;در آن صورت تست به صورت زیر انجام می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;10S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;تست برای دوکاربر شبیه سازی شده و در طی ۱۰ ثانیه بر روی دو آدرس موجود در فایل انجام می‌شود.
+سوئیچ بعدی R- است. این سوئیچ برای معرفی یک siegerc فایل به ابزار استفاده می‌شود. اینگونه فایل ها دقیقا مشابه فایل bashrc هستند و با اجرای ابزار،‌ تنظیماتی را بر روی آن ابزار اعمال می کند. فایل siegerc پیش فرض در مسیر etc/siege/siegerc/ قرار دارد. می تونید این فایل را با یک ادیتور باز کنید و تنظیمات را تغییر دهید.(راهنمای هر دستور به صورت کامنت شده در فایل siegerc وجود دارد.)
+سوئیچ بعدی l- است. این سوئیچ برای معرفی یک لاگ فایل به ابزار استفاده می‌شود تا ابزار لاگ‌های خود را در آن ثبت کند. اگر فایلی تعیین نشود،‌ لاگ ها به طور پیش فرش در var/log/siege.log/قرار می گیرند. برای معرفی یک لاگ فایل از آپشن لانگ یعنی log-- نیز می‌توان استفاده کرد. به مثال زیر توجه کنید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;=&lt;/span&gt;siege.log&lt;span class="w"&gt; &lt;/span&gt;https://google.com/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;تنظیمات کلی ابزار در مسیر  siege/siege.conf./~ قرار دارد.
+سوئیچ بعدی m- و نوع لانگ آن mark-- است. این سوئیچ برای نشانه‌گذاری در لاگ فایل استفاده می‌شود و لاگ های مربوط به هر کاربر را با یک رشته از هم جدا می کند. شاید یک مثال به روشن شدن موضوع کمک کند. یک سرور آزمایشی ایجاد میکنم:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8001&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--bind&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;البته می توانید تست را بر روی هر سرور دیگری نیز انجام دهید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--log&lt;span class="o"&gt;=&lt;/span&gt;siege.log&lt;span class="w"&gt; &lt;/span&gt;--mark&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;aaaaa&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;بعد از انجام تست، لاگ فایل را باز کنید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Date &amp;amp; Time,  Trans,  Elap Time,  Data Trans,  Resp Time,  Trans Rate,  Throughput,  Concurrent,    OKAY,   Failed
+2022-05-21 00:11:32,      7,       2.78,           0,       0.40,        2.52,        0.00,        1.00,       7,       0
+**** aaaaa ****
+2022-05-21 00:35:48,   1352,       4.40,           3,       0.01,      307.27,        0.68,        1.97,    1352,       0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می بینید لاگ های مربوط به تست های مربوط به کاربران شبیه‌سازی مختلف با aaaaa از هم جدا شده اند. پس سوئیچ mark-- نقش یک delimiter«حائل» رو برای لاگ های مربوط به کاربران شبیه‌سازی‌شده مختلف در لاگ فایل  ایفا می‌کند.&lt;/p&gt;
+&lt;p&gt;سوئیچ بعدی H- و لانگ آن یعنی header-- است. این سوئیچ برای اضافه کردن یک هدر به درخواست استفاده می‌شود.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cache-control: no-cache&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;لیستی از هدر‌های HTTP را می‌توانید &lt;a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields"&gt;اینجا&lt;/a&gt; بیابید.
+ با سوئیچ A- یا شکل لانگ آن user-agent-- می توان agent در خواست دهنده را مشخص کرد.  برای مشاهده‌ی لیستی از agentهای معروف می‌توانید به این &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent"&gt;لینک&lt;/a&gt; مراجعه بفرمایید.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-A&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;curl/7.68.0&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اگر agent تعیین نشود، Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/4.0.4 به صورت پیش فرض به عنوان agent ارسال می شود.
+یکی دیگر از هدرهایی که نوع مدیای درون بدنه درخواست را تعیین می کند، هدرcontent-type است. ابزار Siege برای این هدر یک سوئیچ مجزا با نام T- یا content-type-- در نظر گرفته است. تست باید با سوئیچ g- انجام شود تا هدر درخواست و هدر پاسخ قابل مشاهده باشد.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;5S&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;--header&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content-type:application/json&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;خروجی تست :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;HEAD&lt;span class="w"&gt; &lt;/span&gt;/&lt;span class="w"&gt; &lt;/span&gt;HTTP/1.0
+Host:&lt;span class="w"&gt; &lt;/span&gt;localhost:8001
+Accept:&lt;span class="w"&gt; &lt;/span&gt;/
+Accept-Encoding:&lt;span class="w"&gt; &lt;/span&gt;gzip,&lt;span class="w"&gt; &lt;/span&gt;deflate
+User-Agent:&lt;span class="w"&gt; &lt;/span&gt;Mozilla/5.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;pc-x86_64-linux-gnu&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Siege/4.0.4
+content-type:&lt;span class="w"&gt; &lt;/span&gt;application/json
+Connection:&lt;span class="w"&gt; &lt;/span&gt;close
+
+HTTP/1.0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+Server:&lt;span class="w"&gt; &lt;/span&gt;SimpleHTTP/0.6&lt;span class="w"&gt; &lt;/span&gt;Python/3.6.8
+Date:&lt;span class="w"&gt; &lt;/span&gt;Wed,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Jul&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2019&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;16&lt;/span&gt;:34:29&lt;span class="w"&gt; &lt;/span&gt;GMT
+Content-type:&lt;span class="w"&gt; &lt;/span&gt;text/html&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;utf-8
+Content-Length:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;418&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Siege برای حملات DOS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ابزار siege برای حملات  DOS نیز استفاده می‌شود. و اگر این حملات به صورت توزیع شده باشد،‌ حمله اصطلاحا &lt;a href="https://en.wikipedia.org/wiki/Denial-of-service_attack#Distributed_attack"&gt;DDOS&lt;/a&gt; خواهد بود. برای جلوگیری از متهم شدن به حمله DOS تمام تست های این بخش بر روی سرور محلی انجام می‌شود. مانند مثال های قبل سرور محلی را با دستور زیر ایجاد می کنیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;http.server&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8001&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;--bind&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;پس از اجرای سرور،‌ تست را انجام می دهیم.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;255&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8001/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;سوئیچ b- تاخیر بین درخواست ها را از بین می‌برد و از این طریق حمله موثرتر انجام خواهد شد!
+البته به صورت پیش فرض تعداد کاربران شبیه سازی شده‌ی محدودی را می توانید استفاده کنید. این محدودیت را می تونید با باز کردن فایل کانفیگ siege یا فایل siegerc ببینید.(محدودیت در متغیر limit اعمال شده است) این نکته را هم باید مد نظر داشته باشید که سیستم برای هر درخواست کاربر شبیه سازی شده یک سوکت باز می کند.برای موثر بودن حمله مقدار سوئیچ‌های t- یا r- را تا حد معقولی افزایش دهید. برای جلوگیری از حملات DOS &lt;a href="https://www.indusface.com/blog/top-6-ddos-attack-prevention-tactics-2021/"&gt;چندین راه مختلف وجود دارد&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;استفاده از Siege برای ارسال دیتای POST&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;از این قابلیت برای تست API ها استفاده می‌شود ولی با وجود ابزارهای قدرتمندی مانند Postman یا cURL شاید از استفاده از Siege چندان عاقلانه به نظر نرسد.در هر حال این قابلیت در siege وجود دارد. برای ارسال دیتای پست با Siege به صورت زیر عمل می کنیم:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;siege&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://sample.com/ POST foo=bar&amp;amp;baz=bash&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;این دستور با یک کاربر شبیه سازی شده و تعداد تکرار یک، به آدرس فرضی sample.com دیتاهای foo=bar و baz=bash را ارسال می کند.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;مروری بر مهم‌ترین کانفیگ‌های Siege&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;همان‌طور که قبلا اشاره شد کانفیگ ابزار در مسیر &lt;code&gt;etc/siege/siegerc/&lt;/code&gt; قرار دارد. البته یک کپی از تنظیمات نیز در مسیر ‍&lt;code&gt;siege/siege.cong./~&lt;/code&gt; وجود دارد. توضیحات مربوط به هر کانفیگ در قسمت بالای آن کانفیگ به صورت کامنت‌شده قرار دارد در این قسمت چند کانفیگ مهم را مرور خواهیم کرد.&lt;/p&gt;
+&lt;p&gt;درباره‌ی log در ابزار قبلا توضیح دادیم. &lt;code&gt;logfile&lt;/code&gt; مسیر لاگ‌های ابزار را مشخص می‌کند. &lt;code&gt;verbose&lt;/code&gt; همان سوئیچ v- است. &lt;code&gt;color&lt;/code&gt; برای نمایش خروجی به صورت رنگی استفاده می‌شود و مقادیر آن به صورت on/off می‌باشد. &lt;code&gt;quiet&lt;/code&gt; همان سوئیچ q- است. قبلا ذکر شد که اگر ابزار با سوئیچ g- اجرا شود، هدر درخواست و پاسخ نمایش داده می‌شود. تنظیم &lt;code&gt;gmethod&lt;/code&gt; متدی را که ابزار در حالتی که با سوئیچ g- اجرا می‌شود را تعیین می کند. مقادیر این تنظیم GET/HEAD هستند. با متد HEAD فقط هدر درخواست و پاسخ نمایش داده می‌شود اما با متد GET تمام صفحه‌ای که درخواست به آن ارسال می‌شود، برگشت داده می‌شود و این دقیقا همان کاری‌ است که سوئیچ p- انجام می‌دهد. وقتی که درخواستی به یک سرور ارسال می‌شوداگر آپشن v- استفاده شده باشد، لاگ های ابزار در خروجی قرار می گیرند همچنین آدرس‌هایی که تست می‌شوند به صورت خلاصه شده در لاگ خروجی قرار می گیرند. با &lt;code&gt;fullurl&lt;/code&gt; می توانیم خروجی لاگ‌ها را به صورت کامل نمایش دهیم. مقادیر این تنظیم به صورت true/false است. &lt;code&gt;protocol&lt;/code&gt; پروتکل درخواست را مشخص می کند مقادیر آن می تواند HTTP/1.0 یا HTTP/1.1 باشد. در مورد HTTP/2.0 در مستندات اشاره‌ای نشده است. &lt;code&gt;concurrent&lt;/code&gt; مشابه سوئیچ c- است. برای بعضی از تنظیمات،‌ سوئیچ‌های متناظری نیز در نظر گرفته شده است. تنظیم‌های &lt;code&gt;time&lt;/code&gt; و &lt;code&gt;reps&lt;/code&gt; و &lt;code&gt;file&lt;/code&gt; و &lt;code&gt;dely&lt;/code&gt; و &lt;code&gt;internet&lt;/code&gt; و &lt;code&gt;benchmark&lt;/code&gt; و سوئیچ‌های t- و ‍r- و f- و d- و i- و b- متناظر هستند.&lt;/p&gt;</content><category term="Test"/><category term="test"/><category term="regression testing"/><category term="siege"/></entry></feed>

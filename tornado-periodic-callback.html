@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  	<title>تورنادو و تسک‌های periodic</title>
+
+	<link rel="stylesheet" href="/theme/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/bootstrap-rtl.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/Vazir.css" type="text/css" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script>
+  		$(document).ready(function () {
+    		$(".post table").addClass("table table-striped table-condensed table-bordered");
+  	  	});
+    </script>
+	<meta charset="utf-8" />
+
+	<link rel="alternate" href="/feeds/all.atom.xml" type="application/atom+xml" title="خبرخوان رگانتو -سلسله یادداشت‌های رگانتو " />
+        <meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="google-site-verification" content="qsVGVu_-AAkJs98yNa_4PU3KkEz1Bam-dNOyEUeCyZI" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <meta name="tags" content="python" />
+    <meta name="tags" content="tornado" />
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<div class="banner">
+				  <a href="/"><h1>سلسله یادداشت‌های رگانتو</h1></a>
+			</div>
+<div class="content">
+	<div class="post">
+		<h3>
+			تورنادو و تسک‌های periodic
+		</h3>
+		<div class="info">
+			چهارشنبه 09 شهریور 1401
+				توسط <a class="url fn" href="/author/reganto.html">Reganto</a>
+		</div>
+		<div class="content">
+			<h2>مقدمه</h2>
+<p>یکی از ویژگی‌های بسیار جذاب تورنادو توانایی آن در اجرای تسک‌های پریودیک‌ است. ابزارهای دیگری نیز برای این دسته از تسک‌ها وجود دارند که شاید معروف‌ترین آن‌ها <code>Celery Beat</code> و <code>Crond</code> باشد اما تورنادو این کار را بدون هیچگونه پیش‌نیازی  و به سادگی و تنها با فراخوانی یک متد انجام می‌دهد.</p>
+<h2>امضای متد</h2>
+<p>متد مورد نظر برای اجرای تسک‌های پریودیک <code>PeriodicCallback</code> نام دارد آن را می‌توان از مسیر <code>tornado.ioloop.PeriodicCallback</code> ایمپورت کرد. این متد سه آرگومان می‌گیرد اولی تابعی است که قرار است اجرا شود «کال‌بک مورد نظر ما» دومی فاصله زمانی بین اجرای متوالی کال‌بک است«همان interval یا callback time» سومی هم پارامتری است به نام jitter</p>
+<h2>یک مثال</h2>
+<p>می‌خواهیم یک تابع داشته باشیم که در فواصل زمانی معین یک پیام را به خروجی می‌برد.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">PeriodicCallback</span>
+
+
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello Tornado&quot;</span><span class="p">)</span>
+
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">PeriodicCallback</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">callback</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</code></pre></div>
+
+<p>تابع <code>say_hello</code> هر سه ثانیه یکبار به صورت پریودیک اجرا می‌شود. اکثر زمان‌ها در تورنادو به صورت ثانیه وارد می‌شود اما در این مورد یک استثنا وجود دارد. پارامتر <code>callback_time</code> در <code>PeriodicCallback</code> باید به صورت میلی‌ثانیه یا شی‌ای از <code>datetime.timedelta</code> وارد شود.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">PeriodicCallback</span>
+
+
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello Tornado&quot;</span><span class="p">)</span>
+
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">PeriodicCallback</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">callback</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>فراخوانی کال‌بک با آرگومان</h2>
+<p>بعضی از توابع‌ برای اجرا نیازمند آرگومان‌هایی هستند و به دو روش می‌توان آرگومان‌هایی را به کال‌بک مورد نظر فرستاد</p>
+<p>1- استفاده از <code>lambda</code></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">PeriodicCallback</span>
+
+
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">PeriodicCallback</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">say_hello</span><span class="p">(</span><span class="s2">&quot;Reganto&quot;</span><span class="p">),</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">callback</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</code></pre></div>
+
+<p>2- استفاده از <code>partial</code></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">PeriodicCallback</span>
+
+
+<span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">PeriodicCallback</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">say_hello</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Reganto&quot;</span><span class="p">),</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="n">callback</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>یک مثال ملموس‌تر</h2>
+<p>سناریویی را در نظر بگیرید که در یک سیستم تعدادی کاربر داشته باشیم. کاربران مورد نظر ما برای دریافت سرویسی ماهانه مبلغی را پرداخت می‌کنند در این‌صورت تسکی باید به صورت ماهیانه اجرا شود. این تسک می‌بایست کاربرانی را که برای سرویس مورد نظر پرداختی نداشته‌اند پیدا کرده و دسترسی آن‌ها را به سرویس مسدود کند و درنهایت ایمیلی با متن مناسب برای کاربرانی که اکانت خود را شارژ نکرده‌اند بفرستد.</p>
+<p>این تسک را می‌توان به سه زیرتسک «سه تابع» تقسیم کرد:</p>
+<p>1- پیدا کردن کاربرانی که پرداختی نداشته‌اند</p>
+<p>2- مسدود کردن دسترسی کاربرانی که پرداختی نداشته‌اند</p>
+<p>3- ارسال ایمیل به کاربران مسدودشده و درخواست برای شارژ اکانت</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">PeriodicCallback</span>
+
+<span class="k">def</span> <span class="nf">scan_for_expired_users</span><span class="p">():</span>
+    <span class="n">expired_users</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Finrod&quot;</span><span class="p">,</span> <span class="s2">&quot;Boromir&quot;</span><span class="p">,</span> <span class="s2">&quot;Theoden&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">expired_users</span>
+
+<span class="k">def</span> <span class="nf">deactivating_process</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deactivating account: </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">send_expiration_email</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending expiration email to: </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">arda_task</span><span class="p">():</span>
+    <span class="n">expired_users</span> <span class="o">=</span> <span class="n">scan_for_expired_users</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">expired_users</span><span class="p">:</span>
+        <span class="n">deactivating_process</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">send_expiration_email</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">PeriodicCallback</span><span class="p">(</span><span class="n">arda_task</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+<span class="n">task</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</code></pre></div>
+
+<h2>درباره‌ی jitter</h2>
+<p>جیتر یک مفهوم ریاضی است  و برای کاهش  <code>alignment</code> رویدادهای با پریود مشابه استفاده می‌شود.</p>
+<h4>بدون جیتر</h4>
+<p><img alt="بدون جیتر" src="/images/1401/6/no-jitter-example.png"></p>
+<h4>با جیتر</h4>
+<p><img alt="بدون جیتر" src="/images/1401/6/jitter-example.png"></p>
+<h4>اجرا با مقادیر متفاوت جیتر</h4>
+<p><img alt="بدون جیتر" src="/images/1401/6/jitter.gif"></p>
+<p>اگر مقدار جیتر را 0.1 قرار دهیم، باعث به‌ وجود آمدن تنوع 10 درصدی در فاصله زمانی فراخوانی کال‌بک خواهد شد.</p>
+<h2>در آخر</h2>
+<p>1- اگر اجرای کال‌بک بیشتر از <code>callback_time</code> طول بکشد، از فراخوانی‌های بعدی چشم‌پوشی می‌شود.«اضافه شده در تونادو 6.2»</p>
+<p>2- چنان‌چه برای <code>alignment</code> معادلی مناسب یافتید، دریغ نکنید. tell.regnato[at]gmail.com</p>
+<p>3- برای نکات جزیی‌تر می‌توانید مستندات تورنادو برای <a href="https://www.tornadoweb.org/en/stable/ioloop.html">PeriodicCallback</a> را چک کنید.</p>
+<p>4- مثالی از اجرای همین تسک با Celery Beat را می‌توانید <a href="https://breadcrumbscollector.tech/what-is-celery-beat-and-how-to-use-it/">اینجا</a> بیابید.</p>
+<p>5- عکس‌های مربوط به جیتر از <a href="https://www.myonlinetraininghub.com/jitter-in-excel-scatter-charts">اینجا</a> گرفته شده‌اند.</p>
+		</div>
+	</div>
+</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div class="footer">
+		<div class="container" style="direction: ltr;">
+			<hr/>
+				<ul class="nav nav-pills pull-right">
+					<li><a target="_blank" href="https://github.com/reganto">گیت‌هاب</a> </li>
+					<li><a target="_blank" href="https://linkedin.com/in/mselseleh">لینکدین</a> </li>
+					<li><a target="_blank" href="mailto:tell.reganto@gamil.com">تماس با من</a> </li>
+				        <li><a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 - 2025</a> </li>
+				</ul>
+		</div>
+	</div>
+</body>
+</html>

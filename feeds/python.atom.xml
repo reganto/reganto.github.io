@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>رگانتو - Python</title><link href="/" rel="alternate"/><link href="/feeds/python.atom.xml" rel="self"/><id>/</id><updated>2022-08-12T10:20:00+04:30</updated><subtitle>سلسله یادداشت‌های رگانتو</subtitle><entry><title>با وجود venv بازم لازمه داکر یادبگیرم؟</title><link href="/docker-vs-venv.html" rel="alternate"/><published>2022-08-12T10:20:00+04:30</published><updated>2022-08-12T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-08-12:/docker-vs-venv.html</id><summary type="html"/><content type="html">&lt;p&gt;در گروه تلگرامی کاربران جنگو فارسی کاربری به نام A Boy Has No Name سوالی در رابطه با الزام یادگیری داکر با وجود ابزاری مانند venv پرسیده بود که پاسخ آن را برای استفاده دیگران این‌جا هم ذکر می‌کنم.&lt;/p&gt;
+&lt;h2&gt;سوال چه بود؟&lt;/h2&gt;
+&lt;p&gt;سوال را می‌توانید در &lt;a href="https://t.me/djangoir/255037"&gt;اینجا&lt;/a&gt;بیابید.&lt;/p&gt;
+&lt;p&gt;اگر تلگرام ندارید:‌ با وجود venv بازم لازمه داکر یادبگیرم؟&lt;/p&gt;
+&lt;h2&gt;پاسخ من به این سوال&lt;/h2&gt;
+&lt;p&gt;هر دو ابزارهای ایزوله‌سازی هستند. اول از همه باید ببینیم چرا باید از ایزوله‌سازی استفاده می‌کنیم. ما به دلایل زیر از ایزوله ‌سازی استفاده می‌کنیم:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;اگر پروژه X به نسخه 1.1 یک پکیج نیاز داشته باشه و پروژه Y به نسخه مثلا 2.3 از همین پکیچ « دقت کنید که ما تنها امکان نصب یک نسخه از یک پکیج را به صورت system wide خواهیم داشت»&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;در بعضی از سیستم‌ عامل‌ها «لینوکس رو مطمئنم بقیه رو نه» بخش‌هایی از سیستم‌عامل وابسته به بعضی از پکیج‌های پایتون هستند. حالا فرض کنید بخش X از سیستم‌عامل به نسخه 1.2 از یک پکیج و پروژه‌ای ما به نسخه 1.5 همون پکیج وابسته باشه! اینجا تداخل پیش میاد و با نصب نسخه 1.5 از پیکج مورد نظر ما،‌ عملکرد یک بخش 
+از سیستم‌عامل با مشکل رو به رو میشه&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ما در پایتون با مفهومی به نام &lt;a href="https://www.google.com/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=2ahUKEwiyi5mO-sb5AhWKg_0HHQvhAZgQmhN6BAhcEAI&amp;amp;url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTransitive_dependency&amp;amp;usg=AOvVaw0J0qDwL7kCnDliXs6Gzexh"&gt;transitive dependency&lt;/a&gt; سروکار داریم.«A-&amp;gt;B, B-&amp;gt;C» با ایجاد یک محیط ایزوله به راحتی می‌تونیم یک lock file از وابستگی‌‌ها و ورژن‌ او‌ن‌ها داشته باشیم. این لاک‌فایل بازتولید محیط توسعه در یک سیستم دیگر رو خیلی راحت می‌کنه &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;حالا که با چرایی ساخت محیط ایزوله آشنا شدیم باید ببینیم دسته‌بندی محیط‌‌های ایزوله به چه صورت هست؟&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Application level isolation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;System level isolation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;پکیج‌های مثل venv،‌ virtualenv و ... در دسته اول قرار می‌گیرند. این ابزارها مفسر پایتون و پکیج‌های مورد نیاز را در یک محیط ایزوله اما غیرپرتابل قرار می‌دهند. غیرپرتابل از این جهت که با تغییر دایرکتوری محیط ایزوله عملا محیط ایزوله بلااستفاده خواهد شد. «‌در venv/bin/ یک ls -ltrh بگیرید و ببینید مفسر به کجا لینک شده». استفاده از این محیط‌های مجازی در سیستم‌های دیگر نیز عملا بلاموضوع است. اما برای پروژه‌های کوچک تا متوسط با وابستگی‌های کم،‌این ابزار‌ها گزینه‌ای مناسب هستند.&lt;/p&gt;
+&lt;p&gt;در سطح دوم، ما به دلایلی «مثلا همکار شما nginx را با فلان فلگ کامپایل کرده و شما نیاز دارید با همان تنظیمات nginx را داشته باشید - تیم از یک دیتابیس خاص استفاده می‌کنه و  بقیه موارد مربوط به external dependencies» مایلیم تمام سیستم عامل « یا دست کم بخش‌هایی از سیستم‌ عامل و ابزار‌های مورد استفاده» را به صورت ایزوله داشته باشیم. برای اینکار دو نوع ابزار وجود دارد:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Classic virtualization&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lightweight virtualization «Containerization»&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;در دسته اول ابزار‌هایی مثل Virtualbox، VMWare، ‍‍Vagrant و ... قرار می‌گیرند و در دسته دوم ابزارهایی مانند Docker، Rocket و ...&lt;/p&gt;
+&lt;p&gt;یک جایی نیاز هست که تمام اعضای تیم بر روی یک محیط یکسان « با internal dependencies و external dependencies  مشابه» کار کنند که در این صورت از Classic virtualization  و ابزارهای مرتبط استفاده می‌شود. در این‌جا ما با یک محیط کاملا ایزوله و خودکفا ;) سروکار داریم.&lt;/p&gt;
+&lt;p&gt;اما در دسته دوم ما با ایزوله سازی محیط user-space به صورت مفهوم کانتیتر بر روی یک انجین سروکار داریم. در این صورت سیستم‌عامل به صورت یک external dependency ایزوله نمی‌شه. &lt;/p&gt;
+&lt;p&gt;در هر صورت تمام این بحث‌ها به خاطر پرتابل بودن محیط توسعه و دردسر‌های مربوط به اون هست. هر کدوم‌ از این طرز‌تفکر‌ها و ابزارهای مربوط‌ به اون‌ها تریدآف‌هایی دارند اما به خاطر مفهوم Scale Out شیفت تکنولوژی به سمت Docker هست. venv رو مجبورید استفاده کنید! یک حدی از داکر رو هم خوبه که بلد باشید و بیشتر از اون رو مگر اینکه به مباحث DevOps و حوزه‌های مرتبط علاقه‌مند باشید.&lt;/p&gt;
+&lt;p&gt;اگر مایل هستید راجع‌به این موضوع بیشتر بدونید فصل دوم کتاب Expert Python Programming رو پیشنهاد می‌کنم.&lt;/p&gt;</content><category term="Python"/><category term="docker"/><category term="vevnv"/><category term="isolation"/></entry><entry><title>آماده‌سازی VSCode برای Django</title><link href="/vscode-for-djagno.html" rel="alternate"/><published>2022-06-16T10:20:00+04:30</published><updated>2022-06-16T10:20:00+04:30</updated><author><name>Reganto</name></author><id>tag:None,2022-06-16:/vscode-for-djagno.html</id><summary type="html"/><content type="html">&lt;p&gt;مراحل آماده‌سازی vscode برای کار با فریمورک Djagno&lt;/p&gt;
+&lt;p&gt;پوشه‌ای برای پروژه خود بسازید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;myproject
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;vscode را اجرا کنید و از منوی File بر روی زیرمنوی Add folder to workspace بزنید. پوشه پروژه&lt;code&gt;myproject&lt;/code&gt; را به vscode اضافه کنید.&lt;/p&gt;
+&lt;p&gt;برای ذخیره workspace جاری از منوی File بر روی Save workspace as... بزنید.&lt;/p&gt;
+&lt;p&gt;در صورتی که از ورژن کنترل استفاده می‌کنید،‌ Git را در دایرکتوری جاری init کنید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک فایل &lt;code&gt;.gitignore&lt;/code&gt; مخصوص پایتون اضافه کنید. یک نمونه گیت‌ایگنور برای پایتون را می‌توانید در &lt;a href="https://github.com/reganto/usernado/blob/master/.gitignore"&gt;این مسیر&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;p&gt;برای پروژه‌ی جاری یک &lt;code&gt;Virtualenv&lt;/code&gt; بسازید:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;برای فعال‌سازی virtualenv در شل می‌توان از دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;استفاده کرد.&lt;/p&gt;
+&lt;p&gt;حالا نوبت آن است که virtualenv ساخته شده را به vscode معرفی کنیم. در vscode کلید‌های ترکیبی &lt;code&gt;Ctrl+Shift+p&lt;/code&gt; را بفشارید و &lt;code&gt;select interpreter&lt;/code&gt; را تایپ کنید. از مسیر &lt;code&gt;myproject/venv/bin/python&lt;/code&gt; می‌توانید پایتون را به vscode معرفی کنید.&lt;/p&gt;
+&lt;p&gt;در مسیر &lt;code&gt;myproject&lt;/code&gt; اگر پوشه &lt;code&gt;.vscode&lt;/code&gt; وجود ندارد، آن را بسازید. فایلی به نام &lt;code&gt;settings.json&lt;/code&gt; در این پوشه ایجاد کنید. در این فایل می‌توانیم تنظیمات vscode برای workspace  جاری را قرار دهیم. بعضی از مقادیر از این قرارند:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;telemetry.telemetryLevel&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;off&amp;quot;&lt;/span&gt;,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.analysis.autoImportCompletions&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;autoDocstring.docstringFormat&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sphinx&amp;quot;&lt;/span&gt;,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.linting.flake8Enabled&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.linting.enabled&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editor.formatOnSave&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;true,
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python.formatting.provider&amp;quot;&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;black&amp;quot;&lt;/span&gt;,
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;اولین مورد مربوط به خاموش کردن &lt;code&gt;telemetry&lt;/code&gt; برای vscode است تا اطلاعاتی از فعالیت‌های ما برای توسعه‌دهندگان فرستاده نشود. دومین مورد مربوط به قابلیت &lt;code&gt;autoImport&lt;/code&gt; برای vscode است که تا زمان نگارش این متن کارایی خوبی نداشته و بهتر است خاموش شود. سومین مورد مربوط به تعیین نوع &lt;code&gt;docstring&lt;/code&gt; برای توابع و کلاس‌هاست. این مورد مربوط به یک افزونه vscode است. مورد بعدی برای فعال نمودن ‍‍‍&lt;code&gt;flake8&lt;/code&gt; به عنوان ‍&lt;code&gt;Linter&lt;/code&gt; استفاده می‌شود. مورد بعدی برای فعال نمودن قابلیت &lt;code&gt;linting&lt;/code&gt; برای vscode است. مورد بعدی برای فرمت‌بندی کد در هنگام ذخیره آن استفاده می‌شود یعنی هربار که کد را ذخیره می‌کنیم بلافاصله کد به صورت خودکار با یک &lt;code&gt;Code Formatter&lt;/code&gt; مانند &lt;code&gt;Black&lt;/code&gt; فرمت‌بندی می‌شود. مورد آخر &lt;code&gt;Code Formatter&lt;/code&gt; را مشخص می‌کند که معمولا در پروژه‌هایی جنگویی توصیه به استفاده از &lt;code&gt;Black&lt;/code&gt; به عنوان &lt;code&gt;Code Formatter&lt;/code&gt; است.&lt;/p&gt;
+&lt;p&gt;برای مدیریت وابستگی‌ها از &lt;code&gt;poetry&lt;/code&gt; استفاده کنید. با دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;poetry  را برای پروژه جاری تنظیم کنید. به سوالاتی که poetry درباره‌ی پروژه می‌پرسد جواب دهید.&lt;/p&gt;
+&lt;p&gt;اطلاعات بیشتر راجع‌به &lt;a href="https://python-poetry.org/"&gt;poetry&lt;/a&gt; را می‌توانید در وبسایت ابزار بیابید.&lt;/p&gt;
+&lt;p&gt;در صورتی که &lt;code&gt;virtualenv&lt;/code&gt; فعال نیست آن را فعال کنید.&lt;/p&gt;
+&lt;p&gt;حالا با دستور &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;از فعال بودن &lt;code&gt;virtualenv&lt;/code&gt; اطمینال حاصل کنید.&lt;/p&gt;
+&lt;p&gt;لینتر &lt;code&gt;Flake8&lt;/code&gt; و فرمتر &lt;code&gt;Black&lt;/code&gt; را نصب کنید:&lt;/p&gt;
+&lt;p&gt;‍‍‍&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;black&lt;span class="w"&gt; &lt;/span&gt;flake8&lt;span class="w"&gt; &lt;/span&gt;--dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;همانطور که می‌بینید این پکیج‌ها را تنها برای حالت &lt;code&gt;development&lt;/code&gt; نصب کردیم.&lt;/p&gt;
+&lt;p&gt;در مرحله بعد باید &lt;code&gt;Django&lt;/code&gt; و ‍&lt;code&gt;DRF&lt;/code&gt; را نصب کنیم. «در صورتی که تمایل به ایجاد API دارید DRF را نصب کنید»&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;django&lt;span class="w"&gt; &lt;/span&gt;djangorestframework
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;به دلیل عمل کردن &lt;code&gt;poetry&lt;/code&gt; و &lt;code&gt;pip&lt;/code&gt; روی یک &lt;code&gt;virtualenv&lt;/code&gt; می‌توانیم فایل &lt;code&gt;requirements.txt&lt;/code&gt;  را به سادگی ایجاد کنیم&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;freeze&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک پروژه جنگو ایجاد کنید&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;django-admin&lt;span class="w"&gt; &lt;/span&gt;startproject&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;بر روی فایل &lt;code&gt;manage.py&lt;/code&gt; کلیک کنید و آنگاه بر روی زبانه‌ی &lt;code&gt;Run and Debug&lt;/code&gt; بزنید و در نهایت &lt;code&gt;launch‍&lt;/code&gt;  را کلیک کنید. از لیست فریم‌ورک‌ها Django را انتخاب کنید. با طی این مراحل فایل با نام &lt;code&gt;launch.json&lt;/code&gt; در مسیر &lt;code&gt;myproject/.vscode/&lt;/code&gt; ساخته می‌شود. حالا با &lt;code&gt;F5&lt;/code&gt; می‌توانید جنگو را اجرا کنید. در واقع F5 همان کار &lt;code&gt;./manage.py runserver&lt;/code&gt; را انجام می‌دهد.&lt;/p&gt;
+&lt;p&gt;ساختار فایل‌ها:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;myproject/
+&lt;span class="w"&gt;    &lt;/span&gt;.vscode/
+&lt;span class="w"&gt;        &lt;/span&gt;settings.json
+&lt;span class="w"&gt;        &lt;/span&gt;launch.json
+&lt;span class="w"&gt;    &lt;/span&gt;backend/
+&lt;span class="w"&gt;        &lt;/span&gt;config/
+&lt;span class="w"&gt;            &lt;/span&gt;__init__.py
+&lt;span class="w"&gt;            &lt;/span&gt;asgi.py
+&lt;span class="w"&gt;            &lt;/span&gt;settings.py
+&lt;span class="w"&gt;            &lt;/span&gt;urls.py
+&lt;span class="w"&gt;            &lt;/span&gt;wsgi.py
+&lt;span class="w"&gt;        &lt;/span&gt;venv/
+&lt;span class="w"&gt;        &lt;/span&gt;.gitignore
+&lt;span class="w"&gt;        &lt;/span&gt;manage.py
+&lt;span class="w"&gt;        &lt;/span&gt;poetry.lock
+&lt;span class="w"&gt;        &lt;/span&gt;pyproject.toml
+&lt;span class="w"&gt;        &lt;/span&gt;requirements.txt
+
+&lt;span class="w"&gt;    &lt;/span&gt;frontend/
+&lt;span class="w"&gt;    &lt;/span&gt;.gitignore
+&lt;span class="w"&gt;    &lt;/span&gt;CONTRIBUTING.md
+&lt;span class="w"&gt;    &lt;/span&gt;LICENSE.txt
+&lt;span class="w"&gt;    &lt;/span&gt;myproject.code-workspace
+&lt;span class="w"&gt;    &lt;/span&gt;README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;VSCode&lt;span class="w"&gt; &lt;/span&gt;Django&lt;span class="w"&gt; &lt;/span&gt;Checklist:
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;folder&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;workspace
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;save&lt;span class="w"&gt; &lt;/span&gt;workspace&lt;span class="w"&gt;  &lt;/span&gt;
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;gitignore&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;backend
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;venv
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;activate&lt;span class="w"&gt; &lt;/span&gt;venv
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;vscode
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.vscode/settings.json
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;init
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;black&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;flake8&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;development
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;dj&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;drf
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;generate&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;django&lt;span class="w"&gt; &lt;/span&gt;startproject
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.vscode/launch.json&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;django
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.gitignore&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;project&lt;span class="w"&gt; &lt;/span&gt;level&lt;span class="w"&gt; &lt;/span&gt;folder
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;PROJECT.code-workspace&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;.vscode/*&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;.gitignore
+
+-&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;LICENSE&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;CONTRIBUTING.md&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;README.md&lt;span class="w"&gt; &lt;/span&gt;and&lt;span class="w"&gt; &lt;/span&gt;so&lt;span class="w"&gt; &lt;/span&gt;on&lt;span class="w"&gt; &lt;/span&gt;so&lt;span class="w"&gt; &lt;/span&gt;forth
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;یک نمونه پروژه ساخته شده را می‌توانید در مسیر &lt;a href="https://github.com/reganto/mandos"&gt;https://github.com/reganto/mandos&lt;/a&gt; بیابید.&lt;/p&gt;
+&lt;p&gt;افزونه‌هایی مورد نیاز از این قرارند:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;autoDocstring&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pylance&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;سایر افزونه‌های جالب:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Docker&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lorem Ipsum&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Material Icon Theme&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PostgreSQL&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Python"/><category term="vscode"/><category term="django"/></entry></feed>

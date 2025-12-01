@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  	<title>اسکریپت full battery alarm برای لینوکس</title>
+
+	<link rel="stylesheet" href="/theme/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/bootstrap-rtl.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/Vazir.css" type="text/css" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script>
+  		$(document).ready(function () {
+    		$(".post table").addClass("table table-striped table-condensed table-bordered");
+  	  	});
+    </script>
+	<meta charset="utf-8" />
+
+	<link rel="alternate" href="/feeds/all.atom.xml" type="application/atom+xml" title="خبرخوان رگانتو -سلسله یادداشت‌های رگانتو " />
+        <meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="google-site-verification" content="qsVGVu_-AAkJs98yNa_4PU3KkEz1Bam-dNOyEUeCyZI" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <meta name="tags" content="battery" />
+    <meta name="tags" content="linux" />
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<div class="banner">
+				  <a href="/"><h1>سلسله یادداشت‌های رگانتو</h1></a>
+			</div>
+<div class="content">
+	<div class="post">
+		<h3>
+			اسکریپت full battery alarm برای لینوکس
+		</h3>
+		<div class="info">
+			پنجشنبه 28 مرداد 1400
+				توسط <a class="url fn" href="/author/reganto.html">Reganto</a>
+		</div>
+		<div class="content">
+			<p>یکی از کاربران AskUbuntu سوالی پرسیده بود در رابطه با اسکریپتی برای نشان دادن آلارمی برای باتری لپ‌تاپ وقتی که تا حد معینی شارژ شده باشد. این موضوع برای من هم سوال بود و دوست داشتم اسکریپی برای آن بنویسم.</p>
+<h2>سوال چه بود؟</h2>
+<p>سوال را می‌توانید <a href="https://askubuntu.com/q/1157608/1397026">اینجا</a> بیابید.</p>
+<h2>پاسخ من به این سوال</h2>
+<p>برای Gnome:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span>
+<span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0
+<span class="w">        </span><span class="nv">battery_level</span><span class="o">=</span><span class="sb">`</span>cat<span class="w"> </span>/sys/class/power_supply/BAT0/capacity<span class="sb">`</span>
+<span class="w">        </span><span class="nv">battery_status</span><span class="o">=</span><span class="sb">`</span>cat<span class="w"> </span>/sys/class/power_supply/BAT0/status<span class="sb">`</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$battery_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Charging&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$battery_level</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">85</span><span class="w"> </span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">then</span>
+<span class="w">            </span>notify-send<span class="w"> </span>-u<span class="w"> </span>critical<span class="w"> </span><span class="s2">&quot;Battery fully charged&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">120</span>
+<span class="w">    </span><span class="k">done</span>
+</code></pre></div>
+
+<p>برای KDE:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span>
+<span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0
+<span class="w">        </span><span class="nv">battery_level</span><span class="o">=</span><span class="sb">`</span>cat<span class="w"> </span>/sys/class/power_supply/BAT0/capacity<span class="sb">`</span>
+<span class="w">        </span><span class="nv">battery_status</span><span class="o">=</span><span class="sb">`</span>cat<span class="w"> </span>/sys/class/power_supply/BAT0/status<span class="sb">`</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$battery_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Charging&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$battery_level</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">85</span><span class="w"> </span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">then</span>
+<span class="w">            </span>kdialog<span class="w"> </span>--msgbox<span class="w"> </span><span class="s2">&quot;Battery fully charged&quot;</span><span class="w"> </span><span class="m">5</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">120</span>
+<span class="w">    </span><span class="k">done</span>
+</code></pre></div>
+
+<p>اسکریپیت را با دستور <code>chmod +x SCRIPTNAME.sh</code> به حالت اجرایی درآورید و در <code>startup</code> قرار دهید.</p>
+<p>دیدن این <a href="https://gist.github.com/reganto/addd1853ffc0dcf0d3944cd068c37ed7">Github Gist</a> هم می‌تواند جالب باشد.</p>
+<p>اسکریپت‌ها و ابزارهای مورد استفاده‌ام را می‌توانید در این <a href="https://github.com/reganto/my-utils">رپوزیتوری</a> بیابید.</p>
+		</div>
+	</div>
+</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div class="footer">
+		<div class="container" style="direction: ltr;">
+			<hr/>
+				<ul class="nav nav-pills pull-right">
+					<li><a target="_blank" href="https://github.com/reganto">گیت‌هاب</a> </li>
+					<li><a target="_blank" href="https://linkedin.com/in/mselseleh">لینکدین</a> </li>
+					<li><a target="_blank" href="mailto:tell.reganto@gamil.com">تماس با من</a> </li>
+				        <li><a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 - 2025</a> </li>
+				</ul>
+		</div>
+	</div>
+</body>
+</html>

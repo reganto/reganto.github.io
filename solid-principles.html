@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  	<title>اصول SOLID</title>
+
+	<link rel="stylesheet" href="/theme/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/bootstrap-rtl.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/Vazir.css" type="text/css" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script>
+  		$(document).ready(function () {
+    		$(".post table").addClass("table table-striped table-condensed table-bordered");
+  	  	});
+    </script>
+	<meta charset="utf-8" />
+
+	<link rel="alternate" href="/feeds/all.atom.xml" type="application/atom+xml" title="خبرخوان رگانتو -سلسله یادداشت‌های رگانتو " />
+        <meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="google-site-verification" content="qsVGVu_-AAkJs98yNa_4PU3KkEz1Bam-dNOyEUeCyZI" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <meta name="tags" content="SOLID" />
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<div class="banner">
+				  <a href="/"><h1>سلسله یادداشت‌های رگانتو</h1></a>
+			</div>
+<div class="content">
+	<div class="post">
+		<h3>
+			اصول SOLID
+		</h3>
+		<div class="info">
+			سه شنبه 31 خرداد 1401
+				توسط <a class="url fn" href="/author/reganto.html">Reganto</a>
+		</div>
+		<div class="content">
+			<p>SOLID «سالید» کلمه‌ای مخفف برای پنج اصل است که معمولا در <strong>طراحی شی‌گرا</strong> اعمال می‌شوند. این اصول کمک می‌کنند تا برنامه‌ها <strong>قابل درک‌تر</strong>، <strong>منعطف‌تر</strong>و <strong>قابلیت نگه‌داری آسان‌تر</strong>ی داشته باشند. اصول سالید برای مدیریت وابستگی‌ها استفاده می‌شوند. این اصول مستقل از هم نیستند و نقض هر کدام «احتمالا» منجر به نقض بقیه خواهد شد.</p>
+<h3>ارتباط میان SOLID و Design Patterns</h3>
+<p>الگوهای طراحی «Design Patterns» راه‌حل‌هایی امتحان شده و قابل اطمینان برای مسائل رایج هستند. الگوهای طراحی به صورت ضمنی SOLID را نیز تحت پوشش قرار می‌دهند.</p>
+<h3>اصل اول: Single Responsibility Principle «اصل تک مسئولیتی»</h3>
+<p>اصل SRP بیان می‌دارد که هر موجودیت در برنامه شی‌گرا اعم از کلاس،‌متد یا تابع بایستی تنها یک وظیفه برای انجام داشته باشد و در این صورت است که موجودیت مفروض ما اگر نیاز به تغییر داشته باشد،‌ باید تنها به یک دلیل تغییر کند. تک مسئولیتی بودن هر بخش از کد بخشی از فلسفه یونیکس هم هست</p>
+<blockquote>
+<p>اگر موجودیتی چندین مسئولیت برای انجام داشته باشد اصطلاحا به آن <strong>god object</strong> می‌گویند</p>
+</blockquote>
+<p><strong>مثال</strong></p>
+<p>کلاس زیر را در نظر بگیرید</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># get student name</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nm</span><span class="p">):</span>
+        <span class="c1"># set student name</span>
+        <span class="k">if</span> <span class="n">nm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">insert_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Database logic written here</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Report formatting</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<p>همانطور که می‌بینید در کلاس <code>Student</code> چندین متد وجود دارد و هر متد وظیفه خاص و غیرمرتبط با متد‌های دیگر دارد. این شیوه پیاده‌سازی ناقض اصل <code>SRP</code> است. برای پیروی از SRP دو متد آخر را در دو کلاس جداگانه قرار می‌دهیم.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># get student name</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nm</span><span class="p">):</span>
+        <span class="c1"># set student name</span>
+        <span class="k">if</span> <span class="n">nm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="k">class</span> <span class="nc">StudentDB</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="c1"># Retrieve data from DB</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="c1"># Insert obj to DB</span>
+        <span class="k">pass</span>
+
+<span class="n">Class</span> <span class="n">StudentLog</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Report formatting</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+<p>در این حالت هر کلاس تنها یک وظیفه برای انجام برعهده دارد و اگر بنابر تغییر یکی از این کلاس‌ها داشته باشیم تنها به یک دلیل کلاس مورد نظر را تغییر خواهیم داد. اصل <code>SRP</code> برای توابع و متد‌ها نیز می‌تواند موضوعیت داشته باشد. به عنوان مثال به فانکشن زیر توجه کنید:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">insert</span><span class="p">():</span>
+    <span class="c1"># Create connection</span>
+    <span class="c1"># Prepare params for insertion</span>
+    <span class="c1"># Execute insertion</span>
+    <span class="c1"># Return result</span>
+    <span class="k">pass</span>    
+</code></pre></div>
+
+<p>همانطور که می‌بینید ما در این تابع یک کانکشن به دیتابیس ساخته‌ایم. پارامترهای لازم را فراهم آورده‌ایم. داده را وارد دیتابیس کرده‌ایم و نتیجه را برگشت‌ داده‌ایم. این تابع به وضوح اصل <code>SRP</code> را نقض می‌کند. از آن‌گذشته برای توابع دیگر نیز باید کد مربوط به اتصال به دیتابیس را تکرار کنیم. بنابراین پیاده‌سازی بهتر می‌تواند به صورت زیر باشد:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">db_connection</span><span class="p">():</span>
+    <span class="c1"># Return a connection to DB</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">get_params</span><span class="p">():</span>
+    <span class="c1"># Prepare params</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">insert</span><span class="p">():</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">db_connection</span><span class="p">()</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">get_params</span><span class="p">()</span>
+    <span class="c1"># Insert data to DB</span>
+    <span class="c1"># Return result</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3>اصل دوم</h3>
+<h3>اصل سوم</h3>
+<h3>اصل چهارم</h3>
+<h3>اصل پنجم</h3>
+<p>منابع:</p>
+<ul>
+<li>Clean Code in Python by Mariano Anaya</li>
+</ul>
+		</div>
+	</div>
+</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div class="footer">
+		<div class="container" style="direction: ltr;">
+			<hr/>
+				<ul class="nav nav-pills pull-right">
+					<li><a target="_blank" href="https://github.com/reganto">گیت‌هاب</a> </li>
+					<li><a target="_blank" href="https://linkedin.com/in/mselseleh">لینکدین</a> </li>
+					<li><a target="_blank" href="mailto:tell.reganto@gamil.com">تماس با من</a> </li>
+				        <li><a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 - 2025</a> </li>
+				</ul>
+		</div>
+	</div>
+</body>
+</html>

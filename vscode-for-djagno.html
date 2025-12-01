@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  	<title>آماده‌سازی VSCode برای Django</title>
+
+	<link rel="stylesheet" href="/theme/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/bootstrap-rtl.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/Vazir.css" type="text/css" />
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script>
+  		$(document).ready(function () {
+    		$(".post table").addClass("table table-striped table-condensed table-bordered");
+  	  	});
+    </script>
+	<meta charset="utf-8" />
+
+	<link rel="alternate" href="/feeds/all.atom.xml" type="application/atom+xml" title="خبرخوان رگانتو -سلسله یادداشت‌های رگانتو " />
+        <meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="google-site-verification" content="qsVGVu_-AAkJs98yNa_4PU3KkEz1Bam-dNOyEUeCyZI" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+
+    <meta name="tags" content="vscode" />
+    <meta name="tags" content="django" />
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<div class="banner">
+				  <a href="/"><h1>سلسله یادداشت‌های رگانتو</h1></a>
+			</div>
+<div class="content">
+	<div class="post">
+		<h3>
+			آماده‌سازی VSCode برای Django
+		</h3>
+		<div class="info">
+			پنجشنبه 26 خرداد 1401
+				توسط <a class="url fn" href="/author/reganto.html">Reganto</a>
+		</div>
+		<div class="content">
+			<p>مراحل آماده‌سازی vscode برای کار با فریمورک Djagno</p>
+<p>پوشه‌ای برای پروژه خود بسازید:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>myproject
+</code></pre></div>
+
+<p>vscode را اجرا کنید و از منوی File بر روی زیرمنوی Add folder to workspace بزنید. پوشه پروژه<code>myproject</code> را به vscode اضافه کنید.</p>
+<p>برای ذخیره workspace جاری از منوی File بر روی Save workspace as... بزنید.</p>
+<p>در صورتی که از ورژن کنترل استفاده می‌کنید،‌ Git را در دایرکتوری جاری init کنید</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init
+</code></pre></div>
+
+<p>یک فایل <code>.gitignore</code> مخصوص پایتون اضافه کنید. یک نمونه گیت‌ایگنور برای پایتون را می‌توانید در <a href="https://github.com/reganto/usernado/blob/master/.gitignore">این مسیر</a> بیابید.</p>
+<p>برای پروژه‌ی جاری یک <code>Virtualenv</code> بسازید:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</code></pre></div>
+
+<p>برای فعال‌سازی virtualenv در شل می‌توان از دستور </p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</code></pre></div>
+
+<p>استفاده کرد.</p>
+<p>حالا نوبت آن است که virtualenv ساخته شده را به vscode معرفی کنیم. در vscode کلید‌های ترکیبی <code>Ctrl+Shift+p</code> را بفشارید و <code>select interpreter</code> را تایپ کنید. از مسیر <code>myproject/venv/bin/python</code> می‌توانید پایتون را به vscode معرفی کنید.</p>
+<p>در مسیر <code>myproject</code> اگر پوشه <code>.vscode</code> وجود ندارد، آن را بسازید. فایلی به نام <code>settings.json</code> در این پوشه ایجاد کنید. در این فایل می‌توانیم تنظیمات vscode برای workspace  جاری را قرار دهیم. بعضی از مقادیر از این قرارند:</p>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;telemetry.telemetryLevel&quot;</span>:<span class="w"> </span><span class="s2">&quot;off&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;python.analysis.autoImportCompletions&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;autoDocstring.docstringFormat&quot;</span>:<span class="w"> </span><span class="s2">&quot;sphinx&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;python.linting.flake8Enabled&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;python.linting.enabled&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;editor.formatOnSave&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;python.formatting.provider&quot;</span>:<span class="w"> </span><span class="s2">&quot;black&quot;</span>,
+<span class="o">}</span>
+</code></pre></div>
+
+<p>اولین مورد مربوط به خاموش کردن <code>telemetry</code> برای vscode است تا اطلاعاتی از فعالیت‌های ما برای توسعه‌دهندگان فرستاده نشود. دومین مورد مربوط به قابلیت <code>autoImport</code> برای vscode است که تا زمان نگارش این متن کارایی خوبی نداشته و بهتر است خاموش شود. سومین مورد مربوط به تعیین نوع <code>docstring</code> برای توابع و کلاس‌هاست. این مورد مربوط به یک افزونه vscode است. مورد بعدی برای فعال نمودن ‍‍‍<code>flake8</code> به عنوان ‍<code>Linter</code> استفاده می‌شود. مورد بعدی برای فعال نمودن قابلیت <code>linting</code> برای vscode است. مورد بعدی برای فرمت‌بندی کد در هنگام ذخیره آن استفاده می‌شود یعنی هربار که کد را ذخیره می‌کنیم بلافاصله کد به صورت خودکار با یک <code>Code Formatter</code> مانند <code>Black</code> فرمت‌بندی می‌شود. مورد آخر <code>Code Formatter</code> را مشخص می‌کند که معمولا در پروژه‌هایی جنگویی توصیه به استفاده از <code>Black</code> به عنوان <code>Code Formatter</code> است.</p>
+<p>برای مدیریت وابستگی‌ها از <code>poetry</code> استفاده کنید. با دستور </p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>init
+</code></pre></div>
+
+<p>poetry  را برای پروژه جاری تنظیم کنید. به سوالاتی که poetry درباره‌ی پروژه می‌پرسد جواب دهید.</p>
+<p>اطلاعات بیشتر راجع‌به <a href="https://python-poetry.org/">poetry</a> را می‌توانید در وبسایت ابزار بیابید.</p>
+<p>در صورتی که <code>virtualenv</code> فعال نیست آن را فعال کنید.</p>
+<p>حالا با دستور </p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>env<span class="w"> </span>info
+</code></pre></div>
+
+<p>از فعال بودن <code>virtualenv</code> اطمینال حاصل کنید.</p>
+<p>لینتر <code>Flake8</code> و فرمتر <code>Black</code> را نصب کنید:</p>
+<p>‍‍‍</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>add<span class="w"> </span>black<span class="w"> </span>flake8<span class="w"> </span>--dev
+</code></pre></div>
+
+<p>همانطور که می‌بینید این پکیج‌ها را تنها برای حالت <code>development</code> نصب کردیم.</p>
+<p>در مرحله بعد باید <code>Django</code> و ‍<code>DRF</code> را نصب کنیم. «در صورتی که تمایل به ایجاد API دارید DRF را نصب کنید»</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>add<span class="w"> </span>django<span class="w"> </span>djangorestframework
+</code></pre></div>
+
+<p>به دلیل عمل کردن <code>poetry</code> و <code>pip</code> روی یک <code>virtualenv</code> می‌توانیم فایل <code>requirements.txt</code>  را به سادگی ایجاد کنیم</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+<p>یک پروژه جنگو ایجاد کنید</p>
+<div class="highlight"><pre><span></span><code>django-admin<span class="w"> </span>startproject<span class="w"> </span>config<span class="w"> </span>.
+</code></pre></div>
+
+<p>بر روی فایل <code>manage.py</code> کلیک کنید و آنگاه بر روی زبانه‌ی <code>Run and Debug</code> بزنید و در نهایت <code>launch‍</code>  را کلیک کنید. از لیست فریم‌ورک‌ها Django را انتخاب کنید. با طی این مراحل فایل با نام <code>launch.json</code> در مسیر <code>myproject/.vscode/</code> ساخته می‌شود. حالا با <code>F5</code> می‌توانید جنگو را اجرا کنید. در واقع F5 همان کار <code>./manage.py runserver</code> را انجام می‌دهد.</p>
+<p>ساختار فایل‌ها:</p>
+<div class="highlight"><pre><span></span><code>myproject/
+<span class="w">    </span>.vscode/
+<span class="w">        </span>settings.json
+<span class="w">        </span>launch.json
+<span class="w">    </span>backend/
+<span class="w">        </span>config/
+<span class="w">            </span>__init__.py
+<span class="w">            </span>asgi.py
+<span class="w">            </span>settings.py
+<span class="w">            </span>urls.py
+<span class="w">            </span>wsgi.py
+<span class="w">        </span>venv/
+<span class="w">        </span>.gitignore
+<span class="w">        </span>manage.py
+<span class="w">        </span>poetry.lock
+<span class="w">        </span>pyproject.toml
+<span class="w">        </span>requirements.txt
+
+<span class="w">    </span>frontend/
+<span class="w">    </span>.gitignore
+<span class="w">    </span>CONTRIBUTING.md
+<span class="w">    </span>LICENSE.txt
+<span class="w">    </span>myproject.code-workspace
+<span class="w">    </span>README.md
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>VSCode<span class="w"> </span>Django<span class="w"> </span>Checklist:
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>folder<span class="w"> </span>to<span class="w"> </span>workspace
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>save<span class="w"> </span>workspace<span class="w">  </span>
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>git<span class="w"> </span>init
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>gitignore<span class="w"> </span>to<span class="w"> </span>backend
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>venv
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>activate<span class="w"> </span>venv
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="k">select</span><span class="w"> </span>python<span class="w"> </span><span class="k">for</span><span class="w"> </span>vscode
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>.vscode/settings.json
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>poetry<span class="w"> </span>init
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>install<span class="w"> </span>black<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>flake8<span class="w"> </span><span class="k">for</span><span class="w"> </span>development
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>install<span class="w"> </span>dj<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>drf
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>generate<span class="w"> </span>requirements.txt
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>django<span class="w"> </span>startproject
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>.vscode/launch.json<span class="w"> </span><span class="k">for</span><span class="w"> </span>django
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>.gitignore<span class="w"> </span>to<span class="w"> </span>project<span class="w"> </span>level<span class="w"> </span>folder
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>PROJECT.code-workspace<span class="w"> </span>and<span class="w"> </span>.vscode/*<span class="w"> </span>to<span class="w"> </span>.gitignore
+
+-<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>add<span class="w"> </span>LICENSE<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>CONTRIBUTING.md<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>README.md<span class="w"> </span>and<span class="w"> </span>so<span class="w"> </span>on<span class="w"> </span>so<span class="w"> </span>forth
+</code></pre></div>
+
+<p>یک نمونه پروژه ساخته شده را می‌توانید در مسیر <a href="https://github.com/reganto/mandos">https://github.com/reganto/mandos</a> بیابید.</p>
+<p>افزونه‌هایی مورد نیاز از این قرارند:</p>
+<ul>
+<li>
+<p>autoDocstring</p>
+</li>
+<li>
+<p>Pylance</p>
+</li>
+<li>
+<p>Python</p>
+</li>
+</ul>
+<p>سایر افزونه‌های جالب:</p>
+<ul>
+<li>
+<p>Docker</p>
+</li>
+<li>
+<p>Lorem Ipsum</p>
+</li>
+<li>
+<p>Material Icon Theme</p>
+</li>
+<li>
+<p>PostgreSQL</p>
+</li>
+</ul>
+		</div>
+	</div>
+</div>
+		</div>
+		<div class="push"></div>
+	</div>
+	<div class="footer">
+		<div class="container" style="direction: ltr;">
+			<hr/>
+				<ul class="nav nav-pills pull-right">
+					<li><a target="_blank" href="https://github.com/reganto">گیت‌هاب</a> </li>
+					<li><a target="_blank" href="https://linkedin.com/in/mselseleh">لینکدین</a> </li>
+					<li><a target="_blank" href="mailto:tell.reganto@gamil.com">تماس با من</a> </li>
+				        <li><a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 - 2025</a> </li>
+				</ul>
+		</div>
+	</div>
+</body>
+</html>
