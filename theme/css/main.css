@@ -90,3 +90,64 @@ html, body {
 	margin-top: 4px;
 	color: #aaa;
 }
+
+/* ===== Mobile Fixes ===== */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .nav {
+    text-align: center;
+  }
+
+  .nav li {
+    display: block;
+    margin: 8px 0;
+  }
+
+  .archives {
+    margin-top: 25px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre {
+    overflow-x: auto;
+    font-size: 14px;
+  }
+
+  .footer .copyright {
+    float: none;
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: block;
+  }
+}
